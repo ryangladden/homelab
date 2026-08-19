@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ghcr.io/hargata/lubelogger:latest
+    restart: unless-stopped
+    networks:
+      - proxy
+    volumes:
+      - /opt/container-data/lubelogger/data:/App/data
+      - /opt/container-data/lubelogger/keys:/root/.aspnet/DataProtection-Keys
+    labels:
+      traefik.enable: true
+      traefik.http.routers.lubelogger.rule: Host(`${LUBELOGGER_DOMAIN}`)
+      traefik.http.routers.lubelogger.entrypoints: websecure
+      traefik.http.routers.lubelogger.tls: true
+      traefik.http.routers.lubelogger.tls.certresolver: le
+      traefik.http.routers.lubelogger.middlewares: tinyauth@file
+networks:
+  proxy:
+    external: true
