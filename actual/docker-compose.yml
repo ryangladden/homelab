@@ -1,0 +1,30 @@
+services:
+  actual:
+    image: docker.io/actualbudget/actual-server:latest
+    container_name: actual
+    env_file:
+      - .env
+    # ports:
+    #   - 5006:5006
+    volumes:
+      - /opt/container-data/actual:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - node src/scripts/health-check.js
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.actual.rule=Host(`${ACTUAL_DOMAIN}`)
+      - traefik.http.routers.actual.entrypoints=websecure
+      - traefik.http.routers.actual.tls=true
+      - traefik.http.routers.actual.tls.certresolver=le
+networks:
+  proxy:
+    external: true
