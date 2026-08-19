@@ -1,0 +1,36 @@
+services:
+
+  openwebui:
+    container_name: open-webui
+    image: ghcr.io/open-webui/open-webui:cuda
+    restart: unless-stopped
+    gpus: all
+    env_file:
+      - .env
+    ports:
+      - 3000:8080
+    volumes:
+      - /opt/container-data/llm/open-webui:/app/backend/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ai.rule=Host(`${AI_DOMAIN}`)
+      - traefik.http.routers.ai.entrypoints=websecure
+      - traefik.http.routers.ai.tls=true
+      - traefik.http.routers.ai.tls.certresolver=le
+    networks:
+      - proxy
+      
+  ollama:
+    ports:
+      - 11434:11434
+    container_name: ollama
+    volumes:
+      - /opt/container-data/llm/ollama:/root/.ollama
+    gpus: all
+    image: ollama/ollama
+    networks:
+      - proxy
+      
+networks:
+  proxy:
+    external: true
