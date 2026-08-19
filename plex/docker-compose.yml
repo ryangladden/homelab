@@ -1,0 +1,50 @@
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    runtime: nvidia
+    ports:
+      - 32400:32400/tcp # Plex Web UI
+      - 8324:8324/tcp # Plex Discovery
+      - 32469:32469/tcp # Plex DLNA
+      - 1900:1900/udp # SSDP Discovery
+      - 32410:32410/udp # Plex Media Server
+      - 32412:32412/udp # Plex Media Server
+      - 32413:32413/udp # Plex Media Server
+      - 32414:32414/udp # Plex Media Server
+    environment:
+      - TZ=America/Chicago # Time zone (change to your local time zone)
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - ADVERTISE_IP=http://${ADVERTISE_IP}:32400 # Use host IP for external access
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - PLEX_PREFER_IPV4=1
+    volumes:
+      - /opt/container-data/plex/database:/config # Plex config (database, settings)
+      - /opt/container-data/plex/transcode:/transcode # Transcoding temporary files
+      - /opt/container-data/plex/data:/data # Media files (make sure the path is correct)
+    network_mode: bridge # Use host network for easier connectivity, especially with Tailscale
+    
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    networks:
+      - proxy
+    restart: unless-stopped
+    volumes:
+      - /opt/container-data/plex/tautulli:/config
+    environment:
+      - TZ=America/Denver
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.tautulli.rule=Host(`${TAUTULLI_DOMAIN}`)
+      - traefik.http.routers.tautulli.entrypoints=websecure
+      - traefik.http.routers.tautulli.tls=true
+      - traefik.http.routers.tautulli.tls.certresolver=le
+networks:
+  proxy:
+    external: true
