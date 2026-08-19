@@ -1,0 +1,64 @@
+services:
+  mailserver:
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    container_name: mailserver
+    # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
+    hostname: ${MAIL_HOSTNAME}
+    env_file: .env
+    ports:
+      - 25:25 # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
+      - 143:143 # IMAP4 (explicit TLS => STARTTLS)
+      - 465:465 # ESMTP (implicit TLS)
+      - 587:587 # ESMTP (explicit TLS => STARTTLS)
+      - 993:993 # IMAP4 (implicit TLS)
+    volumes:
+      - /opt/container-data/mailserver/mail-data/:/var/mail/
+      - /opt/container-data/mailserver/mail-state/:/var/mail-state/
+      - /opt/container-data/mailserver/mail-logs/:/var/log/mail/
+      - /opt/container-data/mailserver/config/:/tmp/docker-mailserver/
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/container-data/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
+    restart: always
+    stop_grace_period: 1m
+  docker-mailserver-gui:
+    container_name: mailserver-gui
+    networks:
+      - proxy
+    environment:
+      - DOCKER_CONTAINER=mailserver
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    image: dunajdev/docker-mailserver-gui:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mail-ui.rule=Host(`${MAIL_HOSTNAME}`)
+      - traefik.http.routers.mail-ui.entrypoints=websecure
+      - traefik.http.routers.mail-ui.tls=true
+      - traefik.http.routers.mail-ui.tls.certresolver=le
+      - traefik.http.routers.mail-ui.middlewares=tinyauth@file
+  autodiscover:
+    image: monogramm/autodiscover-email-settings:latest
+    container_name: autodiscover
+    environment:
+      - COMPANY_NAME=Homelab
+      - SUPPORT_URL=https://${AUTODISCOVER_DOMAIN}
+      - DOMAIN=${MAIL_DOMAIN}
+      - IMAP_HOST=${MAIL_HOSTNAME}
+      - IMAP_PORT=993
+      - IMAP_SOCKET=SSL
+      - SMTP_HOST=${MAIL_HOSTNAME}
+      - SMTP_PORT=465
+      - SMTP_SOCKET=SSL  
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.autoconfig.rule=Host(`${AUTODISCOVER_DOMAIN}`) ||
+        Host(`${AUTOCONFIG_DOMAIN}`)
+      - traefik.http.routers.autoconfig.entrypoints=websecure
+      - traefik.http.routers.autoconfig.tls=true
+      - traefik.http.routers.autoconfig.tls.certresolver=le
+      - traefik.http.services.autoconfig.loadbalancer.server.port=8000
+networks:
+  proxy:
+    external: true
