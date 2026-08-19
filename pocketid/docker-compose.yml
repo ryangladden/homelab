@@ -1,0 +1,29 @@
+services:
+
+  pocket-id:
+    image: ghcr.io/pocket-id/pocket-id:v2
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /opt/container-data/pocketid/data:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - /app/pocket-id
+        - healthcheck
+      interval: 1m30s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.auth.rule=Host(`${POCKETID_DOMAIN}`)
+      - traefik.http.routers.auth.entrypoints=websecure
+      - traefik.http.routers.auth.tls=true
+      - traefik.http.routers.auth.tls.certresolver=le
+    networks:
+      - proxy
+      
+networks:
+  proxy:
+    external: true
