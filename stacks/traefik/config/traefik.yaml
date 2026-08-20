@@ -1,0 +1,52 @@
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    forwardedHeaders:
+      insecure: true
+    address: ":443"
+    http:
+      tls:
+        certResolver: le
+    transport:
+      respondingTimeouts:
+        readTimeout: 10m
+        writeTimeout: 10m
+        idleTimeout: 180s
+
+tcp:
+  serversTransports:
+    proxyproto-tcp:
+      proxyProtocol:
+        version: 2   
+
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: proxy
+  file:
+    directory: /dynamic
+    watch: true
+
+api:
+  dashboard: true
+
+log:
+  level: DEBUG
+
+ping: true
+
+certificatesResolvers:
+  le:
+    acme:
+      email: admin@gladden.uk
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web
