@@ -1,0 +1,7 @@
+[[stack]]
+name = "traefik"
+[stack.config]
+server = "Local"
+linked_repo = "homelab"
+run_directory = "services/traefik"
+file_paths = ["compose.yaml"]
