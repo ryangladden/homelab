@@ -1,0 +1,15 @@
+[[stack]]
+name = "pocketid"
+[stack.config]
+server = "Local"
+linked_repo = "homelab"
+run_directory = "stacks/pocketid"
+environment = """
+ENCRYPTION_KEY=[[POCKETID_ENCRYPTION_KEY]]
+APP_URL=https://[[POCKETID_HOST]]
+POCKETID_HOST=[[POCKETID_HOST]]
+TRUST_PROXY=true
+MAXMIND_LICENSE_KEY=[[MAXMIND_API_KEY]]
+PUID=1000
+PGID=1000
+"""
