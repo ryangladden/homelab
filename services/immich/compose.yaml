@@ -31,11 +31,11 @@ services:
     healthcheck:
       disable: false
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.immich.rule=Host(`${IMMICH_HOST}`)
-      - traefik.http.routers.immich.entrypoints=websecure
-      - traefik.http.routers.immich.tls=true
-      - traefik.http.routers.immich.tls.certresolver=le
+      traefik.enable: true
+      traefik.http.routers.immich.rule: Host(`${IMMICH_HOST}`)
+      traefik.http.routers.immich.entrypoints: websecure
+      traefik.http.routers.immich.tls: true
+      traefik.http.routers.immich.tls.certresolver: le
     networks:
       - proxy
       - immich
