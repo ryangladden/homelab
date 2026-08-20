@@ -1,0 +1,25 @@
+[[stack]]
+name = "immich"
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/immich"
+environment = """
+UPLOAD_LOCATION=/opt/data/immich/mount/library
+DB_DATA_LOCATION=/opt/data/immich/postgres
+THUMB_LOCATION=/opt/data/immich/thumbs
+ENCODED_VIDEO_LOCATION=/opt/data/immich/encoded-videos
+EXTERNAL_LIB_LOCATION=/opt/data/immich/mount
+TZ=America/Denver
+IMMICH_VERSION="release"
+IMMICH_TELEMETRY_INCLUDE=all
+DB_PASSWORD=[[IMMICH_DB_PASSWORD]]
+DB_USERNAME=postgres
+DB_DATABASE_NAME=immich
+IMMICH_API_KEY=[[IMMICH_API_KEY]]
+IMMICH_URL=http://immich-server:2283
+EXTERNAL_IMMICH_URL=https://[[IMMICH_HOST]]
+IMMICH_HOST=[[IMMICH_HOST]]
+DB_HOST=database
+DB_PORT=5432
+"""
