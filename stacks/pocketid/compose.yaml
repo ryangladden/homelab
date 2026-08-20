@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     env_file: .env
     volumes:
-      - /opt/container-data/pocketid/data:/app/data
+      - /opt/data/pocketid/:/app/data
     healthcheck:
       test:
         - CMD
@@ -16,11 +16,11 @@ services:
       retries: 2
       start_period: 10s
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.auth.rule=Host(`${POCKETID_DOMAIN}`)
-      - traefik.http.routers.auth.entrypoints=websecure
-      - traefik.http.routers.auth.tls=true
-      - traefik.http.routers.auth.tls.certresolver=le
+      traefik.enable: true
+      traefik.http.routers.auth.rule: Host(`${POCKETID_HOST}`)
+      traefik.http.routers.auth.entrypoints: websecure
+      traefik.http.routers.auth.tls: true
+      traefik.http.routers.auth.tls.certresolver: le
     networks:
       - proxy
       
