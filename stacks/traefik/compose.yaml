@@ -14,8 +14,8 @@ services:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /opt/container-data/traefik/config:/etc/traefik:ro
-      - /opt/container-data/traefik/dynamic:/dynamic:ro
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - .config/dynamic:/dynamic:ro
       - /opt/container-data/traefik/letsencrypt:/letsencrypt
       - /opt/container-data/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
