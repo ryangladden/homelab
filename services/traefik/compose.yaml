@@ -16,8 +16,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./config/dynamic:/dynamic:ro
-      - /opt/data/traefik/letsencrypt:/letsencrypt
-      - /opt/data/traefik/certs:/certs
+      - /opt/state/traefik/letsencrypt:/letsencrypt
+      - /opt/state/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
     healthcheck:
       test:
