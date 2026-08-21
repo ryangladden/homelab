@@ -19,6 +19,8 @@ services:
       - ${EXTERNAL_LIB_LOCATION}/vieira/takeout:/usr/src/app/external/pat-takeout
     env_file:
       - .env
+    extends:
+      file: hwaccel.transcoding.yml
     ports:
       - 2283:2283
     expose:
