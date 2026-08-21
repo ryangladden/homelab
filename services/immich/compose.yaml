@@ -21,6 +21,7 @@ services:
       - .env
     extends:
       file: hwaccel.transcoding.yml
+      service: nvenc
     ports:
       - 2283:2283
     expose:
