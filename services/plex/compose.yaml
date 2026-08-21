@@ -21,9 +21,9 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=all
       - PLEX_PREFER_IPV4=1
     volumes:
-      - /opt/container-data/plex/database:/config # Plex config (database, settings)
-      - /opt/container-data/plex/transcode:/transcode # Transcoding temporary files
-      - /opt/container-data/plex/data:/data # Media files (make sure the path is correct)
+      - /opt/data/plex/database:/config # Plex config (database, settings)
+      - /opt/state/plex/transcode:/transcode # Transcoding temporary files
+      - /mnt/plex:/data # Media files (make sure the path is correct)
     network_mode: bridge # Use host network for easier connectivity, especially with Tailscale
     
     devices:
@@ -36,12 +36,12 @@ services:
       - proxy
     restart: unless-stopped
     volumes:
-      - /opt/container-data/plex/tautulli:/config
+      - /opt/data/plex/tautulli:/config
     environment:
       - TZ=America/Denver
     labels:
       - traefik.enable=true
-      - traefik.http.routers.tautulli.rule=Host(`${TAUTULLI_DOMAIN}`)
+      - traefik.http.routers.tautulli.rule=Host(`${TAUTULLI_HOST}`)
       - traefik.http.routers.tautulli.entrypoints=websecure
       - traefik.http.routers.tautulli.tls=true
       - traefik.http.routers.tautulli.tls.certresolver=le
