@@ -55,6 +55,7 @@ services:
       disable: false
     networks:
       - immich
+      - egress
       
   redis:
     container_name: immich-redis
@@ -87,4 +88,6 @@ networks:
   immich:
     internal: true
   proxy:
+    external: true
+  egress:
     external: true
