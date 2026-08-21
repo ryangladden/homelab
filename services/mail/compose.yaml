@@ -12,14 +12,15 @@ services:
       - 587:587 # ESMTP (explicit TLS => STARTTLS)
       - 993:993 # IMAP4 (implicit TLS)
     volumes:
-      - /opt/container-data/mailserver/mail-data/:/var/mail/
-      - /opt/container-data/mailserver/mail-state/:/var/mail-state/
-      - /opt/container-data/mailserver/mail-logs/:/var/log/mail/
-      - /opt/container-data/mailserver/config/:/tmp/docker-mailserver/
+      - /opt/data/mail/data/:/var/mail/
+      - /opt/data/mails/state/:/var/mail-state/
+      - /opt/state/mail/logs/:/var/log/mail/
+      - /opt/data/mails/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
-      - /opt/container-data/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
+      - /opt/data/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
     restart: always
     stop_grace_period: 1m
+    
   docker-mailserver-gui:
     container_name: mailserver-gui
     networks:
@@ -36,6 +37,7 @@ services:
       - traefik.http.routers.mail-ui.tls=true
       - traefik.http.routers.mail-ui.tls.certresolver=le
       - traefik.http.routers.mail-ui.middlewares=tinyauth@file
+      
   autodiscover:
     image: monogramm/autodiscover-email-settings:latest
     container_name: autodiscover
@@ -59,6 +61,7 @@ services:
       - traefik.http.routers.autoconfig.tls=true
       - traefik.http.routers.autoconfig.tls.certresolver=le
       - traefik.http.services.autoconfig.loadbalancer.server.port=8000
+      
 networks:
   proxy:
     external: true
