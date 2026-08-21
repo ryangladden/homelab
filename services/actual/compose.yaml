@@ -5,7 +5,7 @@ services:
     env_file:
       - .env
     volumes:
-      - /opt/container-data/actual:/data
+      - /opt/data/actual:/data
     healthcheck:
       test:
         - CMD-SHELL
