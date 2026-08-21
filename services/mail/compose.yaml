@@ -13,11 +13,11 @@ services:
       - 993:993 # IMAP4 (implicit TLS)
     volumes:
       - /opt/data/mail/data/:/var/mail/
-      - /opt/data/mails/state/:/var/mail-state/
+      - /opt/data/mail/state/:/var/mail-state/
       - /opt/state/mail/logs/:/var/log/mail/
-      - /opt/data/mails/config/:/tmp/docker-mailserver/
+      - /opt/data/mail/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
-      - /opt/data/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
+      - /opt/state/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
     restart: always
     stop_grace_period: 1m
     
