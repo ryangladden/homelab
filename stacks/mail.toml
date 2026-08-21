@@ -5,6 +5,10 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/mail"
 environment = """
+MAIL_HOST=[[MAIL_HOST]]
+AUTOCONFIG_HOST=[[AUTOCONFIG_HOST]]
+AUTODISCOVER_HOST=[[AUTODISCOVER_HOST]]
+
 OVERRIDE_HOSTNAME=
 
 LOG_LEVEL=info
