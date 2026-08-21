@@ -4,17 +4,18 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
+    env_files:
+      - .env
     environment:
-      DOMAIN: https://${VAULTWARDEN_DOMAIN}
       DISABLE_ADMIN_TOKEN: true
       SIGNUPS_ALLOWED: false
     volumes:
-      - /opt/container-data/vaultwarden:/data/
+      - /opt/data/vaultwarden:/data/
     networks:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.vaultwarden.rule=Host(`${VAULTWARDEN_DOMAIN}`)
+      - traefik.http.routers.vaultwarden.rule=Host(`${VAULTWARDEN_HOST}`)
       - traefik.http.routers.vaultwarden.entrypoints=websecure
       - traefik.http.routers.vaultwarden.tls=true
       - traefik.http.routers.vaultwarden.tls.certresolver=le
