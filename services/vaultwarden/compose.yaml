@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     environment:
-      DOMAIN: ttps://${VAULTWARDEN_HOST}
+      DOMAIN: https://${VAULTWARDEN_HOST}
       DISABLE_ADMIN_TOKEN: true
       SIGNUPS_ALLOWED: false
     volumes:
