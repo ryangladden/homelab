@@ -1,0 +1,9 @@
+[[stack]]
+name = "vaultwarden"
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/vaultwarden"
+environment = """
+VAULTWARDEN_HOST=[[VAULTWARDEN_HOST]]
+"""
