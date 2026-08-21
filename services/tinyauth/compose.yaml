@@ -4,11 +4,9 @@ services:
     image: ghcr.io/steveiliop56/tinyauth:v5
     container_name: tinyauth
     restart: unless-stopped
-    env_file:
-      - .env
     labels:
       traefik.enable: true
-      traefik.http.routers.tinyauth.rule: Host(`${TINYAUTH_DOMAIN}`)
+      traefik.http.routers.tinyauth.rule: Host(`${TINYAUTH_HOST}`)
       traefik.http.routers.tinyauth.entrypoints: websecure
       traefik.http.routers.tinyauth.tls: true
       traefik.http.routers.tinyauth.tls.certresolver: le
