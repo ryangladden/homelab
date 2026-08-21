@@ -4,8 +4,6 @@ services:
     container_name: actual
     env_file:
       - .env
-    # ports:
-    #   - 5006:5006
     volumes:
       - /opt/container-data/actual:/data
     healthcheck:
@@ -20,11 +18,11 @@ services:
     networks:
       - proxy
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.actual.rule=Host(`${ACTUAL_DOMAIN}`)
-      - traefik.http.routers.actual.entrypoints=websecure
-      - traefik.http.routers.actual.tls=true
-      - traefik.http.routers.actual.tls.certresolver=le
+      traefik.enable: true
+      traefik.http.routers.actual.rule: Host(`${ACTUAL_HOST}`)
+      traefik.http.routers.actual.entrypoints: websecure
+      traefik.http.routers.actual.tls: true
+      traefik.http.routers.actual.tls.certresolver: le
 networks:
   proxy:
     external: true
