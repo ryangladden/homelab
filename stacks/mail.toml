@@ -5,9 +5,9 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/mail"
 environment = """
-MAIL_HOST=[[MAIL_HOST]]
-AUTOCONFIG_HOST=[[AUTOCONFIG_HOST]]
-AUTODISCOVER_HOST=[[AUTODISCOVER_HOST]]
+MAIL_HOST=mail.[[HOST_DOMAIN]]
+AUTOCONFIG_HOST=autoconfig.[[HOST_DOMAIN]]
+AUTODISCOVER_HOST=autodiscover.[[HOST_DOMAIN]]
 
 OVERRIDE_HOSTNAME=
 
@@ -19,7 +19,7 @@ DMS_VMAIL_GID=
 
 ACCOUNT_PROVISIONER=
 
-POSTMASTER_ADDRESS=postmaster@gladden.uk
+POSTMASTER_ADDRESS=postmaster@[[HOST_DOMAIN]]
 
 ENABLE_UPDATE_CHECK=1
 UPDATE_CHECK_INTERVAL=1d
