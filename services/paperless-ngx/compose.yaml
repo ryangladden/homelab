@@ -32,12 +32,12 @@ services:
       - gotenberg
       - tika
     volumes:
-      - /opt/container-data/paperless-ngx/data:/usr/src/paperless/data
-      - /opt/container-data/paperless-ngx/media:/usr/src/paperless/media
-      - /opt/container-data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
-      - /opt/container-data/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
-      - /opt/container-data/paperless-ngx/export:/usr/src/paperless/export
-      - /opt/container-data/paperless-ngx/consume:/usr/src/paperless/consume
+      - /opt/data/paperless-ngx/data:/usr/src/paperless/data
+      - /opt/data/paperless-ngx/media:/usr/src/paperless/media
+      - /opt/data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
+      - /opt/data/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
+      - /opt/data/paperless-ngx/export:/usr/src/paperless/export
+      - /opt/data/paperless-ngx/consume:/usr/src/paperless/consume
     env_file: .env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
@@ -47,7 +47,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     labels:
       - traefik.enable=true
-      - traefik.http.routers.paperless.rule=Host(${PAPERLESS_DOMAIN}`)
+      - traefik.http.routers.paperless.rule=Host(${PAPERLESS_HOST}`)
       - traefik.http.routers.paperless.entrypoints=websecure
       - traefik.http.routers.paperless.tls=true
       - traefik.http.routers.paperless.tls.certresolver=le
@@ -60,8 +60,6 @@ services:
     container_name: paperless_gotenberg
     image: docker.io/gotenberg/gotenberg:8.20
     restart: unless-stopped
-    # The gotenberg chromium route is used to convert .eml files. We do not
-    # want to allow external content like tracking pixels or even javascript.
     command:
       - gotenberg
       - --chromium-disable-javascript=true
