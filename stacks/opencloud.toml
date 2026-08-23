@@ -1,46 +1,165 @@
 [[stack]]
 name = "opencloud"
 tags = ["service"]
+
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/opencloud"
+
 environment = """
+# ------------------------------------------------------------
+# General
+# ------------------------------------------------------------
+
 OC_DOCKER_TAG=7.4.0
 
-LOG_LEVEL=debug
-LOG_PRETTY=true
+LOG_DRIVER=local
+
+# ------------------------------------------------------------
+# OpenCloud
+# ------------------------------------------------------------
+
+OC_URL=https://cloud.[[HOST_DOMAIN]]
+
+OC_LOG_LEVEL=debug
+OC_LOG_COLOR=true
+OC_LOG_PRETTY=true
+
+OC_ASYNC_UPLOADS=false
+OC_INSECURE=false
+
+OC_ADD_RUN_SERVICES=
+
+OC_DEFAULT_LANGUAGE=en
+
+OC_EXCLUDE_RUN_SERVICES=idp
+
+OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD=true
+OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD=false
+
+IDM_CREATE_DEMO_USERS=false
+IDM_ADMIN_PASSWORD=[[OPENCLOUD_ADMIN_PASSWORD]]
+
+FRONTEND_ARCHIVER_MAX_SIZE=10000000000
+FRONTEND_CHECK_FOR_UPDATES=true
+
+
+# ------------------------------------------------------------
+# Password policy
+# ------------------------------------------------------------
+
+OC_PASSWORD_POLICY_DISABLED=false
+OC_PASSWORD_POLICY_MIN_CHARACTERS=8
+OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS=1
+OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS=1
+OC_PASSWORD_POLICY_MIN_DIGITS=1
+OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS=1
+
+
+# ------------------------------------------------------------
+# Proxy / OIDC
+# ------------------------------------------------------------
+
+PROXY_TLS=false
+PROXY_ENABLE_BASIC_AUTH=false
+
+PROXY_AUTOPROVISION_ACCOUNTS=true
+PROXY_ROLE_ASSIGNMENT_DRIVER=oidc
 
 OC_OIDC_ISSUER=[[POCKETID_HOST]]
+
 WEB_OIDC_CLIENT_ID=[[OPENCLOUD_CLIENT_ID]]
-WEB_OIDC_AUTHORITY=[[OPENCLOUD_SECRET_ID]]
+WEB_OIDC_AUTHORITY=[[POCKETID_HOST]]
 WEB_OIDC_METADATA_URL=[[POCKETID_HOST]]/.well-known/openid-configuration
+WEB_OIDC_RESPONSE_TYPE=code
+WEB_OIDC_SCOPE=openid profile email groups
 
-OPENCLOUD_HOST=cloud.[[HOST_DOMAIN]]
-OC_CONFIG_DIR=/opt/data/opencloud/config
-OC_DATA_DIR=/opt/data/opencloud/data
-OC_APPS_DIR=/opt/data/opencloud/app
+PROXY_OIDC_REWRITE_WELLKNOWN=true
 
-INITIAL_ADMIN_PASSWORD=[[OPENCLOUD_ADMIN_PASSWORD]]
+PROXY_USER_OIDC_CLAIM=preferred_username
+PROXY_USER_CS3_CLAIM=username
+
+PROXY_CSP_CONFIG_FILE_LOCATION=/etc/opencloud/csp.yml
+PROXY_CONFIG_FILE=/etc/opencloud/proxy.yml
+
+
+# ------------------------------------------------------------
+# SMTP
+# ------------------------------------------------------------
+
+NOTIFICATIONS_SMTP_HOST=mail.[[HOST_DOMAIN]]
+NOTIFICATIONS_SMTP_PORT=587
+NOTIFICATIONS_SMTP_SENDER=no-reply@[[MAIL_DOMAIN]]
+NOTIFICATIONS_SMTP_USERNAME=no-reply@[[MAIL_DOMAIN]]
+NOTIFICATIONS_SMTP_PASSWORD=[[NO_REPLY_PASSWORD]]
+NOTIFICATIONS_SMTP_INSECURE=false
+NOTIFICATIONS_SMTP_AUTHENTICATION=plain
+NOTIFICATIONS_SMTP_ENCRYPTION=starttls
+
+
+# ------------------------------------------------------------
+# Storage
+# ------------------------------------------------------------
+
+STORAGE_USERS_DRIVER=decomposeds3
+STORAGE_SYSTEM_DRIVER=decomposed
+
+STORAGE_USERS_DECOMPOSEDS3_ENDPOINT=[[S3_ENDPOINT]]
+STORAGE_USERS_DECOMPOSEDS3_REGION=us-east-1
+STORAGE_USERS_DECOMPOSEDS3_ACCESS_KEY=[[S3_ACCESS_KEY]]
+STORAGE_USERS_DECOMPOSEDS3_SECRET_KEY=[[S3_SECRET_KEY]]
+STORAGE_USERS_DECOMPOSEDS3_BUCKET=opencloud
+
+
+# ------------------------------------------------------------
+# NATS / Gateway
+# ------------------------------------------------------------
+
+NATS_NATS_HOST=0.0.0.0
+GATEWAY_GRPC_ADDR=0.0.0.0:9142
+
+
+# ------------------------------------------------------------
+# Collaboration / Euro Office
+# ------------------------------------------------------------
 
 EURO_OFFICE_HOST=docs.[[HOST_DOMAIN]]
+EURO_OFFICE_DOMAIN=docs.[[HOST_DOMAIN]]
 EURO_OFFICE_JWT_SECRET=[[EURO_OFFICE_JWT_SECRET]]
 
-WOPISERVER_HOST=wopiserver.[[DOMAIN]]
+WOPISERVER_HOST=wopiserver.[[HOST_DOMAIN]]
 
-DECOMPOSEDS3_ENDPOINT=[[S3_ENDPOINT]]
-DECOMPOSEDS3_REGION=us-east-1
-DECOMPOSEDS3_ACCESS_KEY=[[S3_ACCESS_KEY]]
-DECOMPOSEDS3_SECRET_KEY=[[S3_SECRET_KEY]]
-DECOMPOSEDS3_BUCKET=opencloud
+COLLABORATION_GRPC_ADDR=0.0.0.0:9301
+COLLABORATION_HTTP_ADDR=0.0.0.0:9300
+
+MICRO_REGISTRY=nats-js-kv
+MICRO_REGISTRY_ADDRESS=opencloud:9233
+
+COLLABORATION_WOPI_SRC=https://wopiserver.[[HOST_DOMAIN]]
+COLLABORATION_APP_NAME=Euro-Office
+COLLABORATION_APP_PRODUCT=OnlyOffice
+COLLABORATION_APP_ADDR=https://docs.[[HOST_DOMAIN]]
+COLLABORATION_APP_ICON=https://docs.[[HOST_DOMAIN]]/web-apps/apps/documenteditor/main/resources/img/favicon.ico
+
+COLLABORATION_APP_INSECURE=true
+COLLABORATION_CS3API_DATAGATEWAY_INSECURE=true
+COLLABORATION_APP_PROOF_DISABLE=true
+COLLABORATION_LOG_LEVEL=info
+
+OC_EVENTS_ENDPOINT=opencloud:9233
 
 
-SMTP_HOST=mail.[[HOST_DOMAIN]]
-SMTP_PORT=587
-SMTP_SENDER=no-reply@[[MAIL_DOMAIN]]
-SMTP_USERNAME=no-reply@[[MAIL_DOMAIN]]
-SMTP_PASSWORD=[[NO_REPLY_PASSWORD]]
-SMTP_INSECURE=false
-SMTP_AUTHENTICATION=plain
-SMTP_ENCRYPTION=starttls
+# ------------------------------------------------------------
+# Euro Office Document Server
+# ------------------------------------------------------------
+
+WOPI_ENABLED=true
+USE_UNAUTHORIZED_STORAGE=true
+
+JWT_SECRET=[[EURO_OFFICE_JWT_SECRET]]
+JWT_ENABLED=true
+
+DOCUMENT_SERVER_PUBLIC_URL=https://docs.[[HOST_DOMAIN]]
+DOCUMENT_SERVER_EXTERNAL_URL=https://docs.[[HOST_DOMAIN]]
 """
