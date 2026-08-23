@@ -5,7 +5,7 @@ services:
     image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
-      - /opt/container-data/paperless-ngx/redis:/data
+      - /opt/state/paperless-ngx/redis:/data
     networks:
       - paperless
       
@@ -14,7 +14,7 @@ services:
     image: docker.io/library/postgres:17
     restart: unless-stopped
     volumes:
-      - /opt/container-data/paperless-ngx/postgres:/var/lib/postgresql/data
+      - /opt/data/paperless-ngx/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -32,12 +32,12 @@ services:
       - gotenberg
       - tika
     volumes:
-      - /opt/data/paperless-ngx/data:/usr/src/paperless/data
+      - /mnt/paperless/data:/usr/src/paperless/data
       - /opt/data/paperless-ngx/media:/usr/src/paperless/media
       - /opt/data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
-      - /opt/data/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
+      - /opt/state/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
       - /opt/data/paperless-ngx/export:/usr/src/paperless/export
-      - /opt/data/paperless-ngx/consume:/usr/src/paperless/consume
+      - /mnt/paperless/consume:/usr/src/paperless/consume
     env_file: .env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
@@ -54,7 +54,6 @@ services:
     networks:
       - proxy
       - paperless
-      - auth
       
   gotenberg:
     container_name: paperless_gotenberg
