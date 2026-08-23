@@ -32,12 +32,12 @@ services:
       - gotenberg
       - tika
     volumes:
-      - /mnt/paperless/data:/usr/src/paperless/data
-      - /opt/data/paperless-ngx/media:/usr/src/paperless/media
+      - /opt/data/paperless-ngx/data:/usr/src/paperless/data
+      - /mnt/paperless-ngx/media:/usr/src/paperless/media
       - /opt/data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
       - /opt/state/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
       - /opt/data/paperless-ngx/export:/usr/src/paperless/export
-      - /mnt/paperless/consume:/usr/src/paperless/consume
+      - /mnt/paperless-ngx/consume:/usr/src/paperless/consume
     env_file: .env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
