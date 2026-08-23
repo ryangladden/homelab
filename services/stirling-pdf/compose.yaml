@@ -7,6 +7,7 @@ services:
       - /opt/data/stirling/configs:/configs
       - /opt/state/stirling/logs:/logs
       - /opt/data/stirling/pipeline:/pipeline
+    env_file: .env
     environment:
       - SECURITY_ENABLELOGIN=true
     restart: unless-stopped
