@@ -22,6 +22,7 @@ LOG_DRIVER=local
 
 OC_URL=https://cloud.[[HOST_DOMAIN]]
 OPENCLOUD_HOST=cloud.[[HOST_DOMAIN]]
+OC_DOMAIN=cloud.[[HOST_DOMAIN]]
 
 OC_LOG_LEVEL=debug
 OC_LOG_COLOR=true
