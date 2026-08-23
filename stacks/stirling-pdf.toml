@@ -1,0 +1,10 @@
+[[stack]]
+name = "stirling-pdf"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/stirling-pdf"
+environment = """
+STIRLING_HOST=pdf.[[HOST_DOMAIN]]
+"""
