@@ -3,19 +3,16 @@ services:
     image: stirlingtools/stirling-pdf:latest-fat
     container_name: stirling-pdf
     volumes:
-      - /opt/container-data/stirling/tessdata:/usr/share/tessdata
-      - /opt/container-data/stirling/configs:/configs
-      - /opt/container-data/stirling/logs:/logs
-      - /opt/container-data/stirling/pipeline:/pipeline
+      - /opt/state/stirling/tessdata:/usr/share/tessdata
+      - /opt/data/stirling/configs:/configs
+      - /opt/state/stirling/logs:/logs
+      - /opt/data/stirling/pipeline:/pipeline
     environment:
       - SECURITY_ENABLELOGIN=true
-      - LANGS=en_GB
-      - SECURITY_INITIALLOGIN_USERNAME=ryan
-      - SECURITY_INITIALLOGIN_PASSWORD=${PASSWORD}
     restart: unless-stopped
     labels:
       traefik.enable: true
-      traefik.http.routers.stirling.rule: Host(`${STIRLING_DOMAIN}`)
+      traefik.http.routers.stirling.rule: Host(`${STIRLING_HOST}`)
       traefik.http.routers.stirling.entrypoints: websecure
       traefik.http.routers.stirling.tls: true
       traefik.http.routers.stirling.tls.certresolver: le
