@@ -6,5 +6,5 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/actual"
 environment = """
-ACTUAL_HOST=[[ACTUAL_HOST]]
+ACTUAL_HOST=budget.[[HOST_DOMAIN]]
 """
