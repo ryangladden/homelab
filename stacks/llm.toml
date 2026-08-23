@@ -1,0 +1,19 @@
+[[stack]]
+name = "llm"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/llm"
+environment = """
+AI_HOST=ai.[[HOST_DOMAIN]]
+OAUTH_CLIENT_ID=[[OPEN_WEB_UI_CLIENT_ID]]
+OAUTH_CLIENT_SECRET=[[OPEN_WEB_UI_CLIENT_SECRET]]
+OAUTH_PROVIDER_NAME=Pocket ID
+OPENID_PROVIDER_URL=https://[[POCKET_ID_HOST]]/.well-known/openid-configuration
+OPENID_REDIRECT_URI=https://ai.[[HOST_DOMAIN]]/oauth/oidc/callback
+WEBUI_URL=https://ai.[[HOST_DOMAIN]]
+ENABLE_OAUTH_SIGNUP=true
+ENABLE_LOGIN_FORM=false
+OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
+"""
