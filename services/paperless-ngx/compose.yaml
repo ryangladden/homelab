@@ -36,7 +36,7 @@ services:
       - /mnt/paperless-ngx/media:/usr/src/paperless/media
       - /opt/data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
       - /opt/state/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
-      - /opt/data/paperless-ngx/export:/usr/src/paperless/export
+      - /mnt/paperless-ngx/export:/usr/src/paperless/export
       - /mnt/paperless-ngx/consume:/usr/src/paperless/consume
     env_file: .env
     environment:
