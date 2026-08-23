@@ -22,7 +22,7 @@ services:
     command:
       - -c
       - opencloud init || true; opencloud server
-    env_file: .env
+    # env_file: .env
     environment:
       # enable services that are not started automatically
       OC_ADD_RUN_SERVICES: ${START_ADDITIONAL_SERVICES}
@@ -126,7 +126,7 @@ services:
     command:
       - -c
       - opencloud collaboration server
-    env_file: .env
+    # env_file: .env
     environment:
       COLLABORATION_GRPC_ADDR: 0.0.0.0:9301
       COLLABORATION_HTTP_ADDR: 0.0.0.0:9300
@@ -168,7 +168,7 @@ services:
       - traefik.http.routers.euroffice.middlewares=euroffice-headers
       - traefik.http.middlewares.euroffice-headers.headers.customrequestheaders.X-Forwarded-Proto=https
       - traefik.http.middlewares.euroffice-headers.headers.customrequestheaders.X-Forwarded-Ssl=on
-    env_file: .env
+    # env_file: .env
     environment:
       WOPI_ENABLED: "true"
       # self-signed certificate
