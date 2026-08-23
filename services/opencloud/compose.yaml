@@ -9,7 +9,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.opencloud.rule=Host(`${OPENCLOUD_DOMAIN}`)
+      - traefik.http.routers.opencloud.rule=Host(`${OPENCLOUD_HOST}`)
       - traefik.http.routers.opencloud.entrypoints=websecure
       - traefik.http.routers.opencloud.tls=true
       - traefik.http.routers.opencloud.tls.certresolver=le
@@ -24,7 +24,7 @@ services:
     environment:
       # enable services that are not started automatically
       OC_ADD_RUN_SERVICES: ${START_ADDITIONAL_SERVICES}
-      OC_URL: https://${OPENCLOUD_DOMAIN}
+      OC_URL: https://${OPENCLOUD_HOST}
       OC_LOG_LEVEL: ${LOG_LEVEL:-info}
       OC_LOG_COLOR: ${LOG_PRETTY:-false}
       OC_LOG_PRETTY: ${LOG_PRETTY:-false}
@@ -34,9 +34,9 @@ services:
       # INSECURE: needed if OpenCloud / reverse proxy is using self generated certificates
       OC_INSECURE: false
       # basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
-      PROXY_ENABLE_BASIC_AUTH: ${PROXY_ENABLE_BASIC_AUTH:-false}
+      PROXY_ENABLE_BASIC_AUTH: false
       # demo users
-      IDM_CREATE_DEMO_USERS: ${DEMO_USERS:-false}
+      IDM_CREATE_DEMO_USERS: false
       # admin password
       IDM_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
       # email server (if configured)
@@ -65,7 +65,7 @@ services:
       # default language for services/WebUI; defaults to English, language code (ISO 639-1, e.g. de, en, fr)
       OC_DEFAULT_LANGUAGE: en
       # this is needed for setting the correct CSP header
-      EURO_OFFICE_DOMAIN: ${EURO_OFFICE_DOMAIN}
+      EURO_OFFICE_DOMAIN: ${EURO_OFFICE_HOST}
       # expose nats and the reva gateway for the collaboration service
       NATS_NATS_HOST: 0.0.0.0
       GATEWAY_GRPC_ADDR: 0.0.0.0:9142
@@ -73,7 +73,7 @@ services:
       PROXY_AUTOPROVISION_ACCOUNTS: true
       PROXY_ROLE_ASSIGNMENT_DRIVER: oidc
       OC_OIDC_ISSUER: ${OIDC_BASE_URL}
-      WEB_OIDC_CLIENT_ID: ${OIDC_CLIENT_ID} a5e2d99d-98ba-4c2f-aac7-d250e9ebf523
+      WEB_OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
       WEB_OIDC_AUTHORITY: ${OIDC_BASE_URL}
       WEB_OIDC_METADATA_URL: ${OIDC_BASE_URL}/.well-known/openid-configuration
       WEB_OIDC_RESPONSE_TYPE: code
@@ -106,7 +106,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.collaboration.rule=Host(`${WOPISERVER_DOMAIN}`)
+      - traefik.http.routers.collaboration.rule=Host(`${WOPISERVER_HOST}`)
       - traefik.http.routers.collaboration.entrypoints=websecure
       - traefik.http.routers.collaboration.tls=true
       - traefik.http.routers.collaboration.tls.certresolver=le
@@ -131,13 +131,13 @@ services:
       COLLABORATION_WOPI_SRC: https://${WOPISERVER_DOMAIN}
       COLLABORATION_APP_NAME: Euro-Office
       COLLABORATION_APP_PRODUCT: OnlyOffice
-      COLLABORATION_APP_ADDR: https://${EURO_OFFICE_DOMAIN}
-      COLLABORATION_APP_ICON: https://${EURO_OFFICE_DOMAIN}/web-apps/apps/documenteditor/main/resources/img/favicon.ico
+      COLLABORATION_APP_ADDR: https://${EURO_OFFICE_HOST}
+      COLLABORATION_APP_ICON: https://${EURO_OFFICE_HOST}/web-apps/apps/documenteditor/main/resources/img/favicon.ico
       COLLABORATION_APP_INSECURE: true
       COLLABORATION_CS3API_DATAGATEWAY_INSECURE: true
       COLLABORATION_APP_PROOF_DISABLE: "true"
       COLLABORATION_LOG_LEVEL: info
-      OC_URL: https://${OC_DOMAIN}
+      OC_URL: https://${OPENCLOUD_HOST}
       OC_EVENTS_ENDPOINT: opencloud:9233
       EURO_OFFICE_JWT_SECRET: ${EURO_OFFICE_JWT_SECRET}
     volumes:
@@ -153,7 +153,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.euroffice.rule=Host(`${EURO_OFFICE_DOMAIN}`)
+      - traefik.http.routers.euroffice.rule=Host(`${EURO_OFFICE_HOST}`)
       - traefik.http.routers.euroffice.entrypoints=websecure
       - traefik.http.routers.euroffice.tls=true
       - traefik.http.routers.euroffice.tls.certresolver=le
@@ -169,8 +169,8 @@ services:
       USE_UNAUTHORIZED_STORAGE: true
       JWT_SECRET: ${EURO_OFFICE_JWT_SECRET}
       JWT_ENABLED: true
-      DOCUMENT_SERVER_PUBLIC_URL: https://${EURO_OFFICE_DOMAIN}
-      DOCUMENT_SERVER_EXTERNAL_URL: https://${EURO_OFFICE_DOMAIN}
+      DOCUMENT_SERVER_PUBLIC_URL: https://${EURO_OFFICE_HOST}
+      DOCUMENT_SERVER_EXTERNAL_URL: https://${EURO_OFFICE_HOST}
     volumes:
       # Mount local TrueType fonts so the container can use system fonts
       # (e.g. Microsoft fonts like Arial, Calibri, Cambria by installing the `ttf-mscorefonts-installer` package).
