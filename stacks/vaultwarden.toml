@@ -5,5 +5,5 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/vaultwarden"
 environment = """
-VAULTWARDEN_HOST=[[VAULTWARDEN_HOST]]
+VAULTWARDEN_HOST=vault.[[HOST_DOMAIN]]
 """
