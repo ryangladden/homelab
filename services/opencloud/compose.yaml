@@ -76,7 +76,7 @@ services:
       OC_OIDC_ISSUER: ${OIDC_BASE_URL}
       WEB_OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
       WEB_OIDC_AUTHORITY: ${OIDC_BASE_URL}
-      WEB_OIDC_METADATA_URL: ${OIDC_BASE_URL}/.well-known/openid-configuration
+      WEB_OIDC_METADATA_URL: ${WEB_OIDC_METADATA_URL}
       WEB_OIDC_RESPONSE_TYPE: code
       WEB_OIDC_SCOPE: openid profile email groups
       PROXY_OIDC_REWRITE_WELLKNOWN: true
