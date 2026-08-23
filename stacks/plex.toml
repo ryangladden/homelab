@@ -7,5 +7,5 @@ run_directory = "services/plex"
 environment = """
 PLEX_CLAIM=[[PLEX_CLAIM]]
 ADVERTISE_IP=[[HOST_IP]]
-TAUTULLI_HOST=[[TAUTULLI_HOST]]
+TAUTULLI_HOST=plex.[[HOST_DOMAIN]]
 """
