@@ -1,5 +1,6 @@
 services:
   opencloud:
+    container_name: opencloud
     # renovate: depName=opencloudeu/opencloud-rolling
     image: opencloudeu/opencloud-rolling:${OC_DOCKER_TAG:-7.4.0}
     # changelog: https://github.com/opencloud-eu/opencloud/tree/main/changelog
@@ -99,6 +100,7 @@ services:
     logging:
       driver: local
   collaboration:
+    container_name: oc-collaboration
     # renovate: depName=opencloudeu/opencloud-rolling
     image: opencloudeu/opencloud-rolling:${OC_DOCKER_TAG:-7.4.0}
     user: 1000:1000
@@ -148,6 +150,7 @@ services:
     restart: unless-stopped
   euro-office:
     image: ghcr.io/euro-office/documentserver:latest
+    container_name: euro-office
     # changelog https://github.com/EURO-office/DocumentServer/releases
     networks:
       - proxy
@@ -199,14 +202,15 @@ services:
       start_period: 120s
   radicale:
     image: opencloudeu/radicale:latest
+    container_name: radicale
     networks:
       - proxy
     logging:
       driver: local
     restart: always
     volumes:
-      - /opt/container-data/opencloud/config/radicale/:/etc/radicale/
-      - /opt/container-data/opencloud/radicale:/var/lib/radicale
+      - /opt/data/opencloud/config/radicale/:/etc/radicale/
+      - /opt/data/opencloud/radicale:/var/lib/radicale
 networks:
   proxy:
     external: true
