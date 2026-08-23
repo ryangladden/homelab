@@ -47,7 +47,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     labels:
       - traefik.enable=true
-      - traefik.http.routers.paperless.rule=Host(${PAPERLESS_HOST}`)
+      - traefik.http.routers.paperless.rule=Host(`${PAPERLESS_HOST}`)
       - traefik.http.routers.paperless.entrypoints=websecure
       - traefik.http.routers.paperless.tls=true
       - traefik.http.routers.paperless.tls.certresolver=le
