@@ -12,6 +12,5 @@ search:
     - json
 
 server:
-  secret_key: "ultrasecretkey"
   limiter: true
   image_proxy: true
