@@ -13,7 +13,7 @@ services:
       - internal
     labels:
       traefik.enable: true
-      traefik.http.routers.searxng.rule: Host(`search.gladden.uk`)
+      traefik.http.routers.searxng.rule: Host(`${SEARXNG_HOST}`)
       traefik.http.routers.searxng.entrypoints: websecure
       traefik.http.routers.searxng.tls: true
       traefik.http.routers.searxng.tls.certresolver: le
