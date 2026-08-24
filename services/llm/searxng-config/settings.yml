@@ -12,5 +12,5 @@ search:
     - json
 
 server:
-  limiter: true
+  limiter: false
   image_proxy: true
