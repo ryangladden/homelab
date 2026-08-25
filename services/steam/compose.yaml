@@ -21,7 +21,38 @@ services:
     extra_hosts:
       - "${NAME}:127.0.0.1"
       - "${NAME}:192.168.1.251"
-    env_file: .env
+    #env_file: .env
+    environment:
+      # System
+      - TZ=${TZ}
+      - USER_LOCALES=${USER_LOCALES}
+      - DISPLAY=${DISPLAY}
+      # User
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - USER_PASSWORD=${USER_PASSWORD}
+      # Mode
+      - MODE=${MODE}
+      # Web UI
+      - WEB_UI_MODE=${WEB_UI_MODE}
+      - ENABLE_VNC_AUDIO=${ENABLE_VNC_AUDIO}
+      - PORT_NOVNC_WEB=${PORT_NOVNC_WEB}
+      - NEKO_NAT1TO1=${NEKO_NAT1TO1}
+      # Steam
+      - ENABLE_STEAM=${ENABLE_STEAM}
+      - STEAM_ARGS=${STEAM_ARGS}
+      # Sunshine
+      - ENABLE_SUNSHINE=${ENABLE_SUNSHINE}
+      - SUNSHINE_USER=${SUNSHINE_USER}
+      - SUNSHINE_PASS=${SUNSHINE_PASS}
+      # Xorg
+      - ENABLE_EVDEV_INPUTS=${ENABLE_EVDEV_INPUTS}
+      - FORCE_X11_DUMMY_CONFIG=${FORCE_X11_DUMMY_CONFIG}
+      # Nvidia specific config
+      - NVIDIA_DRIVER_CAPABILITIES=${NVIDIA_DRIVER_CAPABILITIES}
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES}
+      - NVIDIA_DRIVER_VERSION=${NVIDIA_DRIVER_VERSION}
     devices:
       - /dev/fuse
       - /dev/uinput
