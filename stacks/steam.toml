@@ -45,7 +45,7 @@ MODE=primary
 
 # Web UI
 WEB_UI_MODE=vnc            # Options: ['vnc', 'neko', 'none']
-ENABLE_VNC_AUDIO=true
+ENABLE_VNC_AUDIO=false
 PORT_NOVNC_WEB=8083
 NEKO_NAT1TO1=
 
