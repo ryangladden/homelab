@@ -1,0 +1,6 @@
+[[stack]]
+name = "uptime"
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/uptime"
