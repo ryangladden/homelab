@@ -12,6 +12,8 @@ services:
       - /opt/data/vaultwarden:/data/
     networks:
       - proxy
+    healthcheck:
+      test: "CMD-SHELL curl -f http://localhost:8080/alive"
     labels:
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
