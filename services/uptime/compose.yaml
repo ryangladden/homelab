@@ -14,7 +14,6 @@ services:
       traefik.http.routers.uptime.tls.certresolver: le
     networks:
       - proxy
-      - uptime
       
   # signal-cli-rest-api:
   #   container_name: signal-api
