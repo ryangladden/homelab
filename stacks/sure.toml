@@ -160,7 +160,7 @@ REDIS_URL=redis://localhost:6379/1
 
 # App Domain
 # This is the domain that your Sure instance will be hosted at. It is used to generate links in emails and other places.
-APP_DOMAIN=budget2.[[HOST_DOMAIN[[
+APP_DOMAIN=budget2.[[HOST_DOMAIN]]
 
 # WebAuthn / passkey configuration
 # RP ID is usually the registrable domain (example.com), not a full URL.
