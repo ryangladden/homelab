@@ -48,7 +48,7 @@ services:
       traefik.http.routers.sure.entrypoints: websecure
       traefik.http.routers.sure.tls: true
       traefik.http.routers.sure.tls.certresolver: le
-      traefik.http.services.sure.loadbalancer.server.port: 8080
+      traefik.http.services.sure.loadbalancer.server.port: 3000
       traefik.http.routers.sure.middlewares: tinyauth@file
       traefik.docker.network: proxy
 
