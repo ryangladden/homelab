@@ -1,0 +1,127 @@
+x-db-env: &db_env
+  POSTGRES_USER: ${POSTGRES_USER}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_DB: ${POSTGRES_DB}
+
+x-rails-env: &rails_env
+  <<: *db_env
+  SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+  SELF_HOSTED: "true"
+  RAILS_FORCE_SSL: "false"
+  RAILS_ASSUME_SSL: "false"
+  DB_HOST: db
+  DB_PORT: 5432
+  REDIS_URL: redis://redis:6379/1
+  # NOTE: enabling OpenAI will incur costs when you use AI-related features in the app (chat, rules).  Make sure you have set appropriate spend limits on your account before adding this.
+  OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN}
+  OPENAI_MODEL: ${OPENAI_MODEL:-}
+  OPENAI_URI_BASE: ${OPENAI_URI_BASE:-}
+  LLM_CONTEXT_WINDOW: ${LLM_CONTEXT_WINDOW:-}
+  OPENAI_REQUEST_TIMEOUT: ${OPENAI_REQUEST_TIMEOUT:-60}
+  AI_RESPONSE_TIMEOUT: ${AI_RESPONSE_TIMEOUT:-90}
+  ASSISTANT_MAX_TOOL_CALL_ITERATIONS: ${ASSISTANT_MAX_TOOL_CALL_ITERATIONS:-}
+
+services:
+  web:
+    image: ghcr.io/we-promise/sure:stable
+    volumes:
+      - /opt/data/sure/data:/rails/storage
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      <<: *rails_env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    networks:
+      - sure_net
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.sure.rule: Host(`${SURE_HOST}`)
+      traefik.http.routers.sure.entrypoints: websecure
+      traefik.http.routers.sure.tls: true
+      traefik.http.routers.sure.tls.certresolver: le
+      traefik.http.services.sure.loadbalancer.server.port: 8080
+      traefik.http.routers.sure.middlewares: tinyauth@file
+      traefik.docker.network: proxy
+
+  worker:
+    image: ghcr.io/we-promise/sure:stable
+    command: bundle exec sidekiq
+    volumes:
+      - /opt/data/sure/data:/rails/storage
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      <<: *rails_env
+    networks:
+      - sure_net
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    volumes:
+      - /opt/data/sure/db/:/var/lib/postgresql/data
+    environment:
+      <<: *db_env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sure_net
+
+  backup:
+    profiles:
+      - backup
+    image: prodrigestivill/postgres-backup-local
+    restart: unless-stopped
+    volumes:
+      - /opt/data/sure/backups/:/backups # Change this path to your desired backup location on the host machine
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} # pipelock:ignore
+      - SCHEDULE=@daily # Runs once a day at midnight
+      - BACKUP_KEEP_DAYS=7 # Keeps the last 7 days of backups
+      - BACKUP_KEEP_WEEKS=4 # Keeps 4 weekly backups
+      - BACKUP_KEEP_MONTHS=6 # Keeps 6 monthly backups
+    depends_on:
+      - db
+    networks:
+      - sure_net
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - /opt/state/sure/redis:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sure_net
+
+networks:
+  sure_net:
+    driver: bridge
+  proxy:
+    external: true
