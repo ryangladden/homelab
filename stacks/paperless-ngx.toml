@@ -20,6 +20,6 @@ PAPERLESS_URL=https://documents.[[HOST_DOMAIN]]
 PAPERLESS_SECRET_KEY=[[PAPERLESS_SECRET_KEY]]
 PAPERLESS_DISABLE_REGULAR_LOGIN=true
 PAPERLESS_CONSUME_DIR=/usr/src/paperless/consume
-PAPERLESS_TRASH_DIR=/usr/src/paperless/media/trash
+PAPERLESS_EMPTY_TRASH_DIR=/usr/src/paperless/media/trash
 PAPERLESS_HOST=documents.[[HOST_DOMAIN]]
 """
