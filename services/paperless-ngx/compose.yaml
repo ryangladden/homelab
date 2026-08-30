@@ -33,6 +33,7 @@ services:
       - tika
     volumes:
       - /opt/data/paperless-ngx/data:/usr/src/paperless/data
+      - /opt/state/paperless-ngx/log:/usr/src/paperless/data/log
       - /mnt/paperless-ngx/media:/usr/src/paperless/media
       - /opt/data/paperless-ngx/media.lock:/usr/src/paperless/media/media.lock
       - /opt/state/paperless-ngx/thumbnails:/usr/src/paperless/media/documents/thumbnails
