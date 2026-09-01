@@ -26,6 +26,7 @@ services:
       - .env
 
     volumes:
+      - /mnt/opencloud:/var/lib/opencloud/storage/users/users
       - /opt/data/opencloud/config:/etc/opencloud
       - /opt/data/opencloud/data:/var/lib/opencloud
       - /opt/data/opencloud/app:/var/lib/opencloud/web/assets/apps
