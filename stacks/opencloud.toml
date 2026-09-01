@@ -12,7 +12,7 @@ environment = """
 # General
 # ------------------------------------------------------------
 
-OC_DOCKER_TAG=7.4.0
+OC_DOCKER_TAG=latest
 
 LOG_DRIVER=local
 
