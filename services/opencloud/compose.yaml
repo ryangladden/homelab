@@ -35,48 +35,48 @@ services:
       driver: local
 
 
-  collaboration:
-    container_name: oc-collaboration
-    # renovate: depName=opencloudeu/opencloud-rolling
-    image: opencloudeu/opencloud-rolling:${OC_DOCKER_TAG}
-    user: 1000:1000
+  # collaboration:
+  #   container_name: oc-collaboration
+  #   # renovate: depName=opencloudeu/opencloud-rolling
+  #   image: opencloudeu/opencloud-rolling:${OC_DOCKER_TAG}
+  #   user: 1000:1000
 
-    networks:
-      - proxy
+  #   networks:
+  #     - proxy
 
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.collaboration.rule=Host(`${WOPISERVER_HOST}`)
-      - traefik.http.routers.collaboration.entrypoints=websecure
-      - traefik.http.routers.collaboration.tls=true
-      - traefik.http.routers.collaboration.tls.certresolver=le
-      - traefik.http.routers.collaboration.service=collaboration
-      - traefik.http.services.collaboration.loadbalancer.server.port=9300
-      - traefik.docker.network=proxy
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.collaboration.rule=Host(`${WOPISERVER_HOST}`)
+  #     - traefik.http.routers.collaboration.entrypoints=websecure
+  #     - traefik.http.routers.collaboration.tls=true
+  #     - traefik.http.routers.collaboration.tls.certresolver=le
+  #     - traefik.http.routers.collaboration.service=collaboration
+  #     - traefik.http.services.collaboration.loadbalancer.server.port=9300
+  #     - traefik.docker.network=proxy
 
-    depends_on:
-      opencloud:
-        condition: service_started
-      euro-office:
-        condition: service_healthy
+  #   depends_on:
+  #     opencloud:
+  #       condition: service_started
+  #     euro-office:
+  #       condition: service_healthy
 
-    entrypoint:
-      - /bin/sh
+  #   entrypoint:
+  #     - /bin/sh
 
-    command:
-      - -c
-      - opencloud collaboration server
+  #   command:
+  #     - -c
+  #     - opencloud collaboration server
 
-    env_file:
-      - .env
+  #   env_file:
+  #     - .env
 
-    volumes:
-      - /opt/data/opencloud/config:/etc/opencloud
+  #   volumes:
+  #     - /opt/data/opencloud/config:/etc/opencloud
 
-    logging:
-      driver: local
+  #   logging:
+  #     driver: local
 
-    restart: unless-stopped
+  #   restart: unless-stopped
 
 
   euro-office:
