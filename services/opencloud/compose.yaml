@@ -10,10 +10,16 @@ services:
 
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.hsts-header.headers.stsSeconds=31536000
+      - traefik.http.middlewares.hsts-header.headers.stsIncludeSubdomains=true
+      - traefik.http.middlewares.hsts-header.headers.stsPreload=true
+      - traefik.http.middlewares.hsts-header.headers.forceSTSHeader=true
       - traefik.http.routers.opencloud.rule=Host(`${OPENCLOUD_HOST}`)
       - traefik.http.routers.opencloud.entrypoints=websecure
       - traefik.http.routers.opencloud.tls=true
       - traefik.http.routers.opencloud.tls.certresolver=le
+      - traefik.http.routers.opencloud.middlewares=hsts-header
+      - traefik.http.services.opencloud.loadbalancer.server.port=9200
 
     entrypoint:
       - /bin/sh
