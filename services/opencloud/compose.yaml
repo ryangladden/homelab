@@ -147,6 +147,13 @@ services:
       - /opt/data/opencloud/config/radicale/:/etc/radicale/
       - /opt/data/opencloud/radicale:/var/lib/radicale
 
+    labels:
+      - traefik.http.routers.radicale.rule=Host(`${RADICALE_HOST}`)
+      - traefik.http.routers.radicale.entrypoints=websecure
+      - traefik.http.routers.radicale.tls=true
+      - traefik.http.routers.radicale.tls.certresolver=le
+      - traefik.http.services.radicale.loadbalancer.server.port=5232
+
 
 networks:
   proxy:
