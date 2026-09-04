@@ -148,3 +148,12 @@ http:
         authResponseHeaders:
           - Remote-User
         headerField: X-Remote-User
+
+    remote-user-header:
+      plugin:
+        htransformation:
+          Rules:
+            - Name: "Remote User"
+              Header: "Remote-User"
+              Value: "X-Remote-User"
+              Type: "Rename"
