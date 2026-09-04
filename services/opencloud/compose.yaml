@@ -137,7 +137,6 @@ services:
     container_name: radicale
 
     networks:
-      - proxy
       - radicale-internal
     logging:
       driver: local
@@ -156,7 +155,7 @@ services:
       - traefik.http.routers.radicale.tls.certresolver=le
       - traefik.http.routers.radicale.service=radicale
       - traefik.http.services.radicale.loadbalancer.server.port=5232
-      - traefik.docker.network=proxy
+      - traefik.docker.network=radicale-internal
       - traefik.http.routers.radicale.middlewares=tinyauth@file
 
 
