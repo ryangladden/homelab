@@ -147,3 +147,4 @@ http:
         address: http://tinyauth:3000/api/auth/traefik
         authResponseHeaders:
           - Remote-User
+        headerField: X-Remote-User
