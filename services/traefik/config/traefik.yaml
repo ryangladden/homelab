@@ -50,3 +50,8 @@ certificatesResolvers:
       storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
+
+experimental:
+  localPlugins:
+    opencloud-user-mapper:
+      moduleName: github.com/ryangladden/traefik-opencloud-user-mapper
