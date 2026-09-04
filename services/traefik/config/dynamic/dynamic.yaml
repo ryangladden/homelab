@@ -153,7 +153,7 @@ http:
         opencloud-user-mapper:
           opencloudURL: http://opencloud:9200
           usernameHeader: Remote-User
-          outputHeader: Remote-User
+          outputHeader: X-Remote-User
           serviceUsernameEnv: OC_MAPPER_USERNAME
           appTokenEnv: OC_MAPPER_APP_TOKEN
           cacheTTL: 1h
