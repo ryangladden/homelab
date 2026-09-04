@@ -145,3 +145,5 @@ http:
     tinyauth:
       forwardauth:
         address: http://tinyauth:3000/api/auth/traefik
+        authResponseHeaders:
+          - Remote-User
