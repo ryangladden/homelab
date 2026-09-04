@@ -16,6 +16,8 @@ OC_DOCKER_TAG=latest
 
 LOG_DRIVER=local
 
+RADICALE_HOST=cal.[[HOST_DOMAIN]]
+
 # ------------------------------------------------------------
 # OpenCloud
 # ------------------------------------------------------------
@@ -31,7 +33,7 @@ OC_LOG_PRETTY=true
 OC_ASYNC_UPLOADS=false
 OC_INSECURE=false
 
-OC_ADD_RUN_SERVICES=
+OC_ADD_RUN_SERVICES=collaboration
 
 OC_DEFAULT_LANGUAGE=en
 
@@ -109,12 +111,6 @@ STORAGE_USERS_ID_CACHE_STORE=nats-js-kv
 
 STORAGE_SYSTEM_DRIVER=decomposed
 
-# STORAGE_USERS_DECOMPOSEDS3_ENDPOINT=[[S3_ENDPOINT]]
-# STORAGE_USERS_DECOMPOSEDS3_REGION=us-east-1
-# STORAGE_USERS_DECOMPOSEDS3_ACCESS_KEY=[[S3_ACCESS_KEY]]
-# STORAGE_USERS_DECOMPOSEDS3_SECRET_KEY=[[S3_SECRET_KEY]]
-# STORAGE_USERS_DECOMPOSEDS3_BUCKET=opencloud
-
 
 # ------------------------------------------------------------
 # NATS / Gateway
@@ -132,16 +128,14 @@ EURO_OFFICE_HOST=docs.[[HOST_DOMAIN]]
 EURO_OFFICE_DOMAIN=docs.[[HOST_DOMAIN]]
 EURO_OFFICE_JWT_SECRET=[[EURO_OFFICE_JWT_SECRET]]
 
-WOPISERVER_HOST=wopiserver.[[HOST_DOMAIN]]
-
 COLLABORATION_GRPC_ADDR=0.0.0.0:9301
 COLLABORATION_HTTP_ADDR=0.0.0.0:9300
 
 MICRO_REGISTRY=nats-js-kv
 MICRO_REGISTRY_ADDRESS=opencloud:9233
 
-COLLABORATION_WOPI_SRC=https://wopiserver.[[HOST_DOMAIN]]
-COLLABORATION_APP_NAME=Euro-Office
+COLLABORATION_WOPI_SRC=http://opencloud:9300
+COLLABORATION_APP_NAME=EuroOffice
 COLLABORATION_APP_PRODUCT=OnlyOffice
 COLLABORATION_APP_ADDR=https://docs.[[HOST_DOMAIN]]
 COLLABORATION_APP_ICON=https://docs.[[HOST_DOMAIN]]/web-apps/apps/documenteditor/main/resources/img/favicon.ico
