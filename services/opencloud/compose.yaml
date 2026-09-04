@@ -156,6 +156,7 @@ services:
       - traefik.http.routers.radicale.service=radicale
       - traefik.http.services.radicale.loadbalancer.server.port=5232
       - traefik.docker.network=proxy
+      - traefik.http.routers.radicale.middlewares=tinyauth@file
 
 
 networks:
