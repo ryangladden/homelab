@@ -4,4 +4,7 @@ name = "traefik"
 server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/traefik"
-file_paths = ["compose.yaml"]
+environment = """
+OC_MAPPER_USERNAME: [[OC_MAPPER_USERNAME]]
+OC_MAPPER_APP_TOKEN: [[OC_MAPPER_APP_TOKEN]]
+"""
