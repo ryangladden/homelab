@@ -94,16 +94,16 @@ services:
 
     labels:
       - traefik.enable=true
-      - traefik.http.routers.euroffice.rule=Host(`${EURO_OFFICE_HOST}`)
-      - traefik.http.routers.euroffice.entrypoints=websecure
-      - traefik.http.routers.euroffice.tls=true
-      - traefik.http.routers.euroffice.tls.certresolver=le
-      - traefik.http.routers.euroffice.service=euroffice
-      - traefik.http.services.euroffice.loadbalancer.server.port=80
+      - traefik.http.routers.euro-office.rule=Host(`${EURO_OFFICE_HOST}`)
+      - traefik.http.routers.euro-office.entrypoints=websecure
+      - traefik.http.routers.euro-office.tls=true
+      - traefik.http.routers.euro-office.tls.certresolver=le
+      - traefik.http.routers.euro-office.service=euro-office
+      - traefik.http.services.euro-office.loadbalancer.server.port=80
       - traefik.docker.network=proxy
-      - traefik.http.routers.euroffice.middlewares=euroffice-headers
-      - traefik.http.middlewares.euroffice-headers.headers.customrequestheaders.X-Forwarded-Proto=https
-      - traefik.http.middlewares.euroffice-headers.headers.customrequestheaders.X-Forwarded-Ssl=on
+      - traefik.http.routers.euro-office.middlewares=euro-office-headers
+      - traefik.http.middlewares.euro-office-headers.headers.customrequestheaders.X-Forwarded-Proto=https
+      - traefik.http.middlewares.euro-office-headers.headers.customrequestheaders.X-Forwarded-Ssl=on
 
     env_file:
       - .env
@@ -148,11 +148,14 @@ services:
       - /opt/data/opencloud/radicale:/var/lib/radicale
 
     labels:
+      - traefik.enable=true
       - traefik.http.routers.radicale.rule=Host(`${RADICALE_HOST}`)
       - traefik.http.routers.radicale.entrypoints=websecure
       - traefik.http.routers.radicale.tls=true
       - traefik.http.routers.radicale.tls.certresolver=le
+      - traefik.http.routers.radicale.service=euroffice
       - traefik.http.services.radicale.loadbalancer.server.port=5232
+      - traefik.docker.network=proxy
 
 
 networks:
