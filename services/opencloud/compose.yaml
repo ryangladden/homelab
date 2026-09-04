@@ -7,7 +7,7 @@ services:
 
     networks:
       - proxy
-      - radicale_internal
+      - radicale-internal
 
     labels:
       - traefik.enable=true
@@ -138,7 +138,7 @@ services:
 
     networks:
       - proxy
-      - radicale_internal
+      - radicale-internal
     logging:
       driver: local
 
@@ -163,5 +163,5 @@ services:
 networks:
   proxy:
     external: true
-  radicale_internal:
+  radicale-internal:
     external: true
