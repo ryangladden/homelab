@@ -1,0 +1,14 @@
+displayName: OpenCloud User Mapper
+type: middleware
+import: github.com/ryangladden/traefik-opencloud-user-mapper
+
+summary: Maps a trusted authenticated username header to an OpenCloud user UUID for upstream services.
+
+testData:
+  opencloudURL: http://opencloud:9200
+  usernameHeader: Remote-User
+  outputHeader: X-Remote-User
+  serviceUsernameEnv: OC_MAPPER_USERNAME
+  appTokenEnv: OC_MAPPER_APP_TOKEN
+  cacheTTL: 1h
+  requestTimeout: 3s
