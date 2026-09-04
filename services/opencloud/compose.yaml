@@ -34,7 +34,8 @@ services:
 
     volumes:
       - /mnt/opencloud:/var/lib/opencloud/storage/users/users
-      - /opt/data/opencloud/config:/etc/opencloud
+      - ./config:/etc/opencloud
+      - /opt/data/opencloud/config/opencloud.yaml:/etc/opencloud/opencloud.yaml
       - /opt/data/opencloud/data:/var/lib/opencloud
       - /opt/data/opencloud/app:/var/lib/opencloud/web/assets/apps
 
@@ -144,7 +145,7 @@ services:
     restart: always
 
     volumes:
-      - /opt/data/opencloud/config/radicale/:/etc/radicale/
+      - ./config/radicale.toml:/etc/radicale/config
       - /opt/data/opencloud/radicale:/var/lib/radicale
 
     labels:
