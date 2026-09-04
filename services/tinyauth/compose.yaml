@@ -14,7 +14,10 @@ services:
       traefik.http.routers.tinyauth.tls.certresolver: le
     networks:
       - proxy
+      - radicale_internal
       
 networks:
   proxy:
+    external: true
+  radicale_internal:
     external: true
