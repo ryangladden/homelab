@@ -4,8 +4,8 @@ directives:
   connect-src:
     - '''self'''
     - 'https://raw.githubusercontent.com/opencloud-eu/awesome-apps/'
-    - 'https://${POCKET_ID_HOST}'
-    - 'wss://${POCKET_ID_HOST}'
+    - 'https://${POCKETID_HOST}'
+    - 'wss://${POCKETID_HOST}'
   default-src:
     - '''none'''
   font-src:
@@ -18,7 +18,7 @@ directives:
     # In contrary to bash and docker the default is given after the | character
     - 'https://${EURO_OFFICE_DOMAIN}/'
     - 'https://docs.opencloud.eu'
-    - 'https://*.gladden.uk'
+    - 'https://*.${HOST_DOMAIN}'
   img-src:
     - '''self'''
     - 'data:'
