@@ -14,6 +14,8 @@ environment = """
 
 OC_DOCKER_TAG=latest
 
+HOST_DOMAIN=[[HOST_DOMAIN]]
+
 LOG_DRIVER=local
 
 RADICALE_HOST=cal.[[HOST_DOMAIN]]
@@ -64,6 +66,8 @@ OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS=1
 # ------------------------------------------------------------
 # Proxy / OIDC
 # ------------------------------------------------------------
+
+POCKETID_HOST=[[POCKETID_HOST]]
 
 PROXY_TLS=false
 PROXY_ENABLE_BASIC_AUTH=false
