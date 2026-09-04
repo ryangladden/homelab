@@ -17,6 +17,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./config/dynamic:/dynamic:ro
+      - ./plugins/traefik-opencloud-user-mapper:/plugins-local/src/github.com/ryangladden/traefik-opencloud-user-mapper:ro
       - /opt/state/traefik/letsencrypt:/letsencrypt
       - /opt/state/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
