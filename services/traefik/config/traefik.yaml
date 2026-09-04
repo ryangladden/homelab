@@ -50,3 +50,9 @@ certificatesResolvers:
       storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
+
+experimental:
+  plugins:
+    htransformation:
+      moduleName: github.com/tomMoulard/htransformation
+      version: v0.3.3
