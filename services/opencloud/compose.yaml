@@ -156,7 +156,7 @@ services:
       - traefik.http.routers.radicale.service=radicale
       - traefik.http.services.radicale.loadbalancer.server.port=5232
       - traefik.docker.network=radicale-internal
-      - traefik.http.routers.radicale.middlewares=tinyauth@file
+      - traefik.http.routers.radicale.middlewares=tinyauth@file,opencloud-user-mapper@file
 
 
 networks:
