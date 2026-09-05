@@ -38,8 +38,8 @@ services:
       - traefik.http.routers.mail-admin.tls=true
       - traefik.http.routers.mail-admin.tls.certresolver=le
       - traefik.http.routers.mail-admin.priority=100
-  
-      - traefik.http.routers.mail-admin.middlewares=tinyauth@file
+      - traefik.http.middlewares.mail-admin-strip.stripprefix.prefixes=/admin
+      - traefik.http.routers.mail-admin.middlewares=mail-admin-strip,tinyauth@file
       
   autodiscover:
     image: monogramm/autodiscover-email-settings:latest
