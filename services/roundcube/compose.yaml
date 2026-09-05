@@ -6,8 +6,6 @@ services:
     volumes:
      - /opt/state/roundcube/config/:/var/roundcube/config
      - /opt/state/roundcube/plugins:/var/www/html/plugins
-    ports:
-      - 9002:80
     env_file: .env
     networks:
       - proxy
