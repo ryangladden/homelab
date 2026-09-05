@@ -71,7 +71,7 @@ services:
     volumes:
      - /opt/state/roundcube/config/:/var/roundcube/config
      - /opt/state/roundcube/plugins:/var/www/html/plugins
-     - ./config/autoconfig.php:/var/www/html/public_html/autoconfig.php
+     - ./config/autologin.php:/var/www/html/public_html/autologin.php
     env_file: .env
     networks:
       - proxy
