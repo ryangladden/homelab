@@ -33,7 +33,7 @@ services:
     labels:
       - traefik.enable=true
   
-      - traefik.http.routers.mail-admin.rule=Host(`${MAIL_HOST}`) && PathPrefix(`/accounts`) || PathPrefix(`/aliases`))
+      - traefik.http.routers.mail-admin.rule=Host(`${MAIL_HOST}`) && PathPrefix(`/admin`) || PathPrefix(`/accounts`) || PathPrefix(`/aliases`))
       - traefik.http.routers.mail-admin.entrypoints=websecure
       - traefik.http.routers.mail-admin.tls=true
       - traefik.http.routers.mail-admin.tls.certresolver=le
