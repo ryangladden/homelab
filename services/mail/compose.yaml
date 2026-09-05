@@ -32,11 +32,14 @@ services:
     image: dunajdev/docker-mailserver-gui:latest
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mail-ui.rule=Host(`${MAIL_HOST}`)
-      - traefik.http.routers.mail-ui.entrypoints=websecure
-      - traefik.http.routers.mail-ui.tls=true
-      - traefik.http.routers.mail-ui.tls.certresolver=le
-      - traefik.http.routers.mail-ui.middlewares=tinyauth@file
+  
+      - traefik.http.routers.mail-admin.rule=Host(`${MAIL_HOST}`) && PathPrefix(`/admin`)
+      - traefik.http.routers.mail-admin.entrypoints=websecure
+      - traefik.http.routers.mail-admin.tls=true
+      - traefik.http.routers.mail-admin.tls.certresolver=le
+      - traefik.http.routers.mail-admin.priority=100
+  
+      - traefik.http.routers.mail-admin.middlewares=tinyauth@file
       
   autodiscover:
     image: monogramm/autodiscover-email-settings:latest
@@ -61,6 +64,27 @@ services:
       - traefik.http.routers.autoconfig.tls=true
       - traefik.http.routers.autoconfig.tls.certresolver=le
       - traefik.http.services.autoconfig.loadbalancer.server.port=8000
+
+  roundcubemail:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcube
+    restart: unless-stopped
+    volumes:
+     - /opt/state/roundcube/config/:/var/roundcube/config
+     - /opt/state/roundcube/plugins:/var/www/html/plugins
+    env_file: .env
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+  
+      - traefik.http.routers.roundcube.rule=Host(`${MAIL_HOST}`)
+      - traefik.http.routers.roundcube.entrypoints=websecure
+      - traefik.http.routers.roundcube.tls=true
+      - traefik.http.routers.roundcube.tls.certresolver=le
+      - traefik.http.routers.roundcube.priority=10
+  
+      - traefik.http.services.roundcube.loadbalancer.server.port=80
       
 networks:
   proxy:
