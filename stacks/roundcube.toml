@@ -8,7 +8,7 @@ run_directory = "services/roundcube"
 environment = """
 ROUNDCUBEMAIL_DB_TYPE=sqlite
 ROUNDCUBEMAIL_SKIN=elastic
-ROUNDCUBEMAIL_DEFAULT_HOST=tls://webmail.[[HOST_DOMAIN]]
+ROUNDCUBEMAIL_DEFAULT_HOST=tls://[[MAIL_HOST]]
 ROUNDCUBEMAIL_SMTP_SERVER=tls://[[MAIL_HOST]]
 ROUNDCUBE_HOST=webmail.[[HOST_DOMAIN]]
 """
