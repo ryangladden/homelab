@@ -1,0 +1,22 @@
+services:
+  roundcubemail:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcubemail
+    restart: unless-stopped
+    volumes:
+     - /opt/state/roundcube/config/:/var/roundcube/config
+     - /opt/state/roundcube/plugins:/var/www/html/plugins
+    ports:
+      - 9002:80
+    env_file: .env
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.roundcube.rule: Host(`${ROUNDCUBE_HOST}`)
+      traefik.http.routers.roundcube.entrypoints: websecure
+      traefik.http.routers.roundcube.tls: true
+      traefik.http.routers.roundcube.tls.certresolver: le
+networks:
+  proxy:
+    external: true
