@@ -1,1 +1,2 @@
+<?php
 define('SHARED_SECRET', getenv('ROUNDCUBE_AUTOLOGIN_SECRET'));
