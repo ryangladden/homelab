@@ -20,7 +20,6 @@ directives:
     - 'https://${EURO_OFFICE_DOMAIN}/'
     - 'https://docs.opencloud.eu'
     - 'https://*.${HOST_DOMAIN}'
-    - "http://roundcubemail:80"
   img-src:
     - '''self'''
     - 'data:'
