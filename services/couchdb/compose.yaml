@@ -8,6 +8,7 @@ services:
 
     volumes:
       - /opt/data/couchdb:/opt/couchdb/data
+      - ./config/livesync.ini:/opt/couchdb/etc/local.ini
 
     networks:
       - proxy
