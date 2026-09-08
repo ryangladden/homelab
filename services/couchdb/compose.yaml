@@ -14,7 +14,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.couchdb.rule=Host(`couchdb.example.com`)"
+      - "traefik.http.routers.couchdb.rule=Host(`${COUCHDB_HOST}`)"
       - "traefik.http.routers.couchdb.entrypoints=websecure"
       - "traefik.http.routers.couchdb.tls=true"
       - "traefik.http.routers.couchdb.tls.certresolver=le"
