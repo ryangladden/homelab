@@ -7,10 +7,11 @@ services:
       - proxy
     labels:
       traefik.enable: true
-      traefik.http.routers.actual.rule: Host(`${SUPERPRODUCTIVITY_HOST}`)
-      traefik.http.routers.actual.entrypoints: websecure
-      traefik.http.routers.actual.tls: true
-      traefik.http.routers.actual.tls.certresolver: le
+      traefik.http.routers.super-productivity.rule: Host(`${SUPERPRODUCTIVITY_HOST}`)
+      traefik.http.routers.super-productivity.entrypoints: websecure
+      traefik.http.routers.super-productivity.tls: true
+      traefik.http.routers.super-productivity.tls.certresolver: le
+      traefik.http.routers.super-productivity.middlewares: tinyauth@file
 
 networks:
   proxy:
