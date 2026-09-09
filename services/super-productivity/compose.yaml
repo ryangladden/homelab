@@ -1,6 +1,6 @@
 services:
 
-  app:
+  super-productivity:
     image: johannesjo/super-productivity:latest
     restart: unless-stopped
     networks:
