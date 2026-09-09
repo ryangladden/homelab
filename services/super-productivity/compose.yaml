@@ -1,0 +1,12 @@
+services:
+
+  app:
+    image: johannesjo/super-productivity:latest
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.actual.rule: Host(`${SUPERPRODUCTIVITY_HOST}`)
+      traefik.http.routers.actual.entrypoints: websecure
+      traefik.http.routers.actual.tls: true
+      traefik.http.routers.actual.tls.certresolver: le
+    
