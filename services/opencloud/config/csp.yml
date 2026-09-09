@@ -6,7 +6,7 @@ directives:
     - 'https://raw.githubusercontent.com/opencloud-eu/awesome-apps/'
     - 'https://${POCKETID_HOST}'
     - 'wss://${POCKETID_HOST}'
-    - 'https://*.gladden.uk
+    - 'https://*.gladden.uk'
   default-src:
     - '''none'''
   font-src:
