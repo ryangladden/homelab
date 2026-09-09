@@ -1,0 +1,10 @@
+[[stack]]
+name = "super-productivity"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/super-productivity"
+environment = """
+SUPERPRODUCTIVITY_HOST=tasks.[[HOST_DOMAIN]]
+"""
