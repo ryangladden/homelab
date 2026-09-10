@@ -1,5 +1,102 @@
 services:
 
+supersync:
+    image: ghcr.io/super-productivity/supersync:latest
+    container_name: supersync-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /opt/data/super-productivity/super-sync:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost:1900/health',
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    mem_limit: 768m
+    cpus: '1.0'
+    networks:
+      - internal
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.super-sync.rule: Host(`${SUPERSYNC_HOST}`)
+      traefik.http.routers.super-sync.entrypoints: websecure
+      traefik.http.routers.super-sync.tls: true
+      traefik.http.routers.super-sync.tls.certresolver: le
+      traefik.http.services.super-sync.loadbalancer.server.port: 1900
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: supersync-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=supersync
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=supersync
+    command:
+      - postgres
+      - -c
+      - shared_buffers=384MB
+      - -c
+      - effective_cache_size=${POSTGRES_EFFECTIVE_CACHE_SIZE:-1GB}
+      - -c
+      - work_mem=4MB
+      - -c
+      - maintenance_work_mem=128MB
+      - -c
+      - max_connections=120
+      - -c
+      - random_page_cost=1.1
+      - -c
+      - idle_in_transaction_session_timeout=300000
+      - -c
+      - wal_compression=on
+      - -c
+      - huge_pages=off
+    shm_size: 256m
+    volumes:
+      - /opt/data/super-productivity/db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >
+          pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB" &&
+          psql -U "$$POSTGRES_USER" -d "$$POSTGRES_DB" -c "SELECT 1" > /dev/null 2>&1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    init: true
+    stop_grace_period: 60s
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1536m
+    networks:
+      internal:
+        aliases:
+          - db
+
   super-productivity:
     image: johannesjo/super-productivity:latest
     restart: unless-stopped
@@ -15,3 +112,5 @@ services:
 networks:
   proxy:
     external: true
+  internal:
+    internal: true
