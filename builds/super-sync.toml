@@ -1,0 +1,8 @@
+[[build]]
+name = "super-sync"
+[build.config]
+builder = "gertrude"
+git_account = "ryangladden"
+repo = "super-productivity/super-productivity"
+branch = "master"
+dockerfile_path = "packages/super-sync-server/Dockerfile"
