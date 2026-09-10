@@ -1,6 +1,6 @@
 services:
 
-supersync:
+  supersync:
     image: ghcr.io/super-productivity/supersync:latest
     container_name: supersync-server
     restart: unless-stopped
