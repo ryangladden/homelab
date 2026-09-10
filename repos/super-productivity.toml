@@ -1,0 +1,7 @@
+[[repo]]
+name = "super-productivity"
+[repo.config]
+server = "gertrude"
+builder = "gertrude"
+git_account = "ryangladden"
+repo = "super-productivity/super-productivity"
