@@ -35,7 +35,7 @@ OC_LOG_PRETTY=true
 OC_ASYNC_UPLOADS=false
 OC_INSECURE=false
 
-OC_ADD_RUN_SERVICES=collaboration
+OC_ADD_RUN_SERVICES=collaboration,notifications
 
 OC_DEFAULT_LANGUAGE=en
 
