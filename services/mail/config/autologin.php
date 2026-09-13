@@ -79,12 +79,31 @@ require_once INSTALL_PATH . 'program/include/iniset.php';
 
 $rcmail = rcmail::get_instance(0, 'larry');
 
+$email = strtolower(trim($payload['email']));
+
+$at = strrpos($email, '@');
+if ($at === false) {
+    fail('Invalid email address', 400);
+}
+
+$domain = substr($email, $at + 1);
+
+$imapHosts = $rcmail->config->get('opencloud_imap_domains', []);
+
+if (!isset($imapHosts[$domain])) {
+    fail('Unsupported email domain');
+}
+
 $auth = $rcmail->login(
     $payload['email'],
     $payload['imapPass'],
-    $rcmail->config->get('imap_host', 'localhost:143'),
+    $imapHosts[$domain],
     false
 );
+
+if (!$auth) {
+    fail('IMAP login failed');
+}
 
 if (!$auth) {
     fail('IMAP login failed');
