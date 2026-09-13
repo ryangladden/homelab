@@ -3,20 +3,32 @@
 $config['x_frame_options'] = false;
 $config['session_lifetime'] = 600;
 
-
 // -----------------------------------------------------------------------------
 // Mail server configuration
 // -----------------------------------------------------------------------------
 
 // Homelab
-$homelabHost   = getenv('HOMELAB_MAIL_HOST');
-$homelabName   = getenv('HOMELAB_MAIL_NAME');
-$homelabDomain = getenv('HOMELAB_MAIL_DOMAIN');
+$homelabHost   = trim(getenv('HOMELAB_MAIL_HOST') ?: '');
+$homelabName   = trim(getenv('HOMELAB_MAIL_NAME') ?: 'Homelab');
+$homelabDomain = strtolower(trim(getenv('HOMELAB_MAIL_DOMAIN') ?: ''));
 
 // Work
-$workHost   = getenv('WORK_MAIL_HOST');
-$workName   = getenv('WORK_MAIL_NAME');
-$workDomain = getenv('WORK_MAIL_DOMAIN');
+$workHost   = trim(getenv('WORK_MAIL_HOST') ?: '');
+$workName   = trim(getenv('WORK_MAIL_NAME') ?: 'Work');
+$workDomain = strtolower(trim(getenv('WORK_MAIL_DOMAIN') ?: ''));
+
+// Required configuration
+if (!$homelabHost || !$homelabDomain) {
+    throw new RuntimeException(
+        'HOMELAB_MAIL_HOST and HOMELAB_MAIL_DOMAIN must be configured'
+    );
+}
+
+if (!$workHost || !$workDomain) {
+    throw new RuntimeException(
+        'WORK_MAIL_HOST and WORK_MAIL_DOMAIN must be configured'
+    );
+}
 
 
 // -----------------------------------------------------------------------------
@@ -33,6 +45,10 @@ $config['imap_host'] = [
 // -----------------------------------------------------------------------------
 // SMTP
 // -----------------------------------------------------------------------------
+//
+// Roundcube 1.7.4 supports per-IMAP-host SMTP configuration.
+// Keys MUST be the normalized IMAP hostname, without ssl:// or port.
+//
 
 $config['smtp_host'] = [
     $homelabHost     => 'ssl://' . $homelabHost . ':465',
@@ -40,8 +56,18 @@ $config['smtp_host'] = [
     $workHost        => 'ssl://' . $workHost . ':465',
 ];
 
-$config['smtp_user'] = '%u';
-$config['smtp_pass'] = '%p';
+// Reuse the IMAP username/password for SMTP authentication.
+$config['smtp_user'] = [
+    $homelabHost     => '%u',
+    'imap.gmail.com' => '%u',
+    $workHost        => '%u',
+];
+
+$config['smtp_pass'] = [
+    $homelabHost     => '%p',
+    'imap.gmail.com' => '%p',
+    $workHost        => '%p',
+];
 
 
 // -----------------------------------------------------------------------------
@@ -49,7 +75,7 @@ $config['smtp_pass'] = '%p';
 // -----------------------------------------------------------------------------
 
 $config['opencloud_imap_domains'] = [
-    strtolower($homelabDomain) => 'ssl://' . $homelabHost . ':993',
-    'gmail.com'                 => 'ssl://imap.gmail.com:993',
-    strtolower($workDomain)    => 'ssl://' . $workHost . ':993',
+    $homelabDomain => 'ssl://' . $homelabHost . ':993',
+    'gmail.com'    => 'ssl://imap.gmail.com:993',
+    $workDomain    => 'ssl://' . $workHost . ':993',
 ];
