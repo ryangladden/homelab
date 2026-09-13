@@ -7,6 +7,9 @@ directives:
     - 'https://${POCKETID_HOST}'
     - 'wss://${POCKETID_HOST}'
     - 'https://*.gladden.uk'
+    - 'blob:'
+    - 'data:'
+    - 'https://cdn.emulatorjs.org/'
   default-src:
     - '''none'''
   font-src:
@@ -40,6 +43,11 @@ directives:
   script-src:
     - '''self'''
     - '''unsafe-inline'''
+    - 'blob:'
+    - "'unsafe-eval'"
   style-src:
     - '''self'''
     - '''unsafe-inline'''
+  worker-src:
+    - "'self'"
+    - 'blob:'
