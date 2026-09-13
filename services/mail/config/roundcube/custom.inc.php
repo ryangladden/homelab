@@ -3,7 +3,6 @@
 $config['x_frame_options'] = false;
 $config['session_lifetime'] = 600;
 
-<?php
 
 // -----------------------------------------------------------------------------
 // Mail server configuration
