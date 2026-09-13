@@ -68,7 +68,7 @@ services:
     container_name: roundcube
     restart: unless-stopped
     volumes:
-     - ./config/:/var/roundcube/config
+     - ./config/roundcube/:/var/roundcube/config
      - /opt/state/roundcube/plugins:/var/www/html/plugins
      - ./config/autologin.php:/var/www/html/public_html/autologin.php
     env_file: .env
