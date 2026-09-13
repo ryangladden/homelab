@@ -68,7 +68,7 @@ services:
     container_name: roundcube
     restart: unless-stopped
     volumes:
-     - /opt/state/roundcube/config/:/var/roundcube/config
+     - ./config/:/var/roundcube/config
      - /opt/state/roundcube/plugins:/var/www/html/plugins
      - ./config/autologin.php:/var/www/html/public_html/autologin.php
      - /opt/state/roundcube/extra-skins/elastic2025:/var/www/html/skins/elastic2025
