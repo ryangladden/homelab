@@ -3,17 +3,54 @@
 $config['x_frame_options'] = false;
 $config['session_lifetime'] = 600;
 
+<?php
+
+// -----------------------------------------------------------------------------
+// Mail server configuration
+// -----------------------------------------------------------------------------
+
+// Homelab
+$homelabHost   = getenv('HOMELAB_MAIL_HOST') ?: 'mail.gladden.uk';
+$homelabName   = getenv('HOMELAB_MAIL_NAME') ?: 'Homelab';
+$homelabDomain = getenv('HOMELAB_MAIL_DOMAIN') ?: 'lab.gladden.uk';
+
+// Work
+$workHost   = getenv('WORK_MAIL_HOST') ?: 'mail.vectordigital.io';
+$workName   = getenv('WORK_MAIL_NAME') ?: 'Work';
+$workDomain = getenv('WORK_MAIL_DOMAIN') ?: 'vectordigital.io';
+
+
+// -----------------------------------------------------------------------------
+// IMAP
+// -----------------------------------------------------------------------------
+
 $config['imap_host'] = [
-    'ssl://' . getenv('HOMELAB_MAIL_HOST') . ':993' => getenv('HOMELAB_MAIL_NAME') ?: 'Homelab Mail',
-    'ssl://' . getenv('WORK_MAIL_HOST') . ':993' => getenv('WORK_MAIL_NAME') ?: 'Work Mail',
-    'ssl://imap.gmail.com:993' => 'Gmail',
+    'ssl://' . $homelabHost . ':993' => $homelabName,
+    'ssl://imap.gmail.com:993'       => 'Google',
+    'ssl://' . $workHost . ':993'    => $workName,
 ];
 
+
+// -----------------------------------------------------------------------------
+// SMTP
+// -----------------------------------------------------------------------------
+
 $config['smtp_host'] = [
-    getenv('HOMELAB_MAIL_HOST') => 'ssl://' . getenv('HOMELAB_MAIL_HOST') . ':465',
-    getenv('WORK_MAIL_HOST') => 'ssl://' . getenv('WORK_MAIL_HOST') . ':465',
+    $homelabHost     => 'ssl://' . $homelabHost . ':465',
     'imap.gmail.com' => 'ssl://smtp.gmail.com:465',
+    $workHost        => 'ssl://' . $workHost . ':465',
 ];
 
 $config['smtp_user'] = '%u';
 $config['smtp_pass'] = '%p';
+
+
+// -----------------------------------------------------------------------------
+// OpenCloud autologin domain -> IMAP routing
+// -----------------------------------------------------------------------------
+
+$config['opencloud_imap_domains'] = [
+    strtolower($homelabDomain) => 'ssl://' . $homelabHost . ':993',
+    'gmail.com'                 => 'ssl://imap.gmail.com:993',
+    strtolower($workDomain)    => 'ssl://' . $workHost . ':993',
+];
