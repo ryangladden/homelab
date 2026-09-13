@@ -10,14 +10,14 @@ $config['session_lifetime'] = 600;
 // -----------------------------------------------------------------------------
 
 // Homelab
-$homelabHost   = getenv('HOMELAB_MAIL_HOST') ?: 'mail.gladden.uk';
-$homelabName   = getenv('HOMELAB_MAIL_NAME') ?: 'Homelab';
-$homelabDomain = getenv('HOMELAB_MAIL_DOMAIN') ?: 'lab.gladden.uk';
+$homelabHost   = getenv('HOMELAB_MAIL_HOST');
+$homelabName   = getenv('HOMELAB_MAIL_NAME');
+$homelabDomain = getenv('HOMELAB_MAIL_DOMAIN');
 
 // Work
-$workHost   = getenv('WORK_MAIL_HOST') ?: 'mail.vectordigital.io';
-$workName   = getenv('WORK_MAIL_NAME') ?: 'Work';
-$workDomain = getenv('WORK_MAIL_DOMAIN') ?: 'vectordigital.io';
+$workHost   = getenv('WORK_MAIL_HOST');
+$workName   = getenv('WORK_MAIL_NAME');
+$workDomain = getenv('WORK_MAIL_DOMAIN');
 
 
 // -----------------------------------------------------------------------------
