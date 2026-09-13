@@ -105,10 +105,6 @@ if (!$auth) {
     fail('IMAP login failed');
 }
 
-if (!$auth) {
-    fail('IMAP login failed');
-}
-
 // Set session cookie and redirect
 $rcmail->session->set_auth_cookie();
 
