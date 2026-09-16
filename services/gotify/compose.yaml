@@ -2,8 +2,7 @@ services:
   gotify:
     container_name: gotify
     restart: unless-stopped
-    environment:
-      - TZ=America/Denver
+    env_file: .env
     volumes:
       - /opt/data/gotify:/app/data
     image: gotify/server
