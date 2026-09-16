@@ -16,6 +16,6 @@ services:
       traefik.http.routers.gotify.tls: true
       traefik.http.routers.gotify.tls.certresolver: le
 
-network:
+networks:
   proxy:
     external: true
