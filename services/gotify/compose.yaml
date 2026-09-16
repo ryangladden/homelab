@@ -1,5 +1,5 @@
 services:
-  server:
+  gotify:
     container_name: gotify
     restart: unless-stopped
     environment:
@@ -15,3 +15,7 @@ services:
       traefik.http.routers.gotify.entrypoints: websecure
       traefik.http.routers.gotify.tls: true
       traefik.http.routers.gotify.tls.certresolver: le
+
+network:
+  proxy:
+    external: true
