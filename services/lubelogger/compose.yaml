@@ -13,7 +13,6 @@ services:
       traefik.http.routers.lubelogger.entrypoints: websecure
       traefik.http.routers.lubelogger.tls: true
       traefik.http.routers.lubelogger.tls.certresolver: le
-      traefik.http.routers.lubelogger.middlewares: tinyauth@file
 networks:
   proxy:
     external: true
