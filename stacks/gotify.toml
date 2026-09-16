@@ -1,0 +1,25 @@
+[[stack]]
+name = "gotify"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/gotify"
+environment = """
+GOTIFY_HOST=push.[[HOST_DOMAIN]]
+GOTIFY_OIDC_ENABLED=true
+GOTIFY_OIDC_ISSUER=https://[[POCKETID_HOST]]
+GOTIFY_OIDC_CLIENTID=[[GOTIFY_CLIENT_ID]]
+GOTIFY_OIDC_CLIENTSECRET=[[GOTIFY_CLIENT_SECRET]]
+GOTIFY_OIDC_REDIRECTURL=https://push.[[HOST_DOMAIN]]/auth/oidc/callback
+GOTIFY_OIDC_AUTOREGISTER=true
+GOTIFY_OIDC_USERNAMECLAIM=email
+GOTIFY_OIDC_LINK_BY_USERNAME=true
+GOTIFY_OIDC_SCOPES=openid,profile,email,groups
+GOTIFY_OIDC_PROMPT=login
+GOTIFY_OIDC_IDP_NAME=PocketID
+GOTIFY_OIDC_AUTO_REDIRECT=true
+GOTIFY_OIDC_GROUPS_CLAIM=groups
+GOTIFY_OIDC_GROUPS_USER=
+GOTIFY_OIDC_GROUPS_ADMIN=admin
+"""
