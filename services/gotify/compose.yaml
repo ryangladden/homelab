@@ -4,6 +4,8 @@ services:
     hostname: gotify
     restart: unless-stopped
     env_file: .env
+    ports:
+      - "8680:80"
     volumes:
       - /opt/data/gotify/app:/app/data
     image: gotify/server
@@ -29,6 +31,8 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    ports:
+      - "8681:80"
     depends_on:
       gotify:
         condition: service_healthy
