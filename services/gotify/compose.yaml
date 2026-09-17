@@ -31,8 +31,6 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
-    ports:
-      - "8681:80"
     depends_on:
       gotify:
         condition: service_healthy
