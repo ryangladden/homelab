@@ -48,11 +48,15 @@ services:
       retries: 5
       start_period: 10s
     labels:
-      traefik.enable: true
+      traefik.docker.network: proxy
+      traefik.enable: "true"
+      traefik.http.routers.igotify-secure.entrypoints: websecure
+      traefik.http.routers.igotify-secure.rule: Host(`${IGOTIFY_HOST}`)
+      traefik.http.routers.igotify-secure.service: igotify
+      traefik.http.routers.igotify-secure.tls: "true"
+      traefik.http.routers.igotify-secure.tls.certresolver: le
+      traefik.http.routers.igotify.entrypoints: web
       traefik.http.routers.igotify.rule: Host(`${IGOTIFY_HOST}`)
-      traefik.http.routers.igotify.entrypoints: websecure
-      traefik.http.routers.igotify.tls: true
-      traefik.http.routers.igotify.tls.certresolver: le
       traefik.http.services.igotify.loadbalancer.server.port: "8080"
 
 networks:
