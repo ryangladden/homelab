@@ -53,6 +53,7 @@ services:
       traefik.http.routers.igotify.entrypoints: websecure
       traefik.http.routers.igotify.tls: true
       traefik.http.routers.igotify.tls.certresolver: le
+      traefik.http.services.igotify.loadbalancer.server.port: "8080"
 
 networks:
   proxy:
