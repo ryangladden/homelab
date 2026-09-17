@@ -4,8 +4,8 @@ services:
     hostname: gotify
     restart: unless-stopped
     env_file: .env
-    ports:
-      - "8680:80"
+    # ports:
+    #   - "8680:80"
     volumes:
       - /opt/data/gotify/app:/app/data
     image: gotify/server
@@ -36,8 +36,8 @@ services:
         condition: service_healthy
     networks:
       - proxy
-    ports:
-      - "8681:8080"
+    # ports:
+    #   - "8681:8080"
     volumes:
       - /opt/data/gotify/push:/app/data
     env_file: .env
