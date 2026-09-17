@@ -1,13 +1,50 @@
 services:
   gotify:
     container_name: gotify
+    hostname: gotify
     restart: unless-stopped
     env_file: .env
     volumes:
-      - /opt/data/gotify:/app/data
+      - /opt/data/gotify/app:/app/data
     image: gotify/server
     networks:
       - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.gotify.rule: Host(`${GOTIFY_HOST}`)
+      traefik.http.routers.gotify.entrypoints: websecure
+      traefik.http.routers.gotify.tls: true
+      traefik.http.routers.gotify.tls.certresolver: le
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  igotify:
+    container_name: igotify
+    hostname: igotify
+    image: ghcr.io/androidseb25/igotify-notification-assist:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      gotify:
+        condition: service_healthy
+    networks:
+      - proxy
+    ports:
+      - "8681:8080"
+    volumes:
+      - /opt/data/gotify/push:/app/data
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/Version"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
     labels:
       traefik.enable: true
       traefik.http.routers.gotify.rule: Host(`${GOTIFY_HOST}`)
