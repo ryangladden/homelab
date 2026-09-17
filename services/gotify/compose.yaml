@@ -47,10 +47,10 @@ services:
       start_period: 10s
     labels:
       traefik.enable: true
-      traefik.http.routers.gotify.rule: Host(`${GOTIFY_HOST}`)
-      traefik.http.routers.gotify.entrypoints: websecure
-      traefik.http.routers.gotify.tls: true
-      traefik.http.routers.gotify.tls.certresolver: le
+      traefik.http.routers.igotify.rule: Host(`${IGOTIFY_HOST}`)
+      traefik.http.routers.igotify.entrypoints: websecure
+      traefik.http.routers.igotify.tls: true
+      traefik.http.routers.igotify.tls.certresolver: le
 
 networks:
   proxy:
