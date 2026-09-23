@@ -45,6 +45,9 @@ services:
       - traefik.http.routers.tautulli.entrypoints=websecure
       - traefik.http.routers.tautulli.tls=true
       - traefik.http.routers.tautulli.tls.certresolver=le
+      - traefik.http.routers.tautulli.middlewares=tinyauth@file
+      - tinyauth.apps.whoami.response.basicauth.username=${TAUTULLI_USERNAME}
+      - tinyauth.apps.whoami.response.basicauth.password=${TAUTULLI_PASSWORD}
 networks:
   proxy:
     external: true
