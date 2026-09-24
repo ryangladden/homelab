@@ -147,6 +147,7 @@ http:
         address: http://tinyauth:3000/api/auth/traefik
         authResponseHeaders:
           - Remote-User
+          - Authorization
           
     opencloud-user-mapper:
       plugin:
