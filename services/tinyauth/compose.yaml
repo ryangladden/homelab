@@ -14,7 +14,6 @@ services:
       traefik.http.routers.tinyauth.entrypoints: websecure
       traefik.http.routers.tinyauth.tls: true
       traefik.http.routers.tinyauth.tls.certresolver: le
-      traefik.http.middlewares.tinyauth.forwardauth.authResponseHeaders: authorization
     networks:
       - proxy
       - radicale-internal
