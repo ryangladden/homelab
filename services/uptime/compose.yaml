@@ -8,10 +8,16 @@ services:
     image: louislam/uptime-kuma:2
     labels:
       traefik.enable: true
-      traefik.http.routers.uptime.rule: Host(`uptime.gladden.uk`)
+      traefik.http.routers.uptime.rule: Host(`${UPTIME_HOST}`)
       traefik.http.routers.uptime.entrypoints: websecure
       traefik.http.routers.uptime.tls: true
       traefik.http.routers.uptime.tls.certresolver: le
+            # TinyAuth
+      traefik.http.routers.uptime.middlewares: tinyauth@file
+      # TinyAuth app identification
+      tinyauth.apps.uptime.config.domain: ${UPTIME_HOST}
+      # Public Uptime Kuma paths
+      tinyauth.apps.uptime.path.allow: ^/(status(/.*)?|status-page|assets/.*|api/push/.*|api/badge/.*|api/status-page/.*|icon\.svg|upload/.*)$
     networks:
       - proxy
       
