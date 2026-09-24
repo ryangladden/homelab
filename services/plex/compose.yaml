@@ -46,6 +46,7 @@ services:
       - traefik.http.routers.tautulli.tls=true
       - traefik.http.routers.tautulli.tls.certresolver=le
       - traefik.http.routers.tautulli.middlewares=tinyauth@file
+      - tinyauth.apps.plex.config.domain=${TAUTULLI_HOST}
       - tinyauth.apps.plex.response.basicauth.username=${TAUTULLI_USERNAME}
       - tinyauth.apps.plex.response.basicauth.password=${TAUTULLI_PASSWORD}
 
