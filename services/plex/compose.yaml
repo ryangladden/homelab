@@ -46,9 +46,7 @@ services:
       - traefik.http.routers.tautulli.tls=true
       - traefik.http.routers.tautulli.tls.certresolver=le
       - traefik.http.routers.tautulli.middlewares=tinyauth@file
-      - tinyauth.apps.plex.config.domain=${TAUTULLI_HOST}
-      - tinyauth.apps.plex.response.basicauth.username=${TAUTULLI_USERNAME}
-      - tinyauth.apps.plex.response.basicauth.password=${TAUTULLI_PASSWORD}
+
 
       # Tautulli Remote bypass
       - traefik.http.routers.tautulli-app.rule=Host(`${TAUTULLI_HOST}`) && Header(`X-Tautulli-Auth`, `${TAUTULLI_APP_SECRET}`)
@@ -56,7 +54,12 @@ services:
       - traefik.http.routers.tautulli-app.tls=true
       - traefik.http.routers.tautulli-app.tls.certresolver=le
       - traefik.http.routers.tautulli-app.priority=100
-      - traefik.http.routers.tautulli-app.service=tautulli
+
+      # TinyAuth
+      - tinyauth.apps.plex.config.domain=${TAUTULLI_HOST}
+      - tinyauth.apps.plex.response.basicauth.username=${TAUTULLI_USERNAME}
+      - tinyauth.apps.plex.response.basicauth.password=${TAUTULLI_PASSWORD}
+
 
 networks:
   proxy:
