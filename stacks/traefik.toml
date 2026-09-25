@@ -7,4 +7,6 @@ run_directory = "services/traefik"
 environment = """
 OC_MAPPER_USERNAME=[[OC_MAPPER_USERNAME]]
 OC_MAPPER_APP_TOKEN=[[OC_MAPPER_APP_TOKEN]]
+CERT_ADMIN_EMAIL=[[ADMIN_EMAIL]]
+HOST_DOMAIN=[[HOST_DOMAIN]]
 """
