@@ -38,15 +38,12 @@ providers:
 api:
   dashboard: true
 
-log:
-  level: DEBUG
-
 ping: true
 
 certificatesResolvers:
   le:
     acme:
-      email: ${CERT_ADMIN_EMAIL}
+      email: admin@${HOST_DOMAIN}
       storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
