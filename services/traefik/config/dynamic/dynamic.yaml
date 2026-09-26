@@ -1,15 +1,6 @@
 http:
 
-
-  routers:    
-
-    home-assistant:
-      rule: "Host(`home.gladden.uk`)"
-      service: home-assistant
-      entrypoints:
-        - websecure
-      tls: 
-        certresolver: le
+  routers:
 
     gertrude:
       rule: "Host(`gertrude.{{ env "HOST_DOMAIN" }}`)"
@@ -22,7 +13,7 @@ http:
         - tinyauth@file
         
     truenas:
-      rule: "Host(`nas.gladden.uk`)"
+      rule: "Host(`nas.{{ env "HOST_DOMAIN" }}`)"
       service: truenas
       entrypoints:
         - websecure
@@ -32,7 +23,7 @@ http:
         - tinyauth@file
 
     dashboard:
-      rule: Host(`dashboard.gladden.uk`)
+      rule: Host(`dashboard.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
       service: api@internal
@@ -41,26 +32,8 @@ http:
       tls:
         certResolver: le
 
-    k3s:
-      rule: Host(`kube.gladden.uk`)
-      entryPoints:
-        - websecure
-      service: k3s
-      tls:
-        certResolver: le
-
-    incus:
-      rule: Host(`incus.gladden.uk`)
-      entryPoints:
-        - websecure
-      service: incus
-      middlewares:
-        - tinyauth@file
-      tls:
-        certResolver: le
-
     s3:
-      rule: Host(`s3.gladden.uk`)
+      rule: Host(`s3.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
       service: s3
@@ -68,7 +41,7 @@ http:
         certResolver: le
 
     backrest:
-      rule: Host(`backup.gladden.uk`)
+      rule: Host(`backup.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
       service: backrest
@@ -78,7 +51,7 @@ http:
         certResolver: le
 
     printer:
-      rule: Host(`printer.gladden.uk`)
+      rule: Host(`printer.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
       service: printer
@@ -89,57 +62,30 @@ http:
 
   services:
 
-    home-assistant:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.197:8123"
-
     gertrude:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.251:9090"
+          - url: "http://{{ env "GERTRUDE_IP" }}:9090"
 
     truenas:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.250"
-
-    k3s:
-      loadBalancer:
-        passHostHeader: true
-        serversTransport: rancher-insecure
-        servers:
-          - url: "https://192.168.1.206"
-
-    incus:
-      loadBalancer:
-        serversTransport: incus-mtls
-        servers:
-          - url: "https://192.168.1.251:8443"
+          - url: "http://{{ env "NAS_IP" }}"
 
     s3:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.250:30293"
+          - url: "http://{{ env "NAS_IP" }}:30293"
 
     backrest:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.252:9898"
+          - url: "http://{{ env "BACKUP_IP" }}:9898"
 
     printer:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.172:80"
-
-  serversTransports:
-    rancher-insecure:
-      insecureSkipVerify: true
-    incus-mtls:
-      certificates:
-        - certFile: /certs/incus-client.crt
-          keyFile: /certs/incus-client.key
-      insecureSkipVerify: true
+          - url: "http://{{ env "PRINTER_IP" }}:80"
 
   middlewares:
     tinyauth:
