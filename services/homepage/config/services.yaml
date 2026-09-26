@@ -26,10 +26,10 @@
         href: "https://documents.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Documents
         server: gertrude
-        container: paperless-webserver
+        container: paperless_web
         widget:
           type: paperlessngx
-          url: http://paperless_web:8000
+          url: http://paperless-web:8000
           key: "{{HOMEPAGE_VAR_PAPERLESS_KEY}}"
 
     - Super Productivity:
