@@ -1,4 +1,3 @@
-```yaml
 ---
 # Homepage - settings.yaml
 # Gertrude Homelab
@@ -43,4 +42,3 @@ layout:
   Infrastructure:
     style: row
     columns: 5
-```
