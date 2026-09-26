@@ -12,7 +12,7 @@ http:
         certresolver: le
 
     gertrude:
-      rule: "Host(`gertrude.${HOST_DOMAIN}`)"
+      rule: "Host(`gertrude.{{ env "HOST_DOMAIN" }}`)"
       service: gertrude
       entrypoints:
         - websecure
