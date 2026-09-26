@@ -1,0 +1,22 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    networks:
+      - proxy
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    env_file: .env
+    labels:
+      traefik.enable: true
+      traefik.http.routers.stirling.rule: Host(`${HOMEPAGE_HOST}`)
+      traefik.http.routers.stirling.entrypoints: websecure
+      traefik.http.routers.stirling.tls: true
+      traefik.http.routers.stirling.tls.certresolver: le
+      traefik.http.services.stirling.loadbalancer.server.port: 8080
+      traefik.docker.network: proxy
+
+networks:
+  proxy:
+    external: true
