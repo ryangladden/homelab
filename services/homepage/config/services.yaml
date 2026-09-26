@@ -134,7 +134,7 @@
 
     - Komodo:
         icon: komodo.png
-        href: "https://docker.{{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        href: "https://docker.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Docker management
         server: gertrude
         container: komodo-core
