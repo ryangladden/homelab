@@ -144,19 +144,9 @@
         href: "https://backup.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Restic backups
         server: gertrude
-    
         widget:
-          type: customapi
-          url: http://backup-status:8080/status.json
-          mappings:
-            - field: status
-              label: Status
-            - field: last_backup
-              label: Last Backup
-            - field: snapshots
-              label: Snapshots
-            - field: repository_size
-              label: Repository
+          type: backrest
+          url: "http://{{HOMEPAGE_VAR_BACKUP_IP}}:9898"
 
     - Traefik:
         icon: traefik.png
