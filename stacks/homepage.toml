@@ -8,4 +8,5 @@ run_directory = "services/homepage"
 environment = """
 HOMEPAGE_HOSTT=home.[[HOST_DOMAIN]]
 HOMEPAGE_ALLOWED_HOSTS=home.[[HOST_DOMAIN]]
+HOMEPAGE_VAR_HOST_DOMAIN=[[HOST_DOMAIN]]
 """
