@@ -1,0 +1,46 @@
+```yaml
+---
+# Homepage - settings.yaml
+# Gertrude Homelab
+
+title: Gertrude
+description: Homelab Dashboard
+
+theme: dark
+color: slate
+
+headerStyle: clean
+statusStyle: dot
+
+useEqualHeights: true
+hideVersion: true
+
+target: _blank
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  showSearchSuggestions: true
+  hideVisitURL: false
+
+layout:
+  Daily:
+    style: row
+    columns: 5
+
+  Media:
+    style: row
+    columns: 2
+
+  Communication:
+    style: row
+    columns: 2
+
+  Security:
+    style: row
+    columns: 3
+
+  Infrastructure:
+    style: row
+    columns: 5
+```
