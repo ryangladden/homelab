@@ -8,14 +8,14 @@
         href: "https://fotos.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Photos & memories
         server: gertrude
-        container: immich_server
+        container: immich-server
         widget:
           type: immich
           url: http://immich-server:2283
           key: "{{HOMEPAGE_VAR_IMMICH_KEY}}"
 
     - OpenCloud:
-        icon: opencloud.png
+        icon: mdi-cloud-outline
         href: "https://cloud.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Files & cloud
         server: gertrude
@@ -29,7 +29,7 @@
         container: paperless-webserver
         widget:
           type: paperlessngx
-          url: http://paperless-webserver:8000
+          url: http://paperless_web:8000
           key: "{{HOMEPAGE_VAR_PAPERLESS_KEY}}"
 
     - Super Productivity:
@@ -37,7 +37,7 @@
         href: "https://tasks.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Tasks & focus
         server: gertrude
-        container: super-productivity
+        container: super-productivity-super-productivity-1
 
     - Stirling PDF:
         icon: stirling-pdf.png
@@ -100,7 +100,7 @@
         href: "https://auth-dev.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
         description: Passkey identity
         server: gertrude
-        container: pocket-id
+        container: pocketid
 
     - TinyAuth:
         icon: tinyauth.png
