@@ -1,0 +1,169 @@
+---
+# Homepage - services.yaml
+# Gertrude Homelab
+
+- Daily:
+    - Immich:
+        icon: immich.png
+        href: "https://fotos.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Photos & memories
+        server: gertrude
+        container: immich_server
+        widget:
+          type: immich
+          url: http://immich-server:2283
+          key: "{{HOMEPAGE_VAR_IMMICH_KEY}}"
+
+    - OpenCloud:
+        icon: opencloud.png
+        href: "https://cloud.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Files & cloud
+        server: gertrude
+        container: opencloud
+
+    - Paperless:
+        icon: paperless-ngx.png
+        href: "https://documents.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Documents
+        server: gertrude
+        container: paperless-webserver
+        widget:
+          type: paperlessngx
+          url: http://paperless-webserver:8000
+          key: "{{HOMEPAGE_VAR_PAPERLESS_KEY}}"
+
+    - Super Productivity:
+        icon: super-productivity.png
+        href: "https://tasks.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Tasks & focus
+        server: gertrude
+        container: super-productivity
+
+    - Stirling PDF:
+        icon: stirling-pdf.png
+        href: "https://pdf.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: PDF toolbox
+        server: gertrude
+        container: stirling-pdf
+
+
+- Media:
+    - Plex:
+        icon: plex.png
+        href: https://app.plex.tv
+        description: Movies, TV & music
+        server: gertrude
+        container: plex
+        widget:
+          type: plex
+          url: http://plex:32400
+          key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
+
+    - Tautulli:
+        icon: tautulli.png
+        href: "https://plex.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Plex activity
+        server: gertrude
+        container: tautulli
+        widget:
+          type: tautulli
+          url: http://tautulli:8181
+          key: "{{HOMEPAGE_VAR_TAUTULLI_KEY}}"
+
+
+- Communication:
+    - Mail:
+        icon: roundcube.png
+        href: "https://webmail.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Roundcube webmail
+        server: gertrude
+        container: roundcube
+
+    - Gotify:
+        icon: gotify.png
+        href: "https://notify.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Notifications
+        server: gertrude
+        container: gotify
+
+
+- Security:
+    - Vaultwarden:
+        icon: vaultwarden.png
+        href: "https://vault.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Passwords
+        server: gertrude
+        container: vaultwarden
+
+    - Pocket ID:
+        icon: pocket-id.png
+        href: "https://auth-dev.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Passkey identity
+        server: gertrude
+        container: pocket-id
+
+    - TinyAuth:
+        icon: tinyauth.png
+        href: "https://auth2.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Access control
+        server: gertrude
+        container: tinyauth
+
+
+- Infrastructure:
+    - UniFi:
+        icon: unifi.png
+        href: "https://unifi.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Network
+        widget:
+          type: unifi
+          url: "https://UNIFI_CONTROLLER_IP"
+          username: "{{HOMEPAGE_VAR_UNIFI_USER}}"
+          password: "{{HOMEPAGE_VAR_UNIFI_PASSWORD}}"
+
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: "https://uptime.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Monitoring
+        server: gertrude
+        container: uptime-kuma
+        widget:
+          type: uptimekuma
+          url: http://uptime-kuma:3001
+          slug: default
+
+    - Backups:
+        icon: restic.png
+        href: "https://backup.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Restic backups
+        server: gertrude
+    
+        widget:
+          type: customapi
+          url: http://backup-status:8080/status.json
+          mappings:
+            - field: status
+              label: Status
+            - field: last_backup
+              label: Last Backup
+            - field: snapshots
+              label: Snapshots
+            - field: repository_size
+              label: Repository
+
+    - Traefik:
+        icon: traefik.png
+        href: "https://dashboard.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Reverse proxy
+        server: gertrude
+        container: traefik
+        widget:
+          type: traefik
+          url: http://traefik:8080
+
+    - Docker Mailserver:
+        icon: docker-mailserver.png
+        href: "https://mail.{{HOMEPAGE_VAR_HOST_DOMAIN}}/admin"
+        description: SMTP / IMAP
+        server: gertrude
+        container: mailserver
