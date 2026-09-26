@@ -132,6 +132,13 @@
           url: http://uptime-kuma:3001
           slug: default
 
+    - Komodo:
+        icon: komodo.png
+        href: "https://docker.{{{HOMEPAGE_VAR_HOST_DOMAIN}}"
+        description: Docker management
+        server: gertrude
+        container: komodo-core
+
     - Backups:
         icon: restic.png
         href: "https://backup.{{HOMEPAGE_VAR_HOST_DOMAIN}}"
