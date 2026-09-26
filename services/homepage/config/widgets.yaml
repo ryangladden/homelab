@@ -1,4 +1,3 @@
-```yaml
 ---
 # Homepage - widgets.yaml
 # Gertrude Homelab
@@ -25,4 +24,3 @@
       dateStyle: medium
       timeStyle: short
       hourCycle: h24
-```
