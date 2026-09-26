@@ -130,7 +130,7 @@
         widget:
           type: uptimekuma
           url: http://uptime-kuma:3001
-          slug: default
+          slug: homepage
 
     - Komodo:
         icon: komodo.png
