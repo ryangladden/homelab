@@ -10,11 +10,11 @@ services:
     env_file: .env
     labels:
       traefik.enable: true
-      traefik.http.routers.stirling.rule: Host(`${HOMEPAGE_HOST}`)
-      traefik.http.routers.stirling.entrypoints: websecure
-      traefik.http.routers.stirling.tls: true
-      traefik.http.routers.stirling.tls.certresolver: le
-      traefik.http.services.stirling.loadbalancer.server.port: 8080
+      traefik.http.routers.homepage.rule: Host(`${HOMEPAGE_HOST}`)
+      traefik.http.routers.homepage.entrypoints: websecure
+      traefik.http.routers.homepage.tls: true
+      traefik.http.routers.homepage.tls.certresolver: le
+      traefik.http.services.homepage.loadbalancer.server.port: 3000
       traefik.docker.network: proxy
 
 networks:
