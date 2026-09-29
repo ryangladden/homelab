@@ -23,10 +23,6 @@ services:
       traefik.http.routers.actual.entrypoints: websecure
       traefik.http.routers.actual.tls: true
       traefik.http.routers.actual.tls.certresolver: le
-      traefik.http.routers.actual-old.rule: Host(`budget.gladden.uk`)
-      traefik.http.routers.actual-old.entrypoints: websecure
-      traefik.http.routers.actual-old.tls: true
-      traefik.http.routers.actual-old.tls.certresolver: le
 networks:
   proxy:
     external: true
