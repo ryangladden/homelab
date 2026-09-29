@@ -9,7 +9,7 @@ services:
       - /opt/data/lubelogger/keys:/root/.aspnet/DataProtection-Keys
     labels:
       traefik.enable: true
-      traefik.http.routers.lubelogger.rule: Host(`cars.gladden.uk`)
+      traefik.http.routers.lubelogger.rule: Host(`${LUBELOGGER_HOST}`)
       traefik.http.routers.lubelogger.entrypoints: websecure
       traefik.http.routers.lubelogger.tls: true
       traefik.http.routers.lubelogger.tls.certresolver: le
