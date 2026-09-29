@@ -21,7 +21,10 @@ services:
       traefik.http.routers.auth.rule: Host(`${POCKETID_HOST}`)
       traefik.http.routers.auth.entrypoints: websecure
       traefik.http.routers.auth.tls: true
-      traefik.http.routers.auth.tls.certresolver: le
+      traefik.http.routers.auth-old.rule: Host(`auth-dev.gladden.uk`)
+      traefik.http.routers.auth-old.entrypoints: websecure
+      traefik.http.routers.auth-old.tls: true
+      traefik.http.routers.auth-old.tls.certresolver: le
     networks:
       - proxy
       
