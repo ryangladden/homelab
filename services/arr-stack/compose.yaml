@@ -1,0 +1,183 @@
+---
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/data/arr/sonarr:/config
+      - /mnt/plex/data/shows:/tv
+      - /opt/state/torrent/downloads:/downloads
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
+      traefik.http.routers.sonarr.entrypoints: websecure
+      traefik.http.routers.sonarr.tls: true
+      traefik.http.routers.sonarr.tls.certresolver: le
+      traefik.http.services.sonarr.loadbalancer.server.port: 8989
+      traefik.docker.network: proxy
+      traefik.http.routers.sonarr.middlewares: tinyauth@file
+      tinyauth.apps.sonarr.config.domain: ${SONARR_HOST}
+      tinyauth.apps.sonarr.response.basicauth.username: ${SONARR_USERNAME}
+      tinyauth.apps.sonarr.response.basicauth.password: ${SONARR_PASSWORD}
+    networks:
+      - proxy
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/data/arr/radarr:/config
+      - /mnt/plex/data/movies:/movies
+      - /opt/state/torrent/downloads:/downloads
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
+      traefik.http.routers.radarr.entrypoints: websecure
+      traefik.http.routers.radarr.tls: true
+      traefik.http.routers.radarr.tls.certresolver: le
+      traefik.http.services.radarr.loadbalancer.server.port: 7878
+      traefik.docker.network: proxy
+      traefik.http.routers.radarr.middlewares: tinyauth@file
+      tinyauth.apps.radarr.config.domain: ${RADARR_HOST}
+      tinyauth.apps.radarr.response.basicauth.username: ${RADARR_USERNAME}
+      tinyauth.apps.radarr.response.basicauth.password: ${RADARR_PASSWORD}
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/data/arr/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
+      traefik.http.routers.prowlarr.entrypoints: websecure
+      traefik.http.routers.prowlarr.tls: true
+      traefik.http.routers.prowlarr.tls.certresolver: le
+      traefik.http.services.prowlarr.loadbalancer.server.port: 9696
+      traefik.docker.network: proxy
+      traefik.http.routers.prowlarr.middlewares: tinyauth@file
+      tinyauth.apps.prowlarr.config.domain: ${PROWLARR_HOST}
+      tinyauth.apps.prowlarr.response.basicauth.username: ${PROWLARR_USERNAME}
+      tinyauth.apps.prowlarr.response.basicauth.password: ${PROWLARR_PASSWORD}
+
+        # ============================================================
+  # Gluetun - ProtonVPN
+  #
+  # qBittorrent shares this container's network namespace.
+  # Therefore Traefik routes qBittorrent through Gluetun.
+  # ============================================================
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+
+    cap_add:
+      - NET_ADMIN
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${PROTON_WIREGUARD_PRIVATE_KEY}
+
+      # Proton P2P / port forwarding
+      - SERVER_COUNTRIES=United States
+      - PORT_FORWARD_ONLY=on
+      - VPN_PORT_FORWARDING=on
+
+      - TZ=Etc/UTC
+
+    volumes:
+      - /opt/data/arr/gluetun:/gluetun
+
+    restart: unless-stopped
+
+    networks:
+      - proxy
+
+    labels:
+      # --------------------------------------------------------
+      # Enable Traefik
+      # --------------------------------------------------------
+      traefik.enable: true
+      traefik.docker.network: proxy
+
+      # --------------------------------------------------------
+      # qBittorrent
+      # --------------------------------------------------------
+      traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST}`)
+      traefik.http.routers.qbittorrent.entrypoints: websecure
+      traefik.http.routers.qbittorrent.tls: true
+      traefik.http.routers.qbittorrent.tls.certresolver: le
+
+      # Explicitly associate router with service
+      traefik.http.routers.qbittorrent.service: qbittorrent
+
+      # qBittorrent WebUI
+      traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
+
+      # TinyAuth
+      traefik.http.routers.qbittorrent.middlewares: tinyauth@file
+
+      tinyauth.apps.qbittorrent.config.domain: ${QBITTORRENT_HOST}
+      tinyauth.apps.qbittorrent.response.basicauth.username: ${QBITTORRENT_USERNAME}
+      tinyauth.apps.qbittorrent.response.basicauth.password: ${QBITTORRENT_PASSWORD}
+
+
+  # ============================================================
+  # qBittorrent
+  #
+  # Uses Gluetun's network stack.
+  # NO independent network.
+  # NO ports exposed directly.
+  # NO Traefik labels needed here.
+  # ============================================================
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+
+    network_mode: "service:gluetun"
+
+    depends_on:
+      gluetun:
+        condition: service_started
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+
+    volumes:
+      - /opt/data/arr/qbittorrent:/config
+      - /mnt/plex/data:/data
+
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
