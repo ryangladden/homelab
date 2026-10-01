@@ -10,7 +10,7 @@ services:
     volumes:
       - /opt/data/arr/sonarr:/config
       - /mnt/plex/data/shows:/tv
-      - /opt/state/torrent/downloads:/downloads
+      - /mnt/plex/data/torrent:/downloads
     restart: unless-stopped
     networks:
       - proxy
@@ -26,8 +26,6 @@ services:
       tinyauth.apps.sonarr.config.domain: ${SONARR_HOST}
       tinyauth.apps.sonarr.response.basicauth.username: ${SONARR_USERNAME}
       tinyauth.apps.sonarr.response.basicauth.password: ${SONARR_PASSWORD}
-    networks:
-      - proxy
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -39,7 +37,7 @@ services:
     volumes:
       - /opt/data/arr/radarr:/config
       - /mnt/plex/data/movies:/movies
-      - /opt/state/torrent/downloads:/downloads
+      - /mnt/plex/data/torrent:/downloads
     restart: unless-stopped
     networks:
       - proxy
