@@ -172,10 +172,10 @@ services:
       traefik.http.routers.overseerr.tls.certresolver: le
       traefik.http.services.overseerr.loadbalancer.server.port: 5055
       traefik.docker.network: proxy
-      traefik.http.routers.overseerr.middlewares: tinyauth@file
-      tinyauth.apps.overseerr.config.domain: ${OVERSEERR_HOST}
-      tinyauth.apps.overseerr.response.basicauth.username: ${OVERSEERR_USERNAME}
-      tinyauth.apps.overseerr.response.basicauth.password: ${OVERSEERR_PASSWORD}
+      # traefik.http.routers.overseerr.middlewares: tinyauth@file
+      # tinyauth.apps.overseerr.config.domain: ${OVERSEERR_HOST}
+      # tinyauth.apps.overseerr.response.basicauth.username: ${OVERSEERR_USERNAME}
+      # tinyauth.apps.overseerr.response.basicauth.password: ${OVERSEERR_PASSWORD}
 
   onepacerr:
     image: ghcr.io/eltharynd/onepacerr:latest
