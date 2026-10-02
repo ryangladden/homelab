@@ -171,7 +171,7 @@ services:
 
     volumes:
       - /opt/data/arr/qbittorrent:/config
-      - /mnt/plex/data/torrent:/data
+      - /mnt/plex/data/:/data
 
     restart: unless-stopped
 
