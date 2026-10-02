@@ -145,7 +145,10 @@ services:
     image: ghcr.io/eltharynd/onepacerr:latest
     container_name: onepacerr
     restart: unless-stopped
+    user: "1000:1000"
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
       - PIPELINE_SKIP_VERIFY_PRESENT_FILES=true
       - PIPELINE_SKIP_ORGANIZE_PRESENT_FILES=true
