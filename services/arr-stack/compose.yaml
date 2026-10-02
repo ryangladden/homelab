@@ -140,7 +140,7 @@ services:
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
 
       # TinyAuth
-      # traefik.http.routers.qbittorrent.middlewares: tinyauth@file
+      traefik.http.routers.qbittorrent.middlewares: tinyauth@file
 
       tinyauth.apps.qbittorrent.config.domain: ${QBITTORRENT_HOST}
       tinyauth.apps.qbittorrent.response.basicauth.username: ${QBITTORRENT_USERNAME}
