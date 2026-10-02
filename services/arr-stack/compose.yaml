@@ -78,6 +78,33 @@ services:
       tinyauth.apps.radarr.response.basicauth.username: ${RADARR_USERNAME}
       tinyauth.apps.radarr.response.basicauth.password: ${RADARR_PASSWORD}
 
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/data/arr/bazarr:/config
+      - /mnt/plex/movies:/movies
+      - /mnt/plex/shows:/tv
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
+      traefik.http.routers.bazarr.entrypoints: websecure
+      traefik.http.routers.bazarr.tls: true
+      traefik.http.routers.bazarr.tls.certresolver: le
+      traefik.http.services.bazarr.loadbalancer.server.port: 6767
+      traefik.docker.network: proxy
+      traefik.http.routers.bazarr.middlewares: tinyauth@file
+      tinyauth.apps.bazarr.config.domain: ${BAZARR_HOST}
+      tinyauth.apps.bazarr.response.basicauth.username: ${BAZARR_USERNAME}
+      tinyauth.apps.bazarr.response.basicauth.password: ${BAZARR_PASSWORD}
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
