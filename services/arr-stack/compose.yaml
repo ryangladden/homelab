@@ -141,6 +141,34 @@ services:
       tinyauth.apps.overseerr.response.basicauth.username: ${OVERSEERR_USERNAME}
       tinyauth.apps.overseerr.response.basicauth.password: ${OVERSEERR_PASSWORD}
 
+  onepacerr:
+    image: ghcr.io/eltharynd/onepacerr:latest
+    container_name: onepacerr
+    restart: unless-stopped
+    environment:
+      - TZ=America/Denver
+      - PUID=1000
+      - PGID=1000
+      - PIPELINE_SKIP_VERIFY_PRESENT_FILES=true
+      - PIPELINE_SKIP_ORGANIZE_PRESENT_FILES=true
+      - PIPELINE_SKIP_UPDATE_METADATA_PRESENT_FILES=true
+      - PIPELINE_PREFER_EXTENDED=true
+      - PIPELINE_PREFER_ALTERNATE=true
+      - LIBRARY_MEDIA_SERVER=plex 
+      - LIBRARY_SERIES_NAME=One Pace
+      - PLEX_URL=http://192.168.1.251:32400
+      - PLEX_TOKEN=${PLEX_TOKEN}
+      - PLEX_LIBRARY_NAME=Anime 
+      - TORRENT_URL=http://gluetun:8080
+      - TORRENT_USER=${QBITTORRENT_USERNAME}
+      - TORRENT_PASSWORD=${QBITTORRENT_PASSWORD}
+      - TORRENT_CLIENT=qbittorrent
+    networks:
+      - proxy
+    volumes:
+      - /mnt/plex/anime:/mnt/Library/Series
+      - /mnt/plex/torrents/anime:/mnt/Applications/Downloads
+
         # ============================================================
   # Gluetun - ProtonVPN
   #
