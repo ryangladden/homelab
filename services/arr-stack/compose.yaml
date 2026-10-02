@@ -167,7 +167,7 @@ services:
       - proxy
     volumes:
       - /mnt/plex/anime:/mnt/Library/Series
-      - /mnt/plex/anime:/data
+      - /mnt/plex:/data
 
         # ============================================================
   # Gluetun - ProtonVPN
