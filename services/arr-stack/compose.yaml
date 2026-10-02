@@ -130,6 +130,15 @@ services:
       tinyauth.apps.prowlarr.response.basicauth.username: ${PROWLARR_USERNAME}
       tinyauth.apps.prowlarr.response.basicauth.password: ${PROWLARR_PASSWORD}
 
+  flaresolverr:
+    container_name: flaresolverr
+    networks:
+      - proxy
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+
   seerr:
     image: ghcr.io/seerr-team/seerr:latest
     init: true
