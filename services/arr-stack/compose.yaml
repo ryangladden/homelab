@@ -26,6 +26,32 @@ services:
       tinyauth.apps.sonarr.response.basicauth.username: ${SONARR_USERNAME}
       tinyauth.apps.sonarr.response.basicauth.password: ${SONARR_PASSWORD}
 
+  sonarr-anime:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr-anime
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/data/arr/sonarr-anime:/config
+      - /mnt/plex/:/data
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.sonarr-anime.rule: Host(`${ANIME_HOST}`)
+      traefik.http.routers.sonarr-anime.entrypoints: websecure
+      traefik.http.routers.sonarr-anime.tls: true
+      traefik.http.routers.sonarr-anime.tls.certresolver: le
+      traefik.http.services.sonarr-anime.loadbalancer.server.port: 8989
+      traefik.docker.network: proxy
+      traefik.http.routers.sonarr-anime.middlewares: tinyauth@file
+      tinyauth.apps.sonarr-anime.config.domain: ${ANIME_HOST}
+      tinyauth.apps.sonarr-anime.response.basicauth.username: ${ANIME_USERNAME}
+      tinyauth.apps.sonarr-anime.response.basicauth.password: ${ANIME_PASSWORD}
+
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
