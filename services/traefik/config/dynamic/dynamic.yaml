@@ -21,6 +21,7 @@ http:
         certresolver: le
       middlewares:
         - tinyauth@file
+        - truenas-auth@file
 
     dashboard:
       rule: Host(`dashboard.{{ env "HOST_DOMAIN" }}`)
@@ -94,6 +95,10 @@ http:
         authResponseHeaders:
           - Remote-User
           - Authorization
+    truenas-auth:
+      headers:
+        customRequestHeaders:
+          Authorization: "Basic {{ env "NAS_CREDENTIALS_BASE64" }}"
           
     opencloud-user-mapper:
       plugin:
