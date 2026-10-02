@@ -147,8 +147,6 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Denver
-      - PUID=1000
-      - PGID=1000
       - PIPELINE_SKIP_VERIFY_PRESENT_FILES=true
       - PIPELINE_SKIP_ORGANIZE_PRESENT_FILES=true
       - PIPELINE_SKIP_UPDATE_METADATA_PRESENT_FILES=true
