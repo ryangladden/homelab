@@ -9,8 +9,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/data/arr/sonarr:/config
-      - /mnt/plex/data/shows:/tv
-      - /mnt/plex/data/torrent:/downloads
+      - /mnt/plex/data/:/data
     restart: unless-stopped
     networks:
       - proxy
@@ -36,8 +35,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/data/arr/radarr:/config
-      - /mnt/plex/data/movies:/movies
-      - /mnt/plex/data/torrent:/downloads
+      - /mnt/plex/data/:/data
     restart: unless-stopped
     networks:
       - proxy
