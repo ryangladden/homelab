@@ -106,7 +106,7 @@ services:
 
   bazarr-anime:
     image: lscr.io/linuxserver/bazarr:latest
-    container_name: bazarr
+    container_name: bazarr-anime
     environment:
       - PUID=1000
       - PGID=1000
