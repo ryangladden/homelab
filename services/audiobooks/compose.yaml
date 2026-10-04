@@ -20,6 +20,28 @@ services:
       - TZ=America/Denver
     restart: unless-stopped
 
+  shelfmark:
+    image: ghcr.io/calibrain/shelfmark:latest
+    container_name: shelfmark
+    environment:
+      PUID: 1000
+      PGID: 1000
+    labels:
+      traefik.enable: true
+      traefik.http.routers.shelfmark.rule: Host(`${SHELFMARK_HOST}`)
+      traefik.http.routers.shelfmark.entrypoints: websecure
+      traefik.http.routers.shelfmark.tls: true
+      traefik.http.routers.shelfmark.tls.certresolver: le
+      traefik.http.services.shelfmark.loadbalancer.server.port: 8084
+      traefik.docker.network: proxy
+    restart: unless-stopped
+    networks:
+      - proxy
+    volumes:
+      - /mnt/audiobookshelf/book:/books
+      - /opt/data/audiobookshelf:/config
+      - /mnt/audiobookshelf/torrents:/data/torrents/audiobooks
+
 networks:
   proxy:
     external: true
