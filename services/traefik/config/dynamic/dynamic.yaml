@@ -61,12 +61,25 @@ http:
       tls:
         certResolver: le
 
+    printer:
+      rule: Host(`test.{{ env "HOST_DOMAIN" }}`)
+      entryPoints:
+        - websecure
+      service: test
+      tls:
+        certResolver: le
+
   services:
 
     gertrude:
       loadBalancer:
         servers:
           - url: "http://{{ env "GERTRUDE_IP" }}:9090"
+          
+    test:
+      loadBalancer:
+        servers:
+          - url: "http://{{ env "GERTRUDE_IP" }}:4173"
 
     truenas:
       loadBalancer:
