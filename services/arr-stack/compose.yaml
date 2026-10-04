@@ -87,8 +87,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/data/arr/bazarr:/config
-      - /mnt/plex/movies:/movies
-      - /mnt/plex/shows:/tv
+      - /mnt/plex/movies:/data/movies
+      - /mnt/plex/shows:/data/tv
     restart: unless-stopped
     networks:
       - proxy
