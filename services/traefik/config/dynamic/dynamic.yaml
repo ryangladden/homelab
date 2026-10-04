@@ -61,7 +61,7 @@ http:
       tls:
         certResolver: le
 
-    printer:
+    test:
       rule: Host(`test.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
