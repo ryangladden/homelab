@@ -39,7 +39,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /mnt/audiobookshelf/book:/books
+      - /mnt/audiobookshelf/books:/books
       - /opt/data/audiobookshelf:/config
       - /mnt/plex/torrents/audiobooks:/data/torrents/audiobooks
 
