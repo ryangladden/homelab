@@ -1,0 +1,25 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    volumes:
+      - /opt/data/audiobookshelf:/config
+      - /opt/state/audiobookshelf:/metadata
+      - /mnt/audiobookshelf/books:/audiobooks
+      - /mnt/audiobookshelf/podcasts:/podcasts
+    labels:
+      traefik.enable: true
+      traefik.http.routers.audiobookshelf.rule: Host(`${AUDIOBOOKSHELF_HOST}`)
+      traefik.http.routers.audiobookshelf.entrypoints: websecure
+      traefik.http.routers.audiobookshelf.tls: true
+      traefik.http.routers.audiobookshelf.tls.certresolver: le
+      traefik.http.services.audiobookshelf.loadbalancer.server.port: 13378
+      traefik.docker.network: proxy
+    networks:
+      - proxy
+    environment:
+      - TZ=America/Denver
+    restart: unless-stopped
+
+network:
+  proxy:
+    external:
