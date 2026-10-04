@@ -1,10 +1,10 @@
 [[stack]]
-name = "audiobookshelf"
+name = "audiobooks"
 tags = ["service"]
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
-run_directory = "services/audiobookshelf"
+run_directory = "services/audiobooks"
 environment = """
 AUDIOBOOKSHELF_HOST=books.[[HOST_DOMAIN]]
 """
