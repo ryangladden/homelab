@@ -7,4 +7,5 @@ linked_repo = "homelab"
 run_directory = "services/audiobooks"
 environment = """
 AUDIOBOOKSHELF_HOST=books.[[HOST_DOMAIN]]
+SHELFMARK_HOST=library.[[HOST_DOMAIN]]
 """
