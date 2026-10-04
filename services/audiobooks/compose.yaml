@@ -20,6 +20,6 @@ services:
       - TZ=America/Denver
     restart: unless-stopped
 
-network:
+networks:
   proxy:
     external:
