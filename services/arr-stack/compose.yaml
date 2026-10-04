@@ -325,6 +325,7 @@ services:
     volumes:
       - /opt/data/arr/qbittorrent:/config
       - /mnt/plex/:/data
+      - /mnt/audiobookshelf/torrents:/data/torrents/audiobooks
 
     restart: unless-stopped
 
