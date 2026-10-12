@@ -37,6 +37,8 @@ services:
     networks:
       - proxy
       - internal
+    depends_on:
+      - postgres
     labels:
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
