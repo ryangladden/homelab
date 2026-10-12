@@ -12,19 +12,19 @@ services:
       - proxy
     labels:
       traefik.enable: true
-      traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST_OLD}`)
-      traefik.http.routers.vaultwarden.entrypoints: websecure
-      traefik.http.routers.vaultwarden.tls: true
-      traefik.http.routers.vaultwarden.tls.certresolver: le
-      traefik.http.routers.vaultwarden.service: vaultwarden
-      traefik.http.services.vaultwarden.loadbalancer.server.port: 80
-      traefik.http.routers.vaultwarden-admin.rule: Host(`${VAULTWARDEN_HOST_OLD}`) && PathPrefix(`/admin`)
-      traefik.http.routers.vaultwarden-admin.entrypoints: websecure
-      traefik.http.routers.vaultwarden-admin.tls: true
-      traefik.http.routers.vaultwarden-admin.tls.certresolver: le
-      traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file
-      traefik.http.routers.vaultwarden-admin.service: vaultwarden
-      traefik.http.routers.vaultwarden-admin.priority: 100
+      traefik.http.routers.vaultwarden-old.rule: Host(`${VAULTWARDEN_HOST_OLD}`)
+      traefik.http.routers.vaultwarden-old.entrypoints: websecure
+      traefik.http.routers.vaultwarden-old.tls: true
+      traefik.http.routers.vaultwarden-old.tls.certresolver: le
+      traefik.http.routers.vaultwarden-old.service: vaultwarden
+      traefik.http.services.vaultwarden-old.loadbalancer.server.port: 80
+      traefik.http.routers.vaultwarden-admin-old.rule: Host(`${VAULTWARDEN_HOST_OLD}`) && PathPrefix(`/admin`)
+      traefik.http.routers.vaultwarden-admin-old.entrypoints: websecure
+      traefik.http.routers.vaultwarden-admin-old.tls: true
+      traefik.http.routers.vaultwarden-admin-old.tls.certresolver: le
+      traefik.http.routers.vaultwarden-admin-old.middlewares: tinyauth@file
+      traefik.http.routers.vaultwarden-admin-old.service: vaultwarden
+      traefik.http.routers.vaultwarden-admin-old.priority: 100
 
   vaultwarden:
     image: vaultwarden/server:latest
