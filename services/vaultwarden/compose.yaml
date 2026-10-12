@@ -61,6 +61,7 @@ services:
       - 5432:5432
     networks:
       - internal
+      - proxy
     restart: always
     container_name: vaultwarden-postgres
     shm_size: 128mb
