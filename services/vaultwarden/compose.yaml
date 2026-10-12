@@ -34,11 +34,12 @@ services:
       - .env
     volumes:
       - /opt/data/vaultwarden:/data/
+      # - /opt/data/vaultwarden-new:/data/
     networks:
       - proxy
       # - internal
-    depends_on:
-      - postgres
+    # depends_on:
+    #   - postgres
     labels:
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
