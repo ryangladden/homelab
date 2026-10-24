@@ -23,6 +23,8 @@ services:
     ports:
       - 11434:11434
     container_name: ollama
+    environment:
+       - OLLAMA_CONTEXT_LENGTH=32768
     volumes:
       - /opt/state/llm/ollama:/root/.ollama
     gpus: all
