@@ -1,0 +1,26 @@
+[[build]]
+name = "archivelens-api"
+[build.config]
+builder = "gertrude"
+git_account = "ryangladden"
+repo = "ryangladden/archivelens"
+branch = "main"
+dockerfile_path = "apps/server/Dockerfile"
+
+[[build]]
+name = "archivelens-python-worker"
+[build.config]
+builder = "gertrude"
+git_account = "ryangladden"
+repo = "ryangladden/archivelens"
+branch = "main"
+dockerfile_path = "workers/python/Dockerfile"
+
+[[build]]
+name = "archivelens-web"
+[build.config]
+builder = "gertrude"
+git_account = "ryangladden"
+repo = "ryangladden/archivelens"
+branch = "main"
+dockerfile_path = "apps/web/Dockerfile"
