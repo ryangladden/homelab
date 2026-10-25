@@ -1,0 +1,111 @@
+[[stack]]
+name = "archivelens"
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/archivelens"
+environment = """
+# ============================================================
+# ArchiveLens Development Environment
+# ============================================================
+
+# ------------------------------------------------------------
+# PostgreSQL
+# ------------------------------------------------------------
+POSTGRES_DB=archivelens
+POSTGRES_USER=archivelens
+POSTGRES_PASSWORD=[[ARCHIVELENS_POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+
+# ------------------------------------------------------------
+# Valkey
+# ------------------------------------------------------------
+VALKEY_PORT=6379
+
+# ------------------------------------------------------------
+# Adminer
+# ------------------------------------------------------------
+ADMINER_PORT=8090
+
+# ------------------------------------------------------------
+# RustFS / S3 Object Storage
+# ------------------------------------------------------------
+S3_ACCESS_KEY_ID=[[ARCHIVELENS_S3_ACCESS_KEY_ID]]
+S3_SECRET_ACCESS_KEY=[[ARCHIVELENS_S3_SECRET_ACCESS_KEY]]
+S3_BUCKET=archivelens
+S3_PUBLIC_ENDPOINT=[[RUSTFS_ENDPOINT]]
+
+# ------------------------------------------------------------
+# Application Ports
+# ------------------------------------------------------------
+API_PORT=8080
+WEB_PORT=5179
+
+# ------------------------------------------------------------
+# Internal Service Authentication
+# ------------------------------------------------------------
+INTERNAL_SERVICE_TOKEN=[[ARCHIVELENS_SERVICE_TOKEN]]
+WORKER_SERVICE_TOKEN=[[ARCHIVELENS_WORKER_TOKEN]]
+
+# ------------------------------------------------------------
+# Document Processing
+# ------------------------------------------------------------
+DOCUMENT_MAXIMUM_UPLOAD_BYTES=262144000
+
+# ------------------------------------------------------------
+# Transcription Suggestions
+# ------------------------------------------------------------
+SPELLCHECK_TRANSCRIPTION_SUGGESTIONS=true
+LLM_TRANSCRIPTION_SUGGESTIONS=true
+
+# ------------------------------------------------------------
+# Ollama
+# ------------------------------------------------------------
+OLLAMA_ENDPOINT=[[OLLAMA_ENDPOINT]]
+OLLAMA_API_KEY=
+OLLAMA_NORMALIZATION_MODEL=qwen3:4b
+OLLAMA_CLASSIFICATION_MODEL=nimble-32k
+OLLAMA_EMBEDDING_MODEL=bge-m3
+OLLAMA_TIMEOUT_SECONDS=300
+
+# ------------------------------------------------------------
+# OpenAI
+# ------------------------------------------------------------
+OPENAI_API_KEY=
+OPENAI_ENDPOINT=https://api.openai.com/v1
+OPENAI_NORMALIZATION_MODEL=gpt-6-luna
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+
+# ------------------------------------------------------------
+# Default AI Providers
+# Options: ollama, openai (subject to application support)
+# ------------------------------------------------------------
+DEFAULT_NORMALIZATION_PROVIDER=ollama
+DEFAULT_CLASSIFICATION_PROVIDER=ollama
+DEFAULT_EMBEDDING_PROVIDER=ollama
+
+# ------------------------------------------------------------
+# Apache Tika
+# ------------------------------------------------------------
+TIKA_ENDPOINT=http://tika:9998/tika/text
+TIKA_TIMEOUT_SECONDS=180
+
+# ------------------------------------------------------------
+# JEV Classification
+# ------------------------------------------------------------
+JEV_ENDPOINT=https://api.typesafe.ai/v1/systemone
+JEV_CLASSIFICATION_MODEL=jev-latest
+JEV_CLASSIFICATION_YES_THRESHOLD=0.5
+
+# ------------------------------------------------------------
+# Text Segmentation
+# ------------------------------------------------------------
+TEXT_SEGMENTATION_TARGET_TOKENS=375
+TEXT_SEGMENTATION_OVERLAP=100
+
+# ------------------------------------------------------------
+# Ollama Classification
+# ------------------------------------------------------------
+OLLAMA_CLASSIFICATION_YES_THRESHOLD=0.6
+OLLAMA_CLASSIFICATION_NUM_CTX=32768
+"""
