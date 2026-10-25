@@ -49,6 +49,7 @@ services:
 
   api:
     image: ${API_IMAGE:-archivelens-api:latest}
+    pull_policy: never
     depends_on:
       postgres:
         condition: service_healthy
@@ -80,6 +81,7 @@ services:
 
   python-worker:
     image: ${WORKER_IMAGE:-archivelens-python-worker:latest}
+    pull_policy: never
     pids_limit: 1024
     depends_on:
       tika:
@@ -164,6 +166,7 @@ services:
 
   web:
     image: ${WEB_IMAGE:-archivelens-web:latest}
+    pull_policy: never
     depends_on:
       - api
     environment:
