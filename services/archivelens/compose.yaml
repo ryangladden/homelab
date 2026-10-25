@@ -168,8 +168,15 @@ services:
       - api
     environment:
       API_PROXY_TARGET: http://api:8080
-    ports:
-      - "${WEB_PORT:-5173}:5173"
+    # ports:
+    #   - "${WEB_PORT:-5173}:5173"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.archivelens.rule: Host(`${ARCHIVELENS_HOST}`)
+      traefik.http.routers.archivelens.entrypoints: websecure
+      traefik.http.routers.archivelens.tls: true
+      traefik.http.routers.archivelens.tls.certresolver: le
+      traefik.http.services.archivelens.loadbalancer.server.port: 5173
     restart: unless-stopped
 
 volumes:
