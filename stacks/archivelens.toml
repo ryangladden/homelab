@@ -5,6 +5,7 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/archivelens"
 environment = """
+ARCHIVELENS_HOST=archive.[[HOST_DOMAIN]]
 # ============================================================
 # ArchiveLens Development Environment
 # ============================================================
