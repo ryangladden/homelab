@@ -75,8 +75,8 @@ services:
       WORKER_URL: http://python-worker:8000
       WORKER_SERVICE_TOKEN: ${WORKER_SERVICE_TOKEN:?WORKER_SERVICE_TOKEN is required}
       MAXIMUM_UPLOAD_BYTES: ${DOCUMENT_MAXIMUM_UPLOAD_BYTES:-262144000}
-    ports:
-      - "${API_PORT:-8080}:8080"
+    # ports:
+    #   - "${API_PORT:-8080}:8080"
     restart: unless-stopped
 
   python-worker:
