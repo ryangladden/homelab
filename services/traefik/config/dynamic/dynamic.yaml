@@ -69,11 +69,11 @@ http:
       tls:
         certResolver: le
         
-    test:
+    archive:
       rule: Host(`archive.{{ env "HOST_DOMAIN" }}`)
       entryPoints:
         - websecure
-      service: test
+      service: archive
       tls:
         certResolver: le
 
