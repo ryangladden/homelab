@@ -1,0 +1,40 @@
+services:      
+  ollama:
+    # ports:
+    #   - 11434:11434
+    container_name: ollama
+    volumes:
+      - /opt/state/llm/ollama:/root/.ollama
+    gpus: all
+    image: ollama/ollama
+    networks:
+      - internal
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    container_name: litellm
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.litellm.rule: Host(`${LITELLM_HOST}`)
+      traefik.http.routers.litellm.entrypoints: websecure
+      traefik.http.routers.litellm.tls: true
+      traefik.http.routers.litellm.tls.certresolver: le
+      traefik.http.services.litellm.loadbalancer.server.port: 4000
+    volumes:
+      - /opt/data/litellm/config.yaml:/app/config.yaml:ro
+    env_file: .env
+    command:
+      - "--config"
+      - "/app/config.yaml"
+    depends_on:
+      - ollama
+    networks:
+      - proxy
+      - internal
+
+networks:
+  proxy:
+    external: true
+  internal: 
+    internal: true
