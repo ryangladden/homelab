@@ -1,0 +1,16 @@
+model_list:
+  - model_name: qwen3:4b
+    litellm_params:
+      model: qwen3
+      api_base: http://ollama:11434
+
+  - model_name: nimble-32k
+    litellm_params:
+      model: nimble
+      api_base: http://ollama:11434
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  request_timeout: 300
