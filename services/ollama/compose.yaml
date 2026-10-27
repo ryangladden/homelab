@@ -22,7 +22,7 @@ services:
       traefik.http.routers.litellm.tls.certresolver: le
       traefik.http.services.litellm.loadbalancer.server.port: 4000
     volumes:
-      - /opt/data/litellm/config.yaml:/app/config.yaml:ro
+      - ./config/config.yaml:/app/config.yaml:ro
     env_file: .env
     command:
       - "--config"
