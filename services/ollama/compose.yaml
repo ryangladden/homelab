@@ -13,6 +13,7 @@ services:
     image: ollama/ollama
     networks:
       - internal
+      - proxy
 
   litellm:
     image: ghcr.io/berriai/litellm:main-stable
