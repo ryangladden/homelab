@@ -1,0 +1,11 @@
+[[stack]]
+name = "ollama"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/ollama"
+environment = """
+LITELLM_HOST=llm.[[HOST_DOMAIN]]
+LITELLM_MASTER_KEY=[[LITELLM_MASTER_KEY]]
+"""
