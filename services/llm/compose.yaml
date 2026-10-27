@@ -19,19 +19,6 @@ services:
     networks:
       - proxy
       
-  ollama:
-    ports:
-      - 11434:11434
-    container_name: ollama
-    environment:
-       - OLLAMA_CONTEXT_LENGTH=32768
-    volumes:
-      - /opt/state/llm/ollama:/root/.ollama
-    gpus: all
-    image: ollama/ollama
-    networks:
-      - proxy
-      
   searxng:
     container_name: searxng
     image: docker.io/searxng/searxng:latest
