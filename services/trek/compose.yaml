@@ -1,0 +1,43 @@
+services:
+  app:
+    image: mauriceboe/trek:latest
+    container_name: trek
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - KILL
+    tmpfs:
+      - /tmp:noexec,nosuid,size=128m
+    ports:
+      - "3000:3000"
+    env_file: .env
+    volumes:
+      - /opt/data/trek/data:/app/data
+      - /opt/data/trek/uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.igotify.rule: Host(`${TREK_HOST}`)
+      traefik.http.routers.igotify.entrypoints: websecure
+      traefik.http.routers.igotify.tls: true
+      traefik.http.routers.igotify.tls.certresolver: le
+      traefik.http.services.igotify.loadbalancer.server.port: "8080"
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:$${PORT:-3000}/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15svap
