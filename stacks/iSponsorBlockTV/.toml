@@ -1,0 +1,9 @@
+[[stack]]
+name = "iSponsorBlockTV"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/iSponsorBlockTV"
+environment = """
+"""
