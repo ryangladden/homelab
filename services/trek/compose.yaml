@@ -25,11 +25,11 @@ services:
       - proxy
     labels:
       traefik.enable: true
-      traefik.http.routers.igotify.rule: Host(`${TREK_HOST}`)
-      traefik.http.routers.igotify.entrypoints: websecure
-      traefik.http.routers.igotify.tls: true
-      traefik.http.routers.igotify.tls.certresolver: le
-      traefik.http.services.igotify.loadbalancer.server.port: "8080"
+      traefik.http.routers.trek.rule: Host(`${TREK_HOST}`)
+      traefik.http.routers.trek.entrypoints: websecure
+      traefik.http.routers.trek.tls: true
+      traefik.http.routers.trek.tls.certresolver: le
+      traefik.http.services.trek.loadbalancer.server.port: "3000"
     logging:
       driver: json-file
       options:
