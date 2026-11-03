@@ -13,6 +13,8 @@ services:
       - traefik.http.routers.simplesamlphp.tls.certresolver=le
       - traefik.http.services.simplesamlphp.loadbalancer.server.port=80
       # - traefik.http.services.simplesamlphp.loadbalancer.server.scheme=https
+      - traefik.http.middlewares.simplesaml.headers.customrequestheaders.X-Forwarded-Proto=https
+      - traefik.http.routers.simplesamlphp.middlewares=simplesaml
     volumes:
       - /opt/state/simplesaml/config:/var/simplesamlphp/config
       - /opt/state/simplesaml/metadata:/var/simplesamlphp/metadata
