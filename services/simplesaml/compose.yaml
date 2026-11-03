@@ -14,5 +14,5 @@ services:
       - traefik.http.services.simplesamlphp.loadbalancer.server.port=8080
 
 networks:
-  traefik:
+  proxy:
     external: true
