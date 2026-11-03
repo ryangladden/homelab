@@ -1,6 +1,6 @@
 services:
   simplesamlphp:
-    image: simplesamlphp/simplesamlphp:latest
+    image: cirrusid/simplesamlphp:latest
     container_name: simplesamlphp
     restart: unless-stopped
     networks:
