@@ -11,7 +11,8 @@ services:
       - traefik.http.routers.simplesamlphp.entrypoints=websecure
       - traefik.http.routers.simplesamlphp.tls=true
       - traefik.http.routers.simplesamlphp.tls.certresolver=le
-      - traefik.http.services.simplesamlphp.loadbalancer.server.port=8080
+      - traefik.http.services.simplesamlphp.loadbalancer.server.port=443
+      - traefik.http.services.simplesamlphp.loadbalancer.server.scheme=https
     volumes:
       - /opt/state/simplesaml/config:/var/simplesamlphp/config
       - /opt/state/simplesaml/metadata:/var/simplesamlphp/metadata
