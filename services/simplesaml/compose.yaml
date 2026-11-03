@@ -18,8 +18,8 @@ services:
       - /opt/state/simplesaml/metadata:/var/simplesamlphp/metadata
       - /opt/state/simplesaml/cert:/var/simplesamlphp/cert
       - /opt/state/simplesaml/log:/var/simplesamlphp/log
-    environment:
-      SSP_APACHE_ALIAS: /
+    # environment:
+    #   SSP_APACHE_ALIAS: /
 
 networks:
   proxy:
