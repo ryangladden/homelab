@@ -7,7 +7,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.simplesamlphp.rule=Host(`saml.lab.example.com`)
+      - traefik.http.routers.simplesamlphp.rule=Host(`${SIMPLESAML_HOST}`)
       - traefik.http.routers.simplesamlphp.entrypoints=websecure
       - traefik.http.routers.simplesamlphp.tls=true
       - traefik.http.routers.simplesamlphp.tls.certresolver=le
