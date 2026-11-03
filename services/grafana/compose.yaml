@@ -1,0 +1,30 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+
+    environment:
+      - TZ=America/Denver
+
+    volumes:
+      - /opt/state/grafana/data:/var/lib/grafana
+
+    networks:
+      - proxy
+
+    labels:
+      - traefik.enable=true
+
+      # Router
+      - traefik.http.routers.grafana.rule=Host(`${GRAFANA_HOST}`)
+      - traefik.http.routers.grafana.entrypoints=websecure
+      - traefik.http.routers.grafana.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=le
+
+      # Service
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+networks:
+  proxy:
+    external: true
