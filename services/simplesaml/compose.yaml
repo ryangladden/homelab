@@ -21,6 +21,7 @@ services:
     environment:
       VIRTUAL_PROTO: https
       VIRTUAL_PORT: 443
+      HTTP_X_FORWARDED_PROTO: https
     #   SSP_APACHE_ALIAS: /
 
 networks:
