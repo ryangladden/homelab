@@ -1,0 +1,18 @@
+services:
+  simplesamlphp:
+    image: simplesamlphp/simplesamlphp:latest
+    container_name: simplesamlphp
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.simplesamlphp.rule=Host(`saml.lab.example.com`)
+      - traefik.http.routers.simplesamlphp.entrypoints=websecure
+      - traefik.http.routers.simplesamlphp.tls=true
+      - traefik.http.routers.simplesamlphp.tls.certresolver=le
+      - traefik.http.services.simplesamlphp.loadbalancer.server.port=8080
+
+networks:
+  traefik:
+    external: true
