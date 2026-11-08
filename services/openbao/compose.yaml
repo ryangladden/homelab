@@ -1,0 +1,23 @@
+services:
+  open_bao:
+    image: openbao/openbao:latest
+    container_name: openbao
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.openbao.rule: Host(`${OPENBAO_HOST}`)
+      traefik.http.routers.openbao.entrypoints: websecure
+      traefik.http.routers.openbao.tls: true
+      traefik.http.routers.openbao.tls.certresolver: le
+      traefik.http.services.openbao.loadbalancer.server.port: 8200
+      traefik.docker.network: proxy
+    volumes:
+      - ./config:/openbao/config
+      - /opt/data/openbao/data:/openbao/data
+    env_file: .env
+    command: server
+
+networks:
+  proxy:
+    external: true
