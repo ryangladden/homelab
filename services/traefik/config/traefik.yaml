@@ -19,6 +19,8 @@ entryPoints:
         readTimeout: 10m
         writeTimeout: 10m
         idleTimeout: 180s
+  ssh:
+    address: ":22"
 
 tcp:
   serversTransports:
