@@ -1,0 +1,13 @@
+[[stack]]
+name = "forgejo"
+tags = ["service"]
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/forgejo"
+environment = """
+FORGEJO_HOST=git.[[HOST_DOMAIN]]
+USER_UID=1000
+USER_GID=1000
+FORGEJO__server__ROOT_URL=https://git.[[HOST_DOMAIN]]/
+"""
