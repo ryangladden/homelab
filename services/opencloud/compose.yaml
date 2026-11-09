@@ -19,7 +19,6 @@ services:
       - traefik.http.routers.opencloud.entrypoints=websecure
       - traefik.http.routers.opencloud.tls=true
       - traefik.http.routers.opencloud.tls.certresolver=le
-      - traefik.http.routers.opencloud.middlewares=crowdsec@file
       - traefik.http.routers.opencloud.middlewares=hsts-header
       - traefik.http.services.opencloud.loadbalancer.server.port=9200
 
@@ -57,7 +56,6 @@ services:
       - traefik.http.routers.euro-office.entrypoints=websecure
       - traefik.http.routers.euro-office.tls=true
       - traefik.http.routers.euro-office.tls.certresolver=le
-      - traefik.http.routers.euro-office.middlewares=crowdsec@file
       - traefik.http.routers.euro-office.service=euro-office
       - traefik.http.services.euro-office.loadbalancer.server.port=80
       - traefik.docker.network=proxy
@@ -115,7 +113,7 @@ services:
       - traefik.http.routers.radicale.service=radicale
       - traefik.http.services.radicale.loadbalancer.server.port=5232
       - traefik.docker.network=radicale-internal
-      - traefik.http.routers.radicale.middlewares=tinyauth@file,opencloud-user-mapper@file,crowdsec@file
+      - traefik.http.routers.radicale.middlewares=tinyauth@file,opencloud-user-mapper@file
 
 
 networks:
