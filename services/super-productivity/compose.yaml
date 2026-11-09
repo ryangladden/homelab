@@ -44,6 +44,7 @@ services:
       traefik.http.routers.super-sync.entrypoints: websecure
       traefik.http.routers.super-sync.tls: true
       traefik.http.routers.super-sync.tls.certresolver: le
+      traefik.http.routers.super-sync.middlewares: crowdsec@file
       traefik.http.services.super-sync.loadbalancer.server.port: 1900
 
   postgres:
