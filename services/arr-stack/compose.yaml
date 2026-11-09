@@ -21,8 +21,7 @@ services:
       traefik.http.routers.sonarr.tls.certresolver: le
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
       traefik.docker.network: proxy
-      traefik.http.routers.sonarr.middlewares: tinyauth@file
-      traefik.http.routers.sonarr.middlewares: crowdsec@file
+      traefik.http.routers.sonarr.middlewares: tinyauth@file, crowdsec@file
       tinyauth.apps.sonarr.config.domain: ${SONARR_HOST}
       tinyauth.apps.sonarr.response.basicauth.username: ${SONARR_USERNAME}
       tinyauth.apps.sonarr.response.basicauth.password: ${SONARR_PASSWORD}
@@ -48,8 +47,7 @@ services:
       traefik.http.routers.sonarr-anime.tls.certresolver: le
       traefik.http.services.sonarr-anime.loadbalancer.server.port: 8989
       traefik.docker.network: proxy
-      traefik.http.routers.sonarr-anime.middlewares: tinyauth@file
-      traefik.http.routers.sonarr-anime.middlewares: crowdsec@file
+      traefik.http.routers.sonarr-anime.middlewares: tinyauth@file, crowdsec@file
       tinyauth.apps.sonarr-anime.config.domain: ${ANIME_HOST}
       tinyauth.apps.sonarr-anime.response.basicauth.username: ${ANIME_USERNAME}
       tinyauth.apps.sonarr-anime.response.basicauth.password: ${ANIME_PASSWORD}
@@ -75,8 +73,7 @@ services:
       traefik.http.routers.radarr.tls.certresolver: le
       traefik.http.services.radarr.loadbalancer.server.port: 7878
       traefik.docker.network: proxy
-      traefik.http.routers.radarr.middlewares: tinyauth@file
-      traefik.http.routers.radarr.middlewares: crowdsec@file
+      traefik.http.routers.radarr.middlewares: tinyauth@file, crowdsec@file
       tinyauth.apps.radarr.config.domain: ${RADARR_HOST}
       tinyauth.apps.radarr.response.basicauth.username: ${RADARR_USERNAME}
       tinyauth.apps.radarr.response.basicauth.password: ${RADARR_PASSWORD}
@@ -102,8 +99,7 @@ services:
       traefik.http.routers.bazarr.tls.certresolver: le
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.docker.network: proxy
-      traefik.http.routers.bazarr.middlewares: tinyauth@file
-      traefik.http.routers.bazarr.middlewares: crowdsec@file
+      traefik.http.routers.bazarr.middlewares: tinyauth@file, crowdsec@file
       tinyauth.apps.bazarr.config.domain: ${BAZARR_ANIME_HOST}
       tinyauth.apps.bazarr.response.basicauth.username: ${BAZARR_ANIME_USERNAME}
       tinyauth.apps.bazarr.response.basicauth.password: ${BAZARR_ANIME_PASSWORD}
@@ -129,8 +125,7 @@ services:
       traefik.http.routers.prowlarr.tls.certresolver: le
       traefik.http.services.prowlarr.loadbalancer.server.port: 9696
       traefik.docker.network: proxy
-      traefik.http.routers.prowlarr.middlewares: tinyauth@file
-      traefik.http.routers.prowlarr.middlewares: crowdsec@file
+      traefik.http.routers.prowlarr.middlewares: tinyauth@file, crowdsec@file
       tinyauth.apps.prowlarr.config.domain: ${PROWLARR_HOST}
       tinyauth.apps.prowlarr.response.basicauth.username: ${PROWLARR_USERNAME}
       tinyauth.apps.prowlarr.response.basicauth.password: ${PROWLARR_PASSWORD}
@@ -271,8 +266,7 @@ services:
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
 
       # TinyAuth
-      traefik.http.routers.qbittorrent.middlewares: tinyauth@file
-      traefik.http.routers.qbittorrent.middlewares: crowdsec@file
+      traefik.http.routers.qbittorrent.middlewares: tinyauth@file, crowdsec@file
 
       tinyauth.apps.qbittorrent.config.domain: ${QBITTORRENT_HOST}
       tinyauth.apps.qbittorrent.response.basicauth.username: ${QBITTORRENT_USERNAME}
