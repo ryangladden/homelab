@@ -51,6 +51,25 @@ services:
     labels:
       - "traefik.enable=false"
 
+  crowdsec-web-ui:
+    image: ghcr.io/theduffman85/crowdsec-web-ui:latest
+    container_name: crowdsec_web_ui
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.crowdsec-ui.rule: Host(`${CROWDSEC_UI_HOST}`)
+      traefik.http.routers.crowdsec-ui.entrypoints: websecure
+      traefik.http.routers.crowdsec-ui.tls: true
+      traefik.http.routers.crowdsec-ui.tls.certresolver: le
+      traefik.http.services.crowdsec-ui.loadbalancer.server.port: 3000
+      traefik.http.routers.crowdsec-ui.middlewares: tinyauth@file
+      traefik.docker.network: proxy
+    env_file: .env
+    volumes:
+      - /opt/state/crowdsec/ui:/app/data
+    restart: unless-stopped
+
 
 networks:
   proxy:
