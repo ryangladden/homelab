@@ -23,6 +23,7 @@ services:
       - /opt/state/traefik/letsencrypt:/letsencrypt
       - /opt/state/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
+      - /opt/state/traefik/log:/var/log/traefik/
     healthcheck:
       test:
         - CMD
@@ -34,6 +35,22 @@ services:
       timeout: 2s
       retries: 3
       start_period: 60s
+
+  crowdsec:
+    image: crowdsecurity/crowdsec:v1.8.1
+    container_name: "crowdsec"
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - proxy
+    volumes:
+      - ./acquis.yaml:/etc/crowdsec/acquis.yaml:ro
+      - /opt/state/traefik/log:/var/log/traefik:ro
+      - /opt/state/crowdsec/data:/var/lib/crowdsec/data/
+      - /opt/state/crowdsec/config:/etc/crowdsec/
+    labels:
+      - "traefik.enable=false"
+
 
 networks:
   proxy:
