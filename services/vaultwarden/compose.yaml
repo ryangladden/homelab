@@ -52,7 +52,7 @@ services:
       traefik.http.routers.vaultwarden-admin.entrypoints: websecure
       traefik.http.routers.vaultwarden-admin.tls: true
       traefik.http.routers.vaultwarden-admin.tls.certresolver: le
-      traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file
+      traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file, crowdsec@file
       traefik.http.routers.vaultwarden-admin.service: vaultwarden
       traefik.http.routers.vaultwarden-admin.priority: 100
 
