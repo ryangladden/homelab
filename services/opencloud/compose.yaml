@@ -112,11 +112,10 @@ services:
       - traefik.http.routers.radicale.entrypoints=websecure
       - traefik.http.routers.radicale.tls=true
       - traefik.http.routers.radicale.tls.certresolver=le
-      - traefik.http.routers.radicale.middlewares=crowdsec@file
       - traefik.http.routers.radicale.service=radicale
       - traefik.http.services.radicale.loadbalancer.server.port=5232
       - traefik.docker.network=radicale-internal
-      - traefik.http.routers.radicale.middlewares=tinyauth@file,opencloud-user-mapper@file
+      - traefik.http.routers.radicale.middlewares=tinyauth@file,opencloud-user-mapper@file,crowdsec@file
 
 
 networks:
