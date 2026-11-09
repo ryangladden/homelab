@@ -147,5 +147,5 @@ http:
           crowdsecLapiKey: "{{ env "BOUNCER_KEY_TRAEFIK" }}"
           crowdsecLapiHost: crowdsec:8080
           crowdsecAppsecEnabled: true
-          crowdsec:7422
+          crowdsecAppsecHost: crowdsec:7422
           
