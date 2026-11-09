@@ -47,11 +47,12 @@ services:
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.paperless.rule=Host(`${PAPERLESS_HOST}`)
-      - traefik.http.routers.paperless.entrypoints=websecure
-      - traefik.http.routers.paperless.tls=true
-      - traefik.http.routers.paperless.tls.certresolver=le
+      traefik.enable: true
+      traefik.http.routers.paperless.rule: Host(`${PAPERLESS_HOST}`)
+      traefik.http.routers.paperless.entrypoints: websecure
+      traefik.http.routers.paperless.tls: true
+      traefik.http.routers.paperless.tls.certresolver: le
+      traefik.http.routers.paperless.middlewares: crowdsec@file
     networks:
       - proxy
       - paperless
