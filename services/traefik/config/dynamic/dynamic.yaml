@@ -11,6 +11,7 @@ http:
         certresolver: le
       middlewares:
         - tinyauth@file
+        - crowdsec@file
         
     truenas:
       rule: "Host(`nas.{{ env "HOST_DOMAIN" }}`)"
@@ -124,7 +125,7 @@ http:
     truenas-auth:
       headers:
         customRequestHeaders:
-          Authorization: "Basic {{ env "NAS_CREDENTIALS_BASE64" }}"
+          Authorization: 'Basic {{ env "NAS_CREDENTIALS_BASE64" }}'
           
     opencloud-user-mapper:
       plugin:
@@ -136,3 +137,12 @@ http:
           appTokenEnv: OC_MAPPER_APP_TOKEN
           cacheTTL: 1h
           requestTimeout: 3s
+
+    crowdsec:
+      plugin:
+        bouncer:
+          enabled: true
+          logLevel: INFO
+          crowdsecMode: stream
+          crowdsecLapiKey: "{{ env "CROWDSEC_LAPI_KEY" }}"
+          crowdsecLapiHost: crowdsec:8080
