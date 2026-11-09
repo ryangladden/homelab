@@ -13,4 +13,7 @@ NAS_IP=[[NAS_IP]]
 BACKUP_IP=[[BACKUP_IP]]
 GERTRUDE_IP=[[GERTRUDE_IP]]
 NAS_CREDENTIALS_BASE64=[[NAS_CREDENTIALS_BASE64]]
+COLLECTIONS=crowdsecurity/traefik crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-generic-rules
+CUSTOM_HOSTNAME=crowdsec
+BOUNCER_KEY_TRAEFIK=[[CROWDSEC_LAPI_KEY]]
 """
