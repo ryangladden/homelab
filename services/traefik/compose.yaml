@@ -1,7 +1,7 @@
 services:
 
   traefik:
-    image: traefik:latest
+    image: ghcr.io/traefik/traefik:latest
     container_name: traefik
     restart: unless-stopped
     env_file: .env
