@@ -30,7 +30,6 @@ services:
       traefik.http.routers.trek.tls: true
       traefik.http.routers.trek.tls.certresolver: le
       traefik.http.services.trek.loadbalancer.server.port: "3000"
-      traefik.http.routers.trek.middlewares: crowdsec@file
     logging:
       driver: json-file
       options:
