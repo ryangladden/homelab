@@ -52,7 +52,6 @@ services:
       traefik.http.routers.paperless.entrypoints: websecure
       traefik.http.routers.paperless.tls: true
       traefik.http.routers.paperless.tls.certresolver: le
-      traefik.http.routers.paperless.middlewares: crowdsec@file
     networks:
       - proxy
       - paperless
