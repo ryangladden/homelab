@@ -42,6 +42,10 @@ api:
 
 ping: true
 
+accessLog:
+  filePath: /var/log/traefik/access.log
+  format: json
+
 certificatesResolvers:
   le:
     acme:
