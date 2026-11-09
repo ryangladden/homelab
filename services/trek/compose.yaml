@@ -27,8 +27,6 @@ services:
       traefik.enable: true
       traefik.http.routers.trek.rule: Host(`${TREK_HOST}`)
       traefik.http.routers.trek.entrypoints: websecure
-      traefik.http.routers.trek.tls: true
-      traefik.http.routers.trek.tls.certresolver: le
       traefik.http.services.trek.loadbalancer.server.port: "3000"
     logging:
       driver: json-file
