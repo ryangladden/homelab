@@ -144,5 +144,8 @@ http:
           enabled: true
           logLevel: INFO
           crowdsecMode: stream
-          crowdsecLapiKey: "{{ env "CROWDSEC_LAPI_KEY" }}"
+          crowdsecLapiKey: "{{ env "BOUNCER_KEY_TRAEFIK" }}"
           crowdsecLapiHost: crowdsec:8080
+          crowdsecAppsecEnabled: true
+          crowdsec:7422
+          
