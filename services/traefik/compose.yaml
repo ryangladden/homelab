@@ -44,7 +44,7 @@ services:
     networks:
       - proxy
     volumes:
-      - ./acquis.yaml:/etc/crowdsec/acquis.yaml:ro
+      - ./config/crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml:ro
       - /opt/state/traefik/log:/var/log/traefik:ro
       - /opt/state/crowdsec/data:/var/lib/crowdsec/data/
       - /opt/state/crowdsec/config:/etc/crowdsec/
