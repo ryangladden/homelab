@@ -14,6 +14,7 @@ services:
       traefik.http.routers.tinyauth.entrypoints: websecure
       traefik.http.routers.tinyauth.tls: true
       traefik.http.routers.tinyauth.tls.certresolver: le
+      traefik.http.routers.tinyauth.middlewares: crowdsec@file
     networks:
       - proxy
       - radicale-internal
