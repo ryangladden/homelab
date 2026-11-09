@@ -13,7 +13,7 @@ entryPoints:
     address: ":443"
     http:
       tls:
-        certResolver: le
+        certResolver: le-dns
       middlewares:
         - crowdsec@file
     transport:
@@ -51,10 +51,18 @@ accessLog:
 certificatesResolvers:
   le:
     acme:
-      email: admin@${HOST_DOMAIN}
       storage: /letsencrypt/acme.json
       httpChallenge:
         entryPoint: web
+  le-dns:
+    acme:
+      storage: /letsencrypt/acme-dns.json
+      keyType: EC256
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
 
 experimental:
   localPlugins:
