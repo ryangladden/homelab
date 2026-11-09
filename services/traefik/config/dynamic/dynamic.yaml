@@ -23,6 +23,7 @@ http:
       middlewares:
         - tinyauth@file
         - truenas-auth@file
+        - crowdsec@file
 
     dashboard:
       rule: Host(`dashboard.{{ env "HOST_DOMAIN" }}`)
@@ -31,6 +32,7 @@ http:
       service: api@internal
       middlewares:
         - tinyauth@file
+        - crowdsec@file
       tls:
         certResolver: le
 
@@ -41,6 +43,8 @@ http:
       service: s3
       tls:
         certResolver: le
+      middlewares:
+        - crowdsec@file
 
     backrest:
       rule: Host(`backup.{{ env "HOST_DOMAIN" }}`)
@@ -49,6 +53,7 @@ http:
       service: backrest
       middlewares:
         - tinyauth@file
+        - crowdsec@file
       tls:
         certResolver: le
 
@@ -59,25 +64,10 @@ http:
       service: printer
       middlewares:
         - tinyauth@file
-      tls:
-        certResolver: le
-
-    test:
-      rule: Host(`test.{{ env "HOST_DOMAIN" }}`)
-      entryPoints:
-        - websecure
-      service: test
+        - crowdsec@file
       tls:
         certResolver: le
         
-    archive:
-      rule: Host(`archive.{{ env "HOST_DOMAIN" }}`)
-      entryPoints:
-        - websecure
-      service: archive
-      tls:
-        certResolver: le
-
   services:
 
     gertrude:
