@@ -21,6 +21,10 @@ entryPoints:
         readTimeout: 10m
         writeTimeout: 10m
         idleTimeout: 180s
+    domains:
+      - main: ${HOST_DOMAIN}
+        sans:
+          - "*.${HOST_DOMAIN}"
   ssh:
     address: ":22"
 
