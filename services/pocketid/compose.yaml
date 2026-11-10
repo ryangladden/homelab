@@ -21,7 +21,6 @@ services:
       traefik.http.routers.auth.rule: Host(`${POCKETID_HOST}`)
       traefik.http.routers.auth.entrypoints: websecure
       traefik.http.routers.auth.tls: true
-      traefik.http.routers.auth.tls.certresolver: le
     networks:
       - proxy
       
