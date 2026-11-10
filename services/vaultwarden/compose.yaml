@@ -20,7 +20,6 @@ services:
       traefik.http.routers.vaultwarden-admin.rule: Host(`${VAULTWARDEN_HOST}`) && PathPrefix(`/admin`)
       traefik.http.routers.vaultwarden-admin.entrypoints: websecure
       traefik.http.routers.vaultwarden-admin.tls: true
-      traefik.http.routers.vaultwarden-admin.tls.certresolver: le
       traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file
       traefik.http.routers.vaultwarden-admin.service: vaultwarden
       traefik.http.routers.vaultwarden-admin.priority: 100
