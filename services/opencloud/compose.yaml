@@ -90,18 +90,14 @@ services:
   radicale:
     image: opencloudeu/radicale:latest
     container_name: radicale
-
     networks:
       - radicale-internal
     logging:
       driver: local
-
     restart: always
-
     volumes:
       - ./config/radicale.toml:/etc/radicale/config
       - /opt/data/opencloud/radicale:/var/lib/radicale
-
     labels:
       - traefik.enable=true
       - traefik.http.routers.radicale.rule=Host(`${RADICALE_HOST}`)
