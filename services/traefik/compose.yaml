@@ -70,7 +70,6 @@ services:
       traefik.http.routers.crowdsec-ui.rule: Host(`${CROWDSEC_UI_HOST}`)
       traefik.http.routers.crowdsec-ui.entrypoints: websecure
       traefik.http.routers.crowdsec-ui.tls: true
-      traefik.http.routers.crowdsec-ui.tls.certresolver: le
       traefik.http.services.crowdsec-ui.loadbalancer.server.port: 3000
       traefik.http.routers.crowdsec-ui.middlewares: tinyauth@file
       traefik.docker.network: proxy
