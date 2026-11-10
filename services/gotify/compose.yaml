@@ -16,7 +16,6 @@ services:
       traefik.http.routers.gotify.rule: Host(`${GOTIFY_HOST}`)
       traefik.http.routers.gotify.entrypoints: websecure
       traefik.http.routers.gotify.tls: true
-      traefik.http.routers.gotify.tls.certresolver: le
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/health"]
       interval: 5s
