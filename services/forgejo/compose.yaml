@@ -16,7 +16,6 @@ services:
       traefik.http.routers.forgejo.rule: Host(`${FORGEJO_HOST}`)
       traefik.http.routers.forgejo.entrypoints: websecure
       traefik.http.routers.forgejo.tls: true
-      traefik.http.routers.forgejo.tls.certresolver: le
       traefik.http.services.forgejo.loadbalancer.server.port: 3000
 
       traefik.tcp.routers.forgejo-ssh.rule: HostSNI(`*`)
