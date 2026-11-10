@@ -14,10 +14,6 @@ entryPoints:
     http:
       tls:
         certResolver: le-dns
-        domains:
-          - main: {{ env "HOST_DOMAIN" }}
-            sans:
-              - "*.{{ env "HOST_DOMAIN" }}"
       middlewares:
         - crowdsec@file
     transport:
