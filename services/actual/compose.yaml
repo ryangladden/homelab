@@ -22,7 +22,6 @@ services:
       traefik.http.routers.actual.rule: Host(`${ACTUAL_HOST}`)
       traefik.http.routers.actual.entrypoints: websecure
       traefik.http.routers.actual.tls: true
-      traefik.http.routers.actual.tls.certresolver: le
 networks:
   proxy:
     external: true
