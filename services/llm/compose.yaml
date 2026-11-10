@@ -14,7 +14,6 @@ services:
       traefik.http.routers.ai.rule: Host(`${AI_HOST}`)
       traefik.http.routers.ai.entrypoints: websecure
       traefik.http.routers.ai.tls: true
-      traefik.http.routers.ai.tls.certresolver: le
       traefik.http.services.ai.loadbalancer.server.port: 8080
     networks:
       - proxy
@@ -35,7 +34,6 @@ services:
       traefik.http.routers.searxng.rule: Host(`${TRAEFIK_SEARXNG_HOST}`)
       traefik.http.routers.searxng.entrypoints: websecure
       traefik.http.routers.searxng.tls: true
-      traefik.http.routers.searxng.tls.certresolver: le
       traefik.http.routers.searxng.middlewares: tinyauth@file
       
   valkey:
