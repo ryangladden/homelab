@@ -12,7 +12,6 @@ services:
       traefik.http.routers.lubelogger.rule: Host(`${LUBELOGGER_HOST}`)
       traefik.http.routers.lubelogger.entrypoints: websecure
       traefik.http.routers.lubelogger.tls: true
-      traefik.http.routers.lubelogger.tls.certresolver: le
 networks:
   proxy:
     external: true
