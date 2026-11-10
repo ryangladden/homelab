@@ -8,7 +8,6 @@ http:
         - websecure
       middlewares:
         - tinyauth@file
-        - crowdsec@file
         
     truenas:
       rule: "Host(`nas.{{ env "HOST_DOMAIN" }}`)"
