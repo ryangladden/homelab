@@ -113,4 +113,28 @@ http:
           crowdsecLapiHost: crowdsec:8080
           crowdsecAppsecEnabled: true
           crowdsecAppsecHost: crowdsec:7422
-          
+
+    geoblock:
+      plugin:
+        geoblock:
+          silentStartUp: false
+          allowLocalRequests: false
+          logLocalRequests: false
+          logAllowedRequests: false
+          logApiRequests: false
+    
+          api: "https://get.geojs.io/v1/ip/country/{ip}"
+          apiTimeoutMs: 500
+          cacheSize: 1000
+    
+          forceMonthlyUpdate: true
+          allowUnknownCountries: false
+          unknownCountryApiResponse: "nil"
+    
+          blackListMode: false
+          countries:
+            - US
+            - BR
+    
+          excludedPathPatterns:
+            - "^/health$"
