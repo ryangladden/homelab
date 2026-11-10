@@ -24,7 +24,6 @@ services:
       traefik.http.routers.litellm.rule: Host(`${LITELLM_HOST}`)
       traefik.http.routers.litellm.entrypoints: websecure
       traefik.http.routers.litellm.tls: true
-      traefik.http.routers.litellm.tls.certresolver: le
       traefik.http.services.litellm.loadbalancer.server.port: 4000
     volumes:
       - ./config/config.yaml:/app/config.yaml:ro
