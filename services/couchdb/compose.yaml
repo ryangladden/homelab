@@ -18,7 +18,6 @@ services:
       - "traefik.http.routers.couchdb.rule=Host(`${COUCHDB_HOST}`)"
       - "traefik.http.routers.couchdb.entrypoints=websecure"
       - "traefik.http.routers.couchdb.tls=true"
-      - "traefik.http.routers.couchdb.tls.certresolver=le"
       - "traefik.http.services.couchdb.loadbalancer.server.port=5984"
       - "traefik.docker.network=proxy"
 
