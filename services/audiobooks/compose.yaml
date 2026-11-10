@@ -11,7 +11,6 @@ services:
       traefik.http.routers.audiobookshelf.rule: Host(`${AUDIOBOOKSHELF_HOST}`)
       traefik.http.routers.audiobookshelf.entrypoints: websecure
       traefik.http.routers.audiobookshelf.tls: true
-      traefik.http.routers.audiobookshelf.tls.certresolver: le
       traefik.http.services.audiobookshelf.loadbalancer.server.port: 80
       traefik.docker.network: proxy
     networks:
@@ -32,7 +31,6 @@ services:
       traefik.http.routers.shelfmark.rule: Host(`${SHELFMARK_HOST}`)
       traefik.http.routers.shelfmark.entrypoints: websecure
       traefik.http.routers.shelfmark.tls: true
-      traefik.http.routers.shelfmark.tls.certresolver: le
       traefik.http.services.shelfmark.loadbalancer.server.port: 8084
       traefik.docker.network: proxy
     restart: unless-stopped
