@@ -14,6 +14,10 @@ entryPoints:
     http:
       tls:
         certResolver: le-dns
+        domains:
+        - main: {{ env "HOST_DOMAIN" }}
+          sans:
+            - "*.{{ env "HOST_DOMAIN" }}"
       middlewares:
         - crowdsec@file
     transport:
@@ -21,10 +25,6 @@ entryPoints:
         readTimeout: 10m
         writeTimeout: 10m
         idleTimeout: 180s
-    domains:
-      - main: ${HOST_DOMAIN}
-        sans:
-          - "*.${HOST_DOMAIN}"
   ssh:
     address: ":22"
 
