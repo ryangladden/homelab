@@ -93,10 +93,9 @@ services:
   #     traefik.http.routers.bazarr.rule: Host(`${BAZARR_ANIME_HOST}`)
   #     traefik.http.routers.bazarr.entrypoints: websecure
   #     traefik.http.routers.bazarr.tls: true
-  #     traefik.http.routers.bazarr.tls.certresolver: le
   #     traefik.http.services.bazarr.loadbalancer.server.port: 6767
   #     traefik.docker.network: proxy
-  #     traefik.http.routers.bazarr.middlewares: tinyauth@file, crowdsec@file
+  #     traefik.http.routers.bazarr.middlewares: tinyauth@file
   #     tinyauth.apps.bazarr.config.domain: ${BAZARR_ANIME_HOST}
   #     tinyauth.apps.bazarr.response.basicauth.username: ${BAZARR_ANIME_USERNAME}
   #     tinyauth.apps.bazarr.response.basicauth.password: ${BAZARR_ANIME_PASSWORD}
