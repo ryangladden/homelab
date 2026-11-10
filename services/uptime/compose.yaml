@@ -11,7 +11,6 @@ services:
       traefik.http.routers.uptime.rule: Host(`${UPTIME_HOST}`)
       traefik.http.routers.uptime.entrypoints: websecure
       traefik.http.routers.uptime.tls: true
-      traefik.http.routers.uptime.tls.certresolver: le
             # TinyAuth
       traefik.http.routers.uptime.middlewares: tinyauth@file
       # TinyAuth app identification
