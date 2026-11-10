@@ -24,6 +24,15 @@ services:
       - /opt/state/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
       - /opt/state/traefik/log:/var/log/traefik/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wildcard.rule=Host(`${HOST_DOMAIN}`)"
+      - "traefik.http.routers.wildcard.entrypoints=websecure"
+      - "traefik.http.routers.wildcard.tls=true"
+      - "traefik.http.routers.wildcard.tls.certresolver=le-dns"
+      - "traefik.http.routers.wildcard.tls.domains[0].main=${HOST_DOMAIN}"
+      - "traefik.http.routers.wildcard.tls.domains[0].sans=*.${HOST_DOMAIN}"
+      - "traefik.http.routers.wildcard.service=noop@internal"
     healthcheck:
       test:
         - CMD
