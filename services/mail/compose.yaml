@@ -36,7 +36,6 @@ services:
       - traefik.http.routers.mail-admin.rule=Host(`${MAIL_HOST}`)
       - traefik.http.routers.mail-admin.entrypoints=websecure
       - traefik.http.routers.mail-admin.tls=true
-      - traefik.http.routers.mail-admin.tls.certresolver=le
       - traefik.http.routers.mail-admin.middlewares=tinyauth@file
       
   autodiscover:
@@ -60,7 +59,6 @@ services:
         Host(`${AUTOCONFIG_HOST}`)
       - traefik.http.routers.autoconfig.entrypoints=websecure
       - traefik.http.routers.autoconfig.tls=true
-      - traefik.http.routers.autoconfig.tls.certresolver=le
       - traefik.http.services.autoconfig.loadbalancer.server.port=8000
 
   roundcubemail:
@@ -79,7 +77,6 @@ services:
       - traefik.http.routers.roundcube.rule=Host(`${ROUNDCUBE_HOST}`)
       - traefik.http.routers.roundcube.entrypoints=websecure
       - traefik.http.routers.roundcube.tls=true
-      - traefik.http.routers.roundcube.tls.certresolver=le
       - traefik.http.routers.roundcube.middlewares=tinyauth@file
       - traefik.http.services.roundcube.loadbalancer.server.port=80
       
