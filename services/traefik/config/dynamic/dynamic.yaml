@@ -117,11 +117,11 @@ http:
     geoblock:
       plugin:
         geoblock:
-          silentStartUp: false
-          allowLocalRequests: false
-          logLocalRequests: false
-          logAllowedRequests: false
-          logApiRequests: false
+          silentStartUp: true
+          allowLocalRequests: true
+          logLocalRequests: true
+          logAllowedRequests: true
+          logApiRequests: true
     
           api: "https://get.geojs.io/v1/ip/country/{ip}"
           apiTimeoutMs: 500
