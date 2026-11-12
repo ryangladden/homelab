@@ -20,8 +20,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.actual.rule: Host(`${ACTUAL_HOST}`)
-      traefik.http.routers.actual.entrypoints: websecure
-      traefik.http.routers.actual.tls: true
 networks:
   proxy:
     external: true
