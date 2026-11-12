@@ -1,5 +1,11 @@
 [[stack]]
 name = "arr-stack"
+tags = ["app"]
+description = """
+**Arr Stack** — Collection of media automation services for discovering, organizing, downloading, and managing movies, television, and other media.
+
+**Links:** [Sonarr](https://sonarr.tv/) · [Radarr](https://radarr.video/) · [Prowlarr](https://prowlarr.com/) · [Documentation](https://wiki.servarr.com/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
