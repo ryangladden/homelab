@@ -2,7 +2,7 @@
 name = "docker-socket-proxy"
 tags = ["infra"]
 description = """
-Restricts Docker API access for services such as Traefik and TinyAuth.
+**Docker Socket Proxy** — Security-focused proxy that restricts Docker API access for services requiring container discovery and metadata.
 
 **Links:** [Documentation](https://docs.linuxserver.io/images/docker-socket-proxy/) · [Repository](https://github.com/linuxserver/docker-socket-proxy)
 """
