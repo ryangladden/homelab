@@ -14,8 +14,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.gotify.rule: Host(`${GOTIFY_HOST}`)
-      traefik.http.routers.gotify.entrypoints: websecure
-      traefik.http.routers.gotify.tls: true
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/health"]
       interval: 5s
@@ -49,8 +48,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.igotify.rule: Host(`${IGOTIFY_HOST}`)
-      traefik.http.routers.igotify.entrypoints: websecure
-      traefik.http.routers.igotify.tls: true
       traefik.http.services.igotify.loadbalancer.server.port: "8080"
 
 networks:
