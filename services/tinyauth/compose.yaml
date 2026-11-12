@@ -16,9 +16,12 @@ services:
     networks:
       - proxy
       - radicale-internal
+      - docker-socket-proxy
       
 networks:
   proxy:
     external: true
   radicale-internal:
+    external: true
+  docker-socket-proxy:
     external: true
