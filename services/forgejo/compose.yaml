@@ -1,6 +1,6 @@
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:17
+    image: data.forgejo.org/forgejo/forgejo:17
     container_name: forgejo
     env_file: .env
     restart: always
