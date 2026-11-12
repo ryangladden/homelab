@@ -1,5 +1,11 @@
 [[stack]]
 name = "plex"
+tags = ["app"]
+description = """
+**Plex** — Media server for organizing, streaming, and managing personal libraries of movies, television shows, music, and other content.
+
+**Links:** [Documentation](https://support.plex.tv/) · [Repository](https://github.com/plexinc) · [Website](https://www.plex.tv/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
