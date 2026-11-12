@@ -36,8 +36,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.immich.rule: Host(`${EXTERNAL_IMMICH_HOST}`)
-      traefik.http.routers.immich.entrypoints: websecure
-      traefik.http.routers.immich.tls: true
     networks:
       - proxy
       - immich
