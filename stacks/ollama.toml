@@ -1,6 +1,11 @@
 [[stack]]
 name = "ollama"
 tags = ["service"]
+description = """
+**Ollama** — Local large language model runtime for downloading, running, and serving AI models through a simple API.
+
+**Links:** [Documentation](https://docs.ollama.com/) · [Repository](https://github.com/ollama/ollama) · [Website](https://ollama.com/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
