@@ -1,6 +1,11 @@
 [[stack]]
 name = "isponsorblocktv"
 tags = ["service"]
+description = """
+**iSponsorBlockTV** — Automatically skips sponsored segments, intros, outros, and other unwanted sections in YouTube videos on supported TV devices.
+
+**Links:** [Documentation](https://github.com/dmunozv04/iSponsorBlockTV#readme) · [Repository](https://github.com/dmunozv04/iSponsorBlockTV)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
