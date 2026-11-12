@@ -13,16 +13,10 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
-      traefik.http.routers.vaultwarden.entrypoints: websecure
-      traefik.http.routers.vaultwarden.tls: true
-      traefik.http.routers.vaultwarden.service: vaultwarden
-      traefik.http.services.vaultwarden.loadbalancer.server.port: 80
-      traefik.http.routers.vaultwarden-admin.rule: Host(`${VAULTWARDEN_HOST}`) && PathPrefix(`/admin`)
-      traefik.http.routers.vaultwarden-admin.entrypoints: websecure
-      traefik.http.routers.vaultwarden-admin.tls: true
-      traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file
-      traefik.http.routers.vaultwarden-admin.service: vaultwarden
-      traefik.http.routers.vaultwarden-admin.priority: 100
+      traefik.http.routers.vaultwarden.middlewares: tinyauth@file
+      tinyauth.apps.vaultwarden.config.domain: ${VAULTWARDEN_HOST}
+      # tinyauth.apps.vaultwarden.path.block: "/admin/*"
+      
 
 
 
