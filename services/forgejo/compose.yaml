@@ -11,17 +11,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     labels:
       traefik.enable: true
-      traefik.docker.network: proxy
-      
       traefik.http.routers.forgejo.rule: Host(`${FORGEJO_HOST}`)
-      traefik.http.routers.forgejo.entrypoints: websecure
-      traefik.http.routers.forgejo.tls: true
       traefik.http.services.forgejo.loadbalancer.server.port: 3000
-
-      traefik.tcp.routers.forgejo-ssh.rule: HostSNI(`*`)
-      traefik.tcp.routers.forgejo-ssh.entrypoints: ssh
-      traefik.tcp.routers.forgejo-ssh.service: forgejo-ssh
-      traefik.tcp.services.forgejo-ssh.loadbalancer.server.port: 22
 
 networks:
   proxy:
