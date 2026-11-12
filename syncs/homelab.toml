@@ -1,0 +1,5 @@
+[[resource_sync]]
+name = "homelab-stacks"
+[resource_sync.config]
+linked_repo = "homelab"
+resource_path = ["stacks"]
