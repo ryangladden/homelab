@@ -1,0 +1,15 @@
+[[stack]]
+name = "docker-socket-proxy"
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/docker-socket-proxy"
+environment = """
+CONTAINERS=1
+EVENTS=1
+NETWORKS=1
+PING=1
+VERSION=1
+POST=0
+TZ=[[TIMEZONE]]
+"""
