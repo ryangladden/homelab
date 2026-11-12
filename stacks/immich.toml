@@ -2,7 +2,7 @@
 name = "immich"
 tags = "[app]"
 description = """
-**Immich** — Self-hosted photo and video management platform with automatic mobile backups, facial recognition, and intelligent search.
+**Immich** — Photo and video management platform with automatic mobile backups, facial recognition, and intelligent search.
 
 **Links:** [Documentation](https://docs.immich.app/) · [Repository](https://github.com/immich-app/immich) · [Website](https://immich.app/)
 """
