@@ -1,5 +1,11 @@
 [[stack]]
 name = "uptime"
+tags = ["app"]
+description = """
+**Uptime Kuma** — Self-hosted monitoring platform for tracking service availability, response times, and status pages with configurable notifications.
+
+**Links:** [Documentation](https://github.com/louislam/uptime-kuma/wiki) · [Repository](https://github.com/louislam/uptime-kuma) · [Website](https://uptime.kuma.pet/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
