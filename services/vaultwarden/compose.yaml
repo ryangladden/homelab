@@ -15,7 +15,7 @@ services:
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
       traefik.http.routers.vaultwarden.middlewares: tinyauth@file
       tinyauth.apps.vaultwarden.config.domain: ${VAULTWARDEN_HOST}
-      tinyauth.apps.vaultwarden.path.block: "/admin/*"
+      tinyauth.apps.vaultwarden.path.block: ^/admin(/.*)?$
       
 
 
