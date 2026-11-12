@@ -2,8 +2,7 @@
 name = "actual"
 tags = ["app"]
 description = """
-description = """
-**Actual Budget** — Privacy-focused, self-hosted personal finance application for budgeting, expense tracking, and financial management.
+**Actual Budget** — Personal finance application for budgeting, expense tracking, and financial management.
 
 **Links:** [Documentation](https://actualbudget.org/docs/) · [Repository](https://github.com/actualbudget/actual) · [Website](https://actualbudget.org/)
 """
