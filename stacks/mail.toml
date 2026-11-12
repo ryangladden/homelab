@@ -1,5 +1,11 @@
 [[stack]]
 name = "mail"
+tags = ["app", "service"]
+description = """
+**Mail** — Email server providing SMTP, IMAP, spam filtering, antivirus protection, and secure email delivery.
+
+**Links:** [Documentation](https://docker-mailserver.github.io/docker-mailserver/latest/) · [Repository](https://github.com/docker-mailserver/docker-mailserver) · [Website](https://docker-mailserver.github.io/docker-mailserver/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
