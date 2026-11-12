@@ -1,6 +1,11 @@
 [[stack]]
 name = "super-productivity"
-tags = ["service"]
+tags = ["app"]
+description = """
+**Super Productivity** — Task management and productivity application combining time tracking, project planning, and focused work sessions.
+
+**Links:** [Documentation](https://super-productivity.com/) · [Repository](https://github.com/super-productivity/super-productivity) · [Website](https://super-productivity.com/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
