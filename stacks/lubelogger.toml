@@ -1,6 +1,11 @@
 [[stack]]
 name = "lubelogger"
-tags = ["service"]
+tags = ["app"]
+description = """
+**LubeLogger** — Vehicle maintenance tracker for recording service history, fuel consumption, repairs, and ownership expenses.
+
+**Links:** [Documentation](https://docs.lubelogger.com/) · [Repository](https://github.com/hargata/lubelog) · [Website](https://lubelogger.com/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
