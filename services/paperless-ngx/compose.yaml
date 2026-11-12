@@ -49,8 +49,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.paperless.rule: Host(`${PAPERLESS_HOST}`)
-      traefik.http.routers.paperless.entrypoints: websecure
-      traefik.http.routers.paperless.tls: true
     networks:
       - proxy
       - paperless
