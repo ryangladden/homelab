@@ -2,6 +2,8 @@ services:
   socket-proxy:
     image: lscr.io/linuxserver/socket-proxy:latest
     container_name: socket-proxy
+    networks:
+      - docker-socket-proxy
     env_file: .env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -9,3 +11,7 @@ services:
     read_only: true
     tmpfs:
       - /run
+      
+networks:
+  docker-socket-proxy:
+    external: true
