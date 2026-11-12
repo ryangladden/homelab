@@ -1,7 +1,11 @@
 [[stack]]
 name = "opencloud"
-tags = ["service"]
+tags = ["app", "service"]
+description = """
+**OpenCloud** — File sharing and collaboration platform for securely storing, synchronizing, and accessing files across devices.
 
+**Links:** [Documentation](https://docs.opencloud.eu/) · [Repository](https://github.com/opencloud-eu/opencloud) · [Website](https://opencloud.eu/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
