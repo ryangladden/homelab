@@ -1,5 +1,11 @@
 [[stack]]
 name = "pocketid"
+tags = ["infra", "auth"]
+description = """
+**Pocket ID** — OpenID Connect identity provider offering passkey-based authentication and single sign-on.
+
+**Links:** [Documentation](https://pocket-id.org/docs/) · [Repository](https://github.com/pocket-id/pocket-id) · [Website](https://pocket-id.org/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
