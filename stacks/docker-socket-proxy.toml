@@ -1,5 +1,11 @@
 [[stack]]
 name = "docker-socket-proxy"
+tags = ["infra"]
+description = """
+Restricts Docker API access for services such as Traefik and TinyAuth.
+
+**Links:** [Documentation](https://docs.linuxserver.io/images/docker-socket-proxy/) · [Repository](https://github.com/linuxserver/docker-socket-proxy)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
