@@ -1,6 +1,11 @@
 [[stack]]
 name = "gotify"
 tags = ["service"]
+description = """
+**Gotify** — Lightweight, self-hosted push notification server for delivering application alerts and messages to connected devices.
+
+**Links:** [Documentation](https://gotify.net/docs/) · [Repository](https://github.com/gotify/server) · [Website](https://gotify.net/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
