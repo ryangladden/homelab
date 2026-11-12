@@ -119,7 +119,7 @@ http:
         geoblock:
           silentStartUp: true
           allowLocalRequests: true
-          logLocalRequests: true
+          logLocalRequests: false
           logAllowedRequests: false
           logApiRequests: false
     
