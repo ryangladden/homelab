@@ -1,5 +1,11 @@
 [[stack]]
 name = "vaultwarden"
+tags = ["app"]
+description = """
+**Vaultwarden** — Password manager for securely storing and synchronizing passwords, passkeys, and credentials.
+
+**Links:** [Documentation](https://github.com/dani-garcia/vaultwarden/wiki) · [Repository](https://github.com/dani-garcia/vaultwarden) · [Website](https://github.com/dani-garcia/vaultwarden)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
