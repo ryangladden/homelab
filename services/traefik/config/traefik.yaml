@@ -2,6 +2,7 @@ entryPoints:
   websecure:
     # forwardedHeaders:
     #   insecure: true
+    asDefault: true
     address: ":443"
     http:
       tls:
@@ -14,8 +15,6 @@ entryPoints:
         readTimeout: 10m
         writeTimeout: 10m
         idleTimeout: 180s
-  ssh:
-    address: ":22"
 
 tcp:
   serversTransports:
