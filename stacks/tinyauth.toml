@@ -1,5 +1,11 @@
 [[stack]]
 name = "tinyauth"
+tags = ["infra", "auth"]
+description = """
+**TinyAuth** — Auth proxy service providing centralized access control.
+
+**Links:** [Documentation](https://tinyauth.app/docs/) · [Repository](https://github.com/steveiliop56/tinyauth) · [Website](https://tinyauth.app/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
