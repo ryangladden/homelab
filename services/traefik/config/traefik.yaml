@@ -27,6 +27,7 @@ providers:
   docker:
     exposedByDefault: false
     network: proxy
+    endpoint: tcp://socket-proxy:2375
   file:
     directory: /dynamic
     watch: true
