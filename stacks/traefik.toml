@@ -1,5 +1,11 @@
 [[stack]]
 name = "traefik"
+tags = ["infra"]
+description = """
+Reverse proxy and ingress controller providing HTTPS, automatic TLS certificates, and request filtering.
+
+**Links:** [Documentation](https://doc.traefik.io/traefik/) · [Repository](https://github.com/traefik/traefik)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
