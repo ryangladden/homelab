@@ -1,6 +1,11 @@
 [[stack]]
 name = "paperless-ngx"
-tags = ["service"]
+tags = ["app"]
+description = """
+**Paperless-ngx** — Document management system that digitizes, organizes, indexes, and searches documents using OCR and automated classification.
+
+**Links:** [Documentation](https://docs.paperless-ngx.com/) · [Repository](https://github.com/paperless-ngx/paperless-ngx) · [Website](https://paperless-ngx.com/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
