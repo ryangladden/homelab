@@ -1,6 +1,6 @@
 [[stack]]
 name = "immich"
-tags = "[app]"
+tags = ["app"]
 description = """
 **Immich** — Photo and video management platform with automatic mobile backups, facial recognition, and intelligent search.
 
