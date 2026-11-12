@@ -10,8 +10,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.lubelogger.rule: Host(`${LUBELOGGER_HOST}`)
-      traefik.http.routers.lubelogger.entrypoints: websecure
-      traefik.http.routers.lubelogger.tls: true
 networks:
   proxy:
     external: true
