@@ -42,11 +42,6 @@ accessLog:
   format: json
 
 certificatesResolvers:
-  le:
-    acme:
-      storage: /letsencrypt/acme.json
-      httpChallenge:
-        entryPoint: web
   le-dns:
     acme:
       storage: /letsencrypt/acme-dns.json
