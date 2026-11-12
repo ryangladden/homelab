@@ -2,7 +2,7 @@
 name = "forgejo"
 tags = ["service", "app"]
 description = """
-**Forgejo** — Self-hosted Git forge providing repository hosting, container registry, issue tracking, pull requests, and continuous integration workflows.
+**Forgejo** — Git forge providing repository hosting, container registry, issue tracking, pull requests, and continuous integration workflows.
 
 **Links:** [Documentation](https://forgejo.org/docs/latest/) · [Repository](https://codeberg.org/forgejo/forgejo) · [Website](https://forgejo.org/)
 """
