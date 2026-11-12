@@ -1,5 +1,11 @@
 [[stack]]
 name = "couchdb"
+tags = ["service"]
+description = """
+**Apache CouchDB** — Distributed NoSQL document database used for Obsidian Self-Hosted Live Sync
+
+**Links:** [Documentation](https://docs.couchdb.org/) · [Repository](https://github.com/apache/couchdb) · [Website](https://couchdb.apache.org/)
+"""
 [stack.config]
 server = "gertrude"
 linked_repo = "homelab"
