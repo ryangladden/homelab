@@ -91,6 +91,7 @@ services:
 
   hydroxide:
     image: local/hydroxide:latest
+    pull_policy: build
     build:
       context: ./hydroxide
       dockerfile: Dockerfile
