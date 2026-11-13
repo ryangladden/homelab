@@ -8,7 +8,7 @@ WORKDIR /src
 RUN git clone https://codeberg.org/emersion/hydroxide.git .
 
 RUN go build -trimpath -ldflags="-s -w" \
-    -o /hydroxide .
+    -o /hydroxide ./cmd/hydroxide
 
 FROM alpine:3.22
 
