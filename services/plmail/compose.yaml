@@ -1,0 +1,100 @@
+
+services:
+  secrets-init:
+    image: ghcr.io/karatektus/pl_mail:latest
+    restart: "no"
+    entrypoint: ["generate-secrets"]
+    env_file: .env
+    volumes:
+      - /opt/state/plmail/secrets:/app/var/secrets
+
+  php:
+    image: ghcr.io/karatektus/pl_mail:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      APP_CONTAINER_NAME: web
+    networks:
+      - proxy
+      - default
+      - internal
+    labels:
+      traefik.enable: true
+      traefik.http.routers.plmail.rule: Host(`${PLMAIL_HOST}`)
+      traefik.http.services.plmail.loadbalancer.server.port: 80
+    volumes:
+      - /opt/state/plmail/caddy/data:/data
+      - /opt/state/plmail/caddy/config:/config
+      - /opt/state/plmail/secrets:/app/var/secrets
+      - /opt/state/plmail/attachments:/app/var/attachments
+      - /opt/state/plmail/raw:/app/var/raw
+      - /opt/state/plmail/uploads:/app/var/uploads
+    depends_on:
+      secrets-init:
+        condition: service_completed_successfully
+      database:
+        condition: service_healthy
+
+  worker:
+    image: ghcr.io/karatektus/pl_mail:latest
+    restart: unless-stopped
+    command: php bin/console app:work
+    init: true
+    stop_grace_period: 30s
+    env_file: .env
+    environment:
+      APP_CONTAINER_NAME: worker
+    networks:
+      default:
+        aliases:
+          - mercure
+      internal:
+    volumes:
+      - /opt/state/plmail/mercure/data:/data
+      - /opt/state/plmail/mercure/config:/config
+      - /opt/state/plmail/secrets:/app/var/secrets
+      - /opt/state/plmail/attachments:/app/var/attachments
+      - /opt/state/plmail/raw:/app/var/raw
+      - /opt/state/plmail/uploads:/app/var/uploads
+    healthcheck:
+      disable: true
+    depends_on:
+      secrets-init:
+        condition: service_completed_successfully
+      database:
+        condition: service_healthy
+
+  database:
+    image: pgvector/pgvector:pg18
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD_FILE: /run/plmail/postgres_password
+    volumes:
+      - /opt/state/plmail/postgres:/var/lib/postgresql
+      - /opt/state/plmail/secrets:/run/plmail:ro
+    depends_on:
+      secrets-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    networks:
+      - internal
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=pg_stat_statements
+      - -c
+      - pg_stat_statements.track=top
+
+networks:
+  proxy:
+    external: true
+  default:
+  internal:
+    internal: true
