@@ -24,8 +24,6 @@ services:
       - /opt/state/plmail/raw:/app/var/raw
       - /opt/state/plmail/uploads:/app/var/uploads
     depends_on:
-      secrets-init:
-        condition: service_completed_successfully
       database:
         condition: service_healthy
 
@@ -54,8 +52,6 @@ services:
     healthcheck:
       disable: true
     depends_on:
-      secrets-init:
-        condition: service_completed_successfully
       database:
         condition: service_healthy
 
@@ -70,9 +66,6 @@ services:
     volumes:
       - /opt/state/plmail/postgres:/var/lib/postgresql
       - /opt/state/plmail/secrets:/run/plmail:ro
-    depends_on:
-      secrets-init:
-        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
       interval: 5s
