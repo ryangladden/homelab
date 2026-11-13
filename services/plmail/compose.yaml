@@ -84,7 +84,7 @@ services:
   hydroxide:
     image: local/hydroxide:latest
     build:
-      context: .
+      context: ./hydroxide
       dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
