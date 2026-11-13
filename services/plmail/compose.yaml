@@ -1,6 +1,14 @@
 
 services:
 
+  secrets-init:
+    image: ghcr.io/karatektus/pl_mail:latest
+    restart: "no"
+    entrypoint: ["generate-secrets"]
+    env_file: .env
+    volumes:
+      - /opt/state/plmail/secrets:/app/var/secrets
+      
   php:
     container_name: plmail
     image: ghcr.io/karatektus/pl_mail:latest
