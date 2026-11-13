@@ -1,0 +1,46 @@
+[[stack]]
+name = "plmail"
+tags = ["app"]
+description = """
+**plMail** — Email client with mailbox synchronization, OAuth sign-in, and push notifications.
+
+**Links:** [Documentation](https://karatektus.github.io/pl_mail/docs/) · [Repository](https://github.com/karatektus/pl_mail)
+"""
+[stack.config]
+server = "gertrude"
+linked_repo = "homelab"
+run_directory = "services/plmail"
+environment = """
+PLMAIL_HOST=mail.[[HOST_DOMAIN]]
+POSTGRES_DB=app
+POSTGRES_USER=app
+POSTGRES_VERSION=18
+SERVER_NAME=:80, php:80
+APP_ENV=prod
+APP_SECRET=
+APP_SHARE_DIR=var/share
+APP_SECRETS_FILE=var/secrets/generated.env
+APP_STORAGE_DIR=var
+APP_PUBLIC_URL=https://mail.[[HOST_DOMAIN]]
+APP_DEFAULT_TIMEZONE=America/Denver
+DEFAULT_URI=https://mail.[[HOST_DOMAIN]]
+DATABASE_URL="postgresql://app@database:5432/app?serverVersion=18&charset=utf8"
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+MAILER_DSN=null://null
+APP_ENCRYPTION_KEY=
+MERCURE_URL=http://mercure/.well-known/mercure
+MERCURE_PUBLIC_URL=https://mail.[[HOST_DOMAIN]]/.well-known/mercure
+MERCURE_JWT_SECRET=
+OIDC_ISSUER=[[POCKETID_HOST]]
+OIDC_CLIENT_ID=[[PLMAIL_CLIENT_ID]]
+OIDC_CLIENT_SECRET=[[PLMAIL_CLIENT_SECRET]]
+OIDC_BUTTON_LABEL=[[POCKETID_SLUG]]
+OIDC_SCOPES="openid email profile"
+OIDC_AUTO_CREATE=true
+OIDC_REQUIRE_VERIFIED_EMAIL=true
+OIDC_DISABLE_PASSWORD_LOGIN=true
+APP_DB_LOG_LEVEL=warning
+TRUSTED_PROXIES=127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+VAPID_SUBJECT=mailto:admin@[[MAIL_DOMAIN]]
+APP_FEEDBACK_TO=feedback@[[MAIL_DOMAIN]]
+"""
