@@ -1,14 +1,8 @@
 
 services:
-  secrets-init:
-    image: ghcr.io/karatektus/pl_mail:latest
-    restart: "no"
-    entrypoint: ["generate-secrets"]
-    env_file: .env
-    volumes:
-      - /opt/state/plmail/secrets:/app/var/secrets
 
   php:
+    container_name: plmail
     image: ghcr.io/karatektus/pl_mail:latest
     restart: unless-stopped
     env_file: .env
@@ -36,6 +30,7 @@ services:
         condition: service_healthy
 
   worker:
+    container_name: plmail-worker
     image: ghcr.io/karatektus/pl_mail:latest
     restart: unless-stopped
     command: php bin/console app:work
@@ -66,6 +61,7 @@ services:
 
   database:
     image: pgvector/pgvector:pg18
+    container_name: plmail-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
