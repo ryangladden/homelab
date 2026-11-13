@@ -81,6 +81,19 @@ services:
       - -c
       - pg_stat_statements.track=top
 
+  hydroxide:
+    image: local/hydroxide:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - /opt/state/hydroxide:/home/hydroxide/.config/hydroxide
+    networks:
+      - default
+    security_opt:
+      - no-new-privileges:true
+
 networks:
   proxy:
     external: true
