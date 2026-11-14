@@ -16,7 +16,7 @@ services:
       - /opt/state/mail/logs/:/var/log/mail/
       - /opt/data/mail/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
-      - /opt/state/traefik/letsencrypt/acme.json:/etc/letsencrypt/acme.json:ro
+      - /opt/state/traefik/letsencrypt/acme-dns.json:/etc/letsencrypt/acme.json:ro
     restart: always
     stop_grace_period: 1m
     
