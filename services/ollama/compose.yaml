@@ -11,3 +11,5 @@ services:
       - /opt/state/llm/ollama:/root/.ollama
     gpus: all
     image: ollama/ollama
+    networks:
+      - proxy
