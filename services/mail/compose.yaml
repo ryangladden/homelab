@@ -19,6 +19,8 @@ services:
       - /opt/state/traefik/letsencrypt/acme-dns.json:/etc/letsencrypt/acme.json:ro
     restart: always
     stop_grace_period: 1m
+    networks:
+      - proxy
     
   docker-mailserver-gui:
     container_name: mailserver-gui
