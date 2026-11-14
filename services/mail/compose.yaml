@@ -33,6 +33,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.mail-admin.rule=Host(`${ADMIN_UI_HOST}`)
       - traefik.http.routers.mail-admin.middlewares=tinyauth@file
+      - traefik.http.services.mail-admin.loadbalancer.server.port=3001
       
   autodiscover:
     image: monogramm/autodiscover-email-settings:latest
