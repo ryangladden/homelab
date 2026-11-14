@@ -13,3 +13,7 @@ services:
     image: ollama/ollama
     networks:
       - proxy
+
+networks:
+  proxy:
+    external: true
