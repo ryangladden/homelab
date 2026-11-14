@@ -31,7 +31,7 @@ services:
     image: dunajdev/docker-mailserver-gui:latest
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mail-admin.rule=Host(`${ADMIN_UI_HOST}`)
+      - traefik.http.routers.mail-admin.rule=Host(`${MAIL_UI_HOST}`)
       - traefik.http.routers.mail-admin.middlewares=tinyauth@file
       - traefik.http.services.mail-admin.loadbalancer.server.port=3001
       
