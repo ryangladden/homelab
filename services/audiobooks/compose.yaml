@@ -1,6 +1,7 @@
 services:
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
     volumes:
       - /opt/data/audiobookshelf:/config
       - /opt/state/audiobookshelf:/metadata
@@ -38,6 +39,7 @@ services:
 
   minuspod:
     image: ttlequals0/minuspod:latest
+    container_name: minuspod
     platform: linux/amd64
     ports:
       - 8000:8000
@@ -69,11 +71,11 @@ services:
         set -e
         CONFIG=/app/src/config.py
 
-        if grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$' "$CONFIG"; then
-          sed -i 's/^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$/LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0/' "$CONFIG"
+        if grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$' "$$CONFIG"; then
+          sed -i 's/^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$/LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0/' "$$CONFIG"
         fi
 
-        grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0$' "$CONFIG" || {
+        grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0$' "$$CONFIG" || {
           echo "ERROR: Failed to configure Whisper idle timeout" >&2
           exit 1
         }
