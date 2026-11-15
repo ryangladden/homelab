@@ -26,10 +26,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.shelfmark.rule: Host(`${SHELFMARK_HOST}`)
-      traefik.http.routers.shelfmark.entrypoints: websecure
-      traefik.http.routers.shelfmark.tls: true
       traefik.http.services.shelfmark.loadbalancer.server.port: 8084
-      traefik.docker.network: proxy
     restart: unless-stopped
     networks:
       - proxy
@@ -38,6 +35,83 @@ services:
       - /opt/data/audiobookshelf:/config
       - /mnt/plex/torrents/audiobooks:/data/torrents/audiobooks
 
+  whisper-server:
+    image: ghcr.io/ggml-org/whisper.cpp:main-cuda
+    platform: linux/amd64
+    networks:
+      - whisper
+    container_name: whisper-server
+    volumes:
+      - /opt/state/minuspod/models:/models
+    working_dir: /tmp
+    command:
+      - >-
+        whisper-server
+        --host 0.0.0.0
+        --port 8765
+        --model /models/ggml-large-v3-turbo.bin
+        --inference-path /v1/audio/transcriptions
+        --threads 8
+        --processors 1
+        --dtw large.v3.turbo
+        --no-flash-attn
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8765/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+
+  minuspod:
+    image: ttlequals0/minuspod:latest
+    platform: linux/amd64
+    # stop_grace_period: 360s
+    env_file: .env
+    networks:
+      - minuspod
+      - whisper
+    volumes:
+      - /opt/state/minuspod/data:/app/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:$${MINUSPOD_PORT:-8000}/api/v1/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+    restart: unless-stopped
+    security_opt:
+      - "no-new-privileges:true"
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+
 networks:
   proxy:
     external: true
+  minuspod:
+  whisper:
