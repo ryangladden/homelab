@@ -39,7 +39,7 @@ services:
     image: ttlequals0/minuspod:latest
     platform: linux/amd64
     ports:
-      - 8000:80000
+      - 8000:8000
     # stop_grace_period: 360s
     env_file: .env
     networks:
