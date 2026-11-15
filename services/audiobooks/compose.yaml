@@ -62,6 +62,23 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        CONFIG=/app/src/config.py
+
+        if grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$' "$CONFIG"; then
+          sed -i 's/^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 300$/LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0/' "$CONFIG"
+        fi
+
+        grep -q '^LOCAL_MODEL_IDLE_UNLOAD_SECONDS = 0$' "$CONFIG" || {
+          echo "ERROR: Failed to configure Whisper idle timeout" >&2
+          exit 1
+        }
+
+        exec /app/entrypoint.sh
     logging:
       driver: json-file
       options:
