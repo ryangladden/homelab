@@ -12,6 +12,7 @@ services:
       traefik.http.services.audiobookshelf.loadbalancer.server.port: 80
     networks:
       - proxy
+      - minuspod
     environment:
       - TZ=America/Denver
     restart: unless-stopped
@@ -46,7 +47,6 @@ services:
       - SESSION_COOKIE_SECURE=false
     networks:
       - minuspod
-      - whisper
     volumes:
       - /opt/state/minuspod/data:/app/data
     healthcheck:
