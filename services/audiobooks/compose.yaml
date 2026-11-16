@@ -11,6 +11,7 @@ services:
       traefik.enable: true
       traefik.http.routers.audiobookshelf.rule: Host(`${AUDIOBOOKSHELF_HOST}`)
       traefik.http.services.audiobookshelf.loadbalancer.server.port: 80
+    env_file: .env
     networks:
       - proxy
       - minuspod
