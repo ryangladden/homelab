@@ -10,7 +10,7 @@ services:
       traefik.http.routers.podcast.rule: Host(`${PODCAST_HOST}`)
       traefik.http.services.podcast.loadbalancer.server.port: 8000
     networks:
-      - minuspod
+      - proxy
     volumes:
       - /opt/state/minuspod/data:/app/data
       - ./patch/minuspod-patch.py:/app/patch-minuspod.py:ro
