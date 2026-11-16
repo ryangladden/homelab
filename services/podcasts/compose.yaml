@@ -1,0 +1,57 @@
+services:
+  minuspod:
+    image: ttlequals0/minuspod:latest
+    container_name: minuspod
+    platform: linux/amd64
+    stop_grace_period: 360s
+    env_file: .env
+    labels:
+      traefik.enable: true
+      traefik.http.routers.podcast.rule: Host(`${PODCAST_HOST}`)
+      traefik.http.services.podcast.loadbalancer.server.port: 8000
+    networks:
+      - minuspod
+    volumes:
+      - /opt/state/minuspod/data:/app/data
+      - ./patch/minuspod-patch.py:/app/patch-minuspod.py:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/v1/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        python /app/patch-minuspod.py
+        exec /app/entrypoint.sh
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+    restart: unless-stopped
+    security_opt:
+      - "no-new-privileges:true"
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+
+networks:
+  proxy:
+    external: true
