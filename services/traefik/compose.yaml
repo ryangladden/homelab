@@ -22,6 +22,7 @@ services:
       - /opt/state/traefik/certs:/certs
       - /etc/localtime:/etc/localtime:ro
       - /opt/state/traefik/log:/var/log/traefik/
+      - /opt/data/wazuh/wazuh_indexer_ssl_certs/root-ca.pem:/etc/traefik/certs/wazuh-root-ca.pem:ro # for wazuh
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wildcard.rule=Host(`${HOST_DOMAIN}`)"
