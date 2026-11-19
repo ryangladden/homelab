@@ -53,7 +53,7 @@ services:
       traefik.enable: true
       traefik.http.routers.euro-office.rule: Host(`${EURO_OFFICE_HOST}`)
       traefik.http.routers.euro-office.middlewares: euro-office-headers
-      traefik.http.services.opencloud.loadbalancer.server.port: 80
+      traefik.http.services.euro-office.loadbalancer.server.port: 80
       traefik.http.middlewares.euro-office-headers.headers.customrequestheaders.X-Forwarded-Proto: https
       traefik.http.middlewares.euro-office-headers.headers.customrequestheaders.X-Forwarded-Ssl: on
 
