@@ -9,8 +9,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.tinyauth.rule: Host(`${TINYAUTH_HOST}`)
-      traefik.http.routers.tinyauth.entrypoints: websecure
-      traefik.http.routers.tinyauth.tls: true
     networks:
       - proxy
       - radicale-internal
