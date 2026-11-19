@@ -12,10 +12,20 @@ services:
       - proxy
     labels:
       traefik.enable: true
+
+      # Admin router: protected by TinyAuth
+      traefik.http.routers.vaultwarden-admin.rule: Host(`${VAULTWARDEN_HOST}`) && (Path(`/admin`) || PathPrefix(`/admin/`))
+      traefik.http.routers.vaultwarden-admin.priority: 100
+      traefik.http.routers.vaultwarden-admin.middlewares: tinyauth@file
+      traefik.http.routers.vaultwarden-admin.service: vaultwarden
+
+      # Everything else: Vaultwarden handles authentication
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST}`)
-      traefik.http.routers.vaultwarden.middlewares: tinyauth@file
-      tinyauth.apps.vaultwarden.config.domain: ${VAULTWARDEN_HOST}
-      tinyauth.apps.vaultwarden.path.block: ^/admin(/.*)?$
+      traefik.http.routers.vaultwarden.priority: 10
+      traefik.http.routers.vaultwarden.service: vaultwarden
+
+      # Shared backend
+      traefik.http.services.vaultwarden.loadbalancer.server.port: 80
       
 
 
