@@ -140,3 +140,9 @@ http:
     
           # excludedPathPatterns:
           #   - "^/health$"
+
+  serversTransports:
+    wazuh:
+      serverName: wazuh.dashboard
+      rootCAs:
+        - /etc/traefik/certs/wazuh-root-ca.pem
