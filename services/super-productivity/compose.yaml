@@ -42,7 +42,6 @@ services:
       traefik.enable: true
       traefik.http.routers.super-sync.rule: Host(`${SUPERSYNC_HOST}`)
       traefik.http.routers.super-sync.entrypoints: websecure
-      traefik.http.routers.super-sync.tls: true
       traefik.http.services.super-sync.loadbalancer.server.port: 1900
 
   postgres:
@@ -105,7 +104,6 @@ services:
       traefik.enable: true
       traefik.http.routers.super-productivity.rule: Host(`${SUPERPRODUCTIVITY_HOST}`)
       traefik.http.routers.super-productivity.entrypoints: websecure
-      traefik.http.routers.super-productivity.tls: true
 
 networks:
   proxy:
