@@ -113,6 +113,8 @@ http:
           crowdsecLapiHost: crowdsec:8080
           crowdsecAppsecEnabled: true
           crowdsecAppsecHost: crowdsec:7422
+          crowdsecAppsecUnreachableBlock: true
+          crowdsecAppsecFailureBlock: true
 
     geoblock:
       plugin:
