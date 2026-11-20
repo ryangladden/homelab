@@ -60,6 +60,7 @@ services:
       - /opt/data/wazuh/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/config/certs/admin-key.pem
       - /opt/data/wazuh/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
       - /opt/data/wazuh/wazuh_indexer/config.yml:/usr/share/wazuh-indexer/config/opensearch-security/config.yml
+      - /opt/data/wazuh/wazuh_indexer/roles_mapping.yml:/usr/share/wazuh-indexer/config/opensearch-security/roles_mapping.yml
       - ./config/wazuh_indexer/wazuh.indexer.yml:/usr/share/wazuh-indexer/config/opensearch.yml
 
   wazuh.dashboard:
