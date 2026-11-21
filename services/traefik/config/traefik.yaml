@@ -9,7 +9,7 @@ entryPoints:
         certResolver: le-dns
       middlewares:
         - geoblock@file
-        # - crowdsec@file
+        - crowdsec@file
     transport:
       respondingTimeouts:
         readTimeout: 10m
