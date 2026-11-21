@@ -45,7 +45,7 @@ services:
       start_period: 60s
 
   crowdsec:
-    image: ghcr.io/crowdsecurity/crowdsec:v1.8.1
+    image: ghcr.io/crowdsecurity/crowdsec:v1.8.2
     container_name: "crowdsec"
     restart: unless-stopped
     env_file: .env
