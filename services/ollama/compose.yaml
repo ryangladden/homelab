@@ -1,19 +1,33 @@
-services:      
-  ollama:
-    ports:
-      - 11434:11434
-    container_name: ollama
-    environment:
-      OLLAMA_KEEP_ALIVE: "0"
-      OLLAMA_MAX_LOADED_MODELS: "1"
-      OLLAMA_NUM_PARALLEL: "1"
-    volumes:
-      - /opt/state/llm/ollama:/root/.ollama
-    gpus: all
-    image: ollama/ollama
-    networks:
-      - proxy
+services:
+  llama-swap:
+    image: ghcr.io/mostlygeek/llama-swap:unified-cuda
+    container_name: llama-swap
+    restart: unless-stopped
 
-networks:
-  proxy:
-    external: true
+    ports:
+      - "11434:8080"
+
+    volumes:
+      # - ./config.yaml:/etc/llama-swap/config/config.yaml:ro
+      - /opt/state/ollama/models:/models
+
+    gpus: all
+
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+
+    security_opt:
+      - no-new-privileges:true
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+# networks:
+#   proxy:
+#     external: true
