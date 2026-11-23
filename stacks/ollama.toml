@@ -2,7 +2,7 @@
 name = "ollama"
 tags = ["service"]
 description = """
-**Ollama** — Local large language model runtime for downloading, running, and serving AI models through a simple API.
+**Ollama** — Local large language model runtime for running and serving AI models through a simple API.
 
 **Links:** [Documentation](https://docs.ollama.com/) · [Repository](https://github.com/ollama/ollama) · [Website](https://ollama.com/)
 """
@@ -11,8 +11,5 @@ server = "gertrude"
 linked_repo = "homelab"
 run_directory = "services/ollama"
 environment = """
-LITELLM_HOST=llm.[[HOST_DOMAIN]]
-LITELLM_MASTER_KEY=[[LITELLM_MASTER_KEY]]
-POSTGRES_PASSWORD=[[LITELLM_POSTGRES_PASSWORD]]
-DATABASE_URL="postgresql://litellm:[[LITELLM_POSTGRES_PASSWORD]]@db:5432/litellm"
+LLAMA_SWAP_API_KEY=[[LLAMA_SWAP_API_KEY]]
 """
