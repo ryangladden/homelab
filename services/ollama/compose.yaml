@@ -8,8 +8,8 @@ services:
       - "11434:8080"
 
     volumes:
-      - /opt/state/config.yaml:/etc/llama-swap/config/config.yaml:ro
-      - /opt/state/ollama/models:/models
+      - /opt/state/llama.cppconfig.yaml:/etc/llama-swap/config/config.yaml:ro
+      - /opt/state/llama.cpp/models:/models
 
     gpus: all
 
