@@ -13,9 +13,7 @@ services:
 
     gpus: all
 
-    environment:
-      NVIDIA_VISIBLE_DEVICES: all
-      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+    env_file: .env
 
     security_opt:
       - no-new-privileges:true
