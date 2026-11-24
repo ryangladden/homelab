@@ -12,4 +12,6 @@ linked_repo = "homelab"
 run_directory = "services/ollama"
 environment = """
 LLAMA_SWAP_API_KEY=[[LLAMA_SWAP_API_KEY]]
+NVIDIA_VISIBLE_DEVICES=all
+NVIDIA_DRIVER_CAPABILITIES: compute,utility
 """
