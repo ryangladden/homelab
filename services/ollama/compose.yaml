@@ -4,6 +4,9 @@ services:
     container_name: llama-swap
     restart: unless-stopped
 
+    networks:
+      - proxy 
+
     ports:
       - "11434:8080"
 
@@ -23,25 +26,25 @@ services:
       traefik.enable: "true"
 
       # UI: protected by TinyAuth
-      # traefik.http.routers.llama-swap-ui.rule: >-
-        # Host(`${LLAMA_SWAP_HOST}`) &&
-        # (Path(`/ui`) || PathPrefix(`/ui/`))
-      # traefik.http.routers.llama-swap-ui.priority: 100
-      # traefik.http.routers.llama-swap-ui.middlewares: tinyauth@file
-      # traefik.http.routers.llama-swap-ui.service: llama-swap
+      traefik.http.routers.llama-swap-ui.rule: >-
+        Host(`${LLAMA_SWAP_HOST}`) &&
+        (Path(`/ui`) || PathPrefix(`/ui/`))
+      traefik.http.routers.llama-swap-ui.priority: 100
+      traefik.http.routers.llama-swap-ui.middlewares: tinyauth@file
+      traefik.http.routers.llama-swap-ui.service: llama-swap
 
       # Everything else: no TinyAuth
       traefik.http.routers.llama-swap.rule: Host(`${LLAMA_SWAP_HOST}`)
-      # traefik.http.routers.llama-swap.priority: 10
+      traefik.http.routers.llama-swap.priority: 10
       traefik.http.routers.llama-swap.service: llama-swap
 
       # Shared backend
       traefik.http.services.llama-swap.loadbalancer.server.port: 8080
 
       # TinyAuth application configuration
-      # tinyauth.apps.llama-swap.config.domain: ${LLAMA_SWAP_HOST}
-      # tinyauth.apps.llama-swap.response.basicauth.username: ""
-      # tinyauth.apps.llama-swap.response.basicauth.password: ${LLAMA_SWAP_API_KEY}
+      tinyauth.apps.llama-swap.config.domain: ${LLAMA_SWAP_HOST}
+      tinyauth.apps.llama-swap.response.basicauth.username: ""
+      tinyauth.apps.llama-swap.response.basicauth.password: ${LLAMA_SWAP_API_KEY}
 
 
     deploy:
@@ -52,6 +55,6 @@ services:
               count: 1
               capabilities: [gpu]
 
-# networks:
-#   proxy:
-#     external: true
+networks:
+  proxy:
+    external: true
